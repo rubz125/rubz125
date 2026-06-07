@@ -78,6 +78,8 @@ body {
   .rub-grid-4    { grid-template-columns: repeat(2,1fr) !important; }
   .rub-hide-mobile { display: none !important; }
   .rub-sidebar-sticky { position: static !important; }
+  .rub-hero-badges { display: none !important; }
+  .rub-stats-bar { display: grid !important; grid-template-columns: repeat(2,1fr) !important; width: 100% !important; }
 }
 
 @media (max-width: 600px) {

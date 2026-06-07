@@ -122,11 +122,11 @@ export default function Hero() {
       <ParticleCanvas />
 
       {/* Floating badges — right side */}
-      <div style={{
+      <div className="rub-hero-badges" style={{
         position: "absolute", right: "5%", top: "50%",
         transform: "translateY(-50%)",
         display: "flex", flexDirection: "column", gap: 14,
-      }} className="hidden xl:flex">
+      }}>
         {floatingBadges.map((b, i) => (
           <motion.div
             key={b.label}
