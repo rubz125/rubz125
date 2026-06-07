@@ -56,7 +56,7 @@ export function Gallery() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="grid grid-cols-2 md:grid-cols-4 grid-rows-4 gap-2 sm:gap-3"
+          className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3"
           style={{ gridAutoRows: '180px' }}
         >
           {galleryImages.map((img, i) => (
