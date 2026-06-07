@@ -195,7 +195,7 @@ export default function Hero() {
             letterSpacing: "-4px",
             maxWidth: 820,
             background: isLight
-              ? "linear-gradient(135deg, #0d1526 0%, #0078d4 60%, #00b4d8 100%)"
+              ? "linear-gradient(135deg, #003f88 0%, #0078d4 55%, #00a8cc 100%)"
               : "linear-gradient(135deg, #ffffff 0%, #c8e0ff 55%, #00d4ff 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",

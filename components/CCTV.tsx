@@ -33,7 +33,7 @@ export default function CCTV() {
                 fontFamily: "var(--font-epilogue)", fontWeight: 900,
                 fontSize: "clamp(34px,4.5vw,60px)", lineHeight: 1.0, letterSpacing: "-2.5px", marginBottom: 14,
                 background: isLight
-                  ? "linear-gradient(135deg,#0d1526 0%,#0078d4 60%,#00b4d8 100%)"
+                  ? "linear-gradient(135deg,#003f88 0%,#0078d4 55%,#00a8cc 100%)"
                   : "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
               }}>
