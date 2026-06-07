@@ -187,7 +187,7 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
                               {pName}
                             </span>
                           </div>
-                          <span className="text-[#D4A843] font-bold text-xl shrink-0">{p.currency ?? '₪'}{p.price}</span>
+                          <span className="text-[#D4A843] font-bold text-xl shrink-0">₪{p.price}</span>
                         </div>
                         <p className="text-[#7A6245] text-sm leading-relaxed mb-3">{pDesc}</p>
                         <div className="flex flex-wrap gap-2">

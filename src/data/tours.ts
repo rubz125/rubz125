@@ -12,6 +12,7 @@ export interface Tour {
   slug: string
   category: string; categoryFr: string; categoryHe: string
   title: string; titleFr: string; titleHe: string
+  subtitle?: string; subtitleFr?: string; subtitleHe?: string
   quote: string; quoteAuthor: string
   description: string; descriptionFr: string; descriptionHe: string
   shortDescription: string; shortDescriptionFr: string; shortDescriptionHe: string
