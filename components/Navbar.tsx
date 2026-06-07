@@ -43,9 +43,10 @@ export default function Navbar() {
         padding: "8px 0", textAlign: "center",
         fontSize: 12, color: "#8fa8c8",
         position: "sticky", top: 0, zIndex: 1000,
+        direction: "ltr",
       }}>
         {t("emergency_bar")}{" "}
-        <a href="tel:+972542167219" style={{ color: "#00d4ff", fontWeight: 600, textDecoration: "none" }}>
+        <a href="tel:+972542167219" dir="ltr" style={{ color: "#00d4ff", fontWeight: 600, textDecoration: "none" }}>
           +972 54 216 7219
         </a>
       </div>
@@ -65,6 +66,7 @@ export default function Navbar() {
           maxWidth: 1400, margin: "0 auto",
           padding: "0 clamp(24px, 6vw, 100px)",
           display: "flex", alignItems: "center", justifyContent: "space-between", height: 68,
+          direction: "ltr",
         }}>
           {/* Logo */}
           <a href="#" style={{

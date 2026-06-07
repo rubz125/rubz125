@@ -63,6 +63,7 @@ export default function Contact() {
                   { href: "tel:+972542167219", icon: AlertTriangle, labelKey: "contact_emergency", bg: "transparent", color: "#ff8080", border: "1px solid rgba(255,80,80,0.3)" },
                 ].map((btn) => (
                   <a key={btn.labelKey} href={btn.href} target={btn.href.startsWith("https") ? "_blank" : undefined} rel="noopener noreferrer"
+                    dir="ltr"
                     style={{
                       display: "flex", alignItems: "center", gap: 12,
                       background: btn.bg, border: btn.border || "none",

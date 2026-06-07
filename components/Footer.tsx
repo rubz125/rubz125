@@ -29,6 +29,7 @@ export default function Footer() {
               { href: "https://wa.me/972542167219", icon: MessageCircle, label: "WhatsApp" },
             ].map(l => (
               <a key={l.label} href={l.href} target={l.href.startsWith("https") ? "_blank" : undefined} rel="noopener noreferrer"
+                dir="ltr"
                 style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--text-2)", marginBottom: 8, textDecoration: "none" }}>
                 <l.icon size={13} /> {l.label}
               </a>
