@@ -25,10 +25,10 @@ export function Navbar() {
       label: t.nav_tours,
       href: '/tours',
       children: [
-        { label: 'Negev Crater Expedition', href: '/tours/negev-crater-expedition' },
-        { label: 'Golan Heights Wilderness', href: '/tours/golan-heights-wilderness' },
-        { label: 'Dead Sea & Judean Desert', href: '/tours/dead-sea-judean-desert' },
-        { label: 'Negev Night Safari', href: '/tours/negev-night-safari' },
+        {
+          label: lang === 'fr' ? "Découverte des Monts d'Eilat" : lang === 'he' ? 'גילוי הרי אילת' : "Discovering the Eilat Mountains",
+          href: '/tours/decouverte-des-monts-deilat',
+        },
         { label: t.nav_view_all, href: '/tours' },
       ],
     },
