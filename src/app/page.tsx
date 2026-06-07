@@ -6,7 +6,6 @@ import { FeaturedTours } from '@/components/home/FeaturedTours'
 import { ExperienceSection } from '@/components/home/ExperienceSection'
 import { HowItWorks } from '@/components/home/HowItWorks'
 import { Testimonials } from '@/components/home/Testimonials'
-import { Gallery } from '@/components/home/Gallery'
 import { FAQ } from '@/components/home/FAQ'
 import { CTABanner } from '@/components/home/CTABanner'
 
@@ -21,7 +20,6 @@ export default function HomePage() {
         <ExperienceSection />
         <HowItWorks />
         <Testimonials />
-        <Gallery />
         <FAQ />
         <CTABanner />
       </main>
