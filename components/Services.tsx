@@ -10,14 +10,14 @@ const services = [
     icon: Server, color: "#0078d4", slug: "managed-it",
     title: "Managed IT Services",
     desc: "Your IT. Fully managed. Zero surprises.",
-    detail: "We take complete ownership of your IT environment — monitoring, maintaining, and resolving issues before they impact your business. One flat monthly fee, no hidden costs.",
+    detail: "We take complete ownership of your IT environment â€” monitoring, maintaining, and resolving issues before they impact your business. One flat monthly fee, no hidden costs.",
     benefits: ["Proactive monitoring & maintenance", "Remote & on-site support", "Predictable monthly pricing"],
   },
   {
     icon: Mail, color: "#00b4d8", slug: "microsoft-365",
     title: "Microsoft 365",
     desc: "Deployed right. Secured properly. Managed daily.",
-    detail: "From initial setup to ongoing management, we handle your entire Microsoft 365 environment — including email, Teams, SharePoint, licensing and security policies.",
+    detail: "From initial setup to ongoing management, we handle your entire Microsoft 365 environment â€” including email, Teams, SharePoint, licensing and security policies.",
     benefits: ["Email, Teams & SharePoint", "Security & compliance setup", "User management & licensing"],
   },
   {
@@ -31,7 +31,7 @@ const services = [
     icon: Shield, color: "#0078d4", slug: "cybersecurity",
     title: "Cybersecurity",
     desc: "Detect. Contain. Eliminate. Before damage is done.",
-    detail: "Ransomware, phishing, insider threats — we protect your business at every layer. EDR, email filtering, security awareness, and 24/7 threat monitoring keep you one step ahead.",
+    detail: "Ransomware, phishing, insider threats â€” we protect your business at every layer. EDR, email filtering, security awareness, and 24/7 threat monitoring keep you one step ahead.",
     benefits: ["EDR & antivirus protection", "Threat detection & response", "Security audits"],
   },
   {
@@ -51,7 +51,7 @@ const services = [
   {
     icon: HardDrive, color: "#0078d4", slug: "backup-dr",
     title: "Backup & DR",
-    desc: "When things go wrong — back up in minutes, not days.",
+    desc: "When things go wrong â€” back up in minutes, not days.",
     detail: "Automated daily backups to off-site and cloud storage, with tested recovery procedures. We define your RTO and RPO targets and guarantee them with SLA-backed contracts.",
     benefits: ["Automated daily backups", "Off-site & cloud storage", "RTO/RPO SLA guarantees"],
   },
@@ -59,7 +59,7 @@ const services = [
     icon: Network, color: "#00b4d8", slug: "network",
     title: "Network Infrastructure",
     desc: "Fast. Reliable. Secure. The network you deserve.",
-    detail: "From structured cabling and enterprise WiFi to firewalls and VPN — we design and deploy networks that handle real workloads, with 24/7 monitoring and rapid fault resolution.",
+    detail: "From structured cabling and enterprise WiFi to firewalls and VPN â€” we design and deploy networks that handle real workloads, with 24/7 monitoring and rapid fault resolution.",
     benefits: ["Structured cabling & WiFi", "Firewall & VPN setup", "Network monitoring 24/7"],
   },
   {
@@ -72,8 +72,8 @@ const services = [
   {
     icon: Headphones, color: "#0078d4", slug: "helpdesk",
     title: "Helpdesk Support",
-    desc: "Real humans. Real answers. Issues resolved — fast.",
-    detail: "Your team gets direct access to our senior technicians — no bots, no first-level scripts. Remote support in minutes, on-site when needed, with priority queuing and SLA guarantees.",
+    desc: "Real humans. Real answers. Issues resolved â€” fast.",
+    detail: "Your team gets direct access to our senior technicians â€” no bots, no first-level scripts. Remote support in minutes, on-site when needed, with priority queuing and SLA guarantees.",
     benefits: ["Remote & on-site support", "Priority ticketing system", "SLA response guarantees"],
   },
 ];
@@ -114,7 +114,6 @@ function ServiceCard({ s, i }: { s: (typeof services)[0]; i: number }) {
       }}
       className="service-card"
     >
-      {/* Icon */}
       <div style={{
         width: 48, height: 48, borderRadius: 12,
         background: `${s.color}14`, border: `1px solid ${s.color}28`,
@@ -146,7 +145,7 @@ function ServiceCard({ s, i }: { s: (typeof services)[0]; i: number }) {
             fontSize: 12, color: "var(--text-3)",
             padding: "3px 0", display: "flex", gap: 8,
           }}>
-            <span style={{ color: s.color, flexShrink: 0 }}>?</span> {b}
+            <span style={{ color: s.color, flexShrink: 0 }}>&#8594;</span> {b}
           </li>
         ))}
       </ul>
