@@ -63,7 +63,7 @@ export const tours: Tour[] = [
         name: 'A short hike', nameFr: 'Une courte randonnée', nameHe: 'טיול קצר',
         price: 150, duration: '2h',
         description: 'Nahal Roded or Nahal Shlomo — a breathtaking glimpse of nature around Eilat, with a plunging view over the city and bay.',
-        descriptionFr: 'Nahal Roded ou Nahal Shlomo — un aperçu époustouflant de la nature autour d'Eilat, avec une vue plongeante sur la ville et la baie.',
+        descriptionFr: "Nahal Roded ou Nahal Shlomo — un aperçu époustouflant de la nature autour d'Eilat, avec une vue plongeante sur la ville et la baie.",
         descriptionHe: 'נחל רודד או נחל שלמה — הצצה מרהיבה לטבע סביב אילת, עם נוף מדהים על העיר והמפרץ.',
       },
       {
@@ -88,7 +88,7 @@ export const tours: Tour[] = [
     includesHe: ["7 עד 8 אנשים לג'יפ", "מ-4 אנשים מינימום", "הסעה הלוך ושוב מהמלון", "עצירת צילום כלולה", "תה ועוגיות · מים"],
 
     whatToBring: ['Hat or cap', 'Sunglasses', 'Personal water bottle', 'Walking shoes'],
-    whatToBringFr: ['Chapeau ou casquette', 'Lunettes de soleil', 'Bouteille d'eau personnelle', 'Chaussures de marche'],
+    whatToBringFr: ['Chapeau ou casquette', 'Lunettes de soleil', "Bouteille d'eau personnelle", 'Chaussures de marche'],
     whatToBringHe: ['כובע או מצחייה', 'משקפי שמש', 'בקבוק מים אישי', 'נעלי הליכה'],
 
     image: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80',
