@@ -145,7 +145,7 @@ export function AboutContent() {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[400px] flex items-end">
         <Image
-          src="/gallery/jeep.jpg"
+          src="/gallery/sunshine.jpeg"
           alt="Eilat Action Jeep Safari"
           fill
           className="object-cover"
