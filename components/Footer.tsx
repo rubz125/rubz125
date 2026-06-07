@@ -15,10 +15,9 @@ export default function Footer() {
         <div className="rub-footer-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 48 }}>
           <div>
             <div style={{ fontFamily: "var(--font-epilogue)", fontSize: 22, fontWeight: 900, marginBottom: 14,
-              background: isLight
-                ? "linear-gradient(135deg,#003f88 0%,#0078d4 55%,#00a8cc 100%)"
-                : "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+              ...(isLight
+                ? { color: "#0d1526", WebkitTextFillColor: "#0d1526" }
+                : { background: "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }),
             }}>RUB</div>
             <p style={{ fontSize: 13, color: "var(--text-3)", lineHeight: 1.7, maxWidth: 260, marginBottom: 18 }}>
               {t("footer_tagline")}

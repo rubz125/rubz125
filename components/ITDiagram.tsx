@@ -77,10 +77,9 @@ export default function ITDiagram() {
               style={{
                 fontFamily: "var(--font-epilogue)", fontWeight: 900,
                 fontSize: "clamp(32px,4vw,58px)", lineHeight: 1.0, letterSpacing: "-2.5px", marginBottom: 18,
-                background: isLight
-                  ? "linear-gradient(135deg,#003f88 0%,#0078d4 55%,#00a8cc 100%)"
-                  : "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+                ...(isLight
+                  ? { color: "#0d1526", WebkitTextFillColor: "#0d1526" }
+                  : { background: "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }),
               }}>
               {t("diagram_h2").split("\n").map((l,i,a) => <span key={i}>{l}{i<a.length-1&&<br/>}</span>)}
             </motion.h2>
