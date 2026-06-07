@@ -41,7 +41,7 @@ export function Navbar() {
       ],
     },
     { label: t.nav_about, href: '/about' },
-    { label: t.nav_gallery, href: '/#gallery' },
+    { label: t.nav_gallery, href: '/gallery' },
     { label: t.nav_reviews, href: '/#reviews' },
     { label: t.nav_contact, href: '/contact' },
   ]
