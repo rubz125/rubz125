@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Epilogue } from "next/font/google";
 import "./globals.css";
+import { AppProvider } from "../contexts/AppContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const epilogue = Epilogue({ subsets: ["latin"], weight: ["400","600","700","800","900"], variable: "--font-epilogue" });
@@ -19,8 +20,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${epilogue.variable}`}>
-      <body className="min-h-screen bg-[#0d1526] text-[#e8f0fe] font-[family-name:var(--font-inter)] antialiased overflow-x-hidden">
-        {children}
+      <body className="min-h-screen font-[family-name:var(--font-inter)] antialiased overflow-x-hidden" style={{ background: "var(--bg-1)", color: "var(--text-1)" }}>
+        <AppProvider>
+          {children}
+        </AppProvider>
       </body>
     </html>
   );

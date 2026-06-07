@@ -1,7 +1,8 @@
-"use client";
+﻿"use client";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Phone, Shield, Cloud, Monitor } from "lucide-react";
+import { useApp } from "../contexts/AppContext";
 
 function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -77,14 +78,12 @@ const floatingBadges = [
   { icon: Monitor, label: "24/7 Monitoring", color: "#00d4ff" },
 ];
 
-const stats = [
-  { num: "24/7", label: "Support" },
-  { num: "99.9%", label: "Uptime SLA" },
-  { num: "500+", label: "Devices" },
-  { num: "100+", label: "Businesses" },
-];
+const statsNums = ["24/7", "99.9%", "500+", "100+"];
+const statsKeys = ["hero_stat1", "hero_stat2", "hero_stat3", "hero_stat4"];
 
 export default function Hero() {
+  const { t, theme } = useApp();
+  const isLight = theme === "light";
   return (
     <section
       style={{
@@ -93,7 +92,7 @@ export default function Hero() {
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
-        background: "#0d1526",
+        background: "var(--bg-1)",
       }}
     >
       {/* Background radial glows */}
@@ -111,7 +110,7 @@ export default function Hero() {
       {/* Grid */}
       <div style={{
         position: "absolute", inset: 0,
-        backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+        backgroundImage: "linear-gradient(var(--card-bg) 1px, transparent 1px), linear-gradient(90deg, var(--card-bg) 1px, transparent 1px)",
         backgroundSize: "60px 60px",
         maskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%)",
         WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%)",
@@ -151,7 +150,7 @@ export default function Hero() {
             }}>
               <b.icon size={16} style={{ color: b.color }} />
             </div>
-            <span style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.9)" }}>
+            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-1)" }}>
               {b.label}
             </span>
           </motion.div>
@@ -180,7 +179,7 @@ export default function Hero() {
           }}
         >
           <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#00d4ff", display: "inline-block", animation: "blink 2s infinite" }} />
-          Enterprise IT Partner · Israel
+          {t("hero_badge")}
         </motion.div>
 
         {/* Headline */}
@@ -195,14 +194,18 @@ export default function Hero() {
             lineHeight: 0.97,
             letterSpacing: "-4px",
             maxWidth: 820,
-            background: "linear-gradient(135deg, #ffffff 0%, #c8e0ff 55%, #00d4ff 100%)",
+            background: isLight
+              ? "linear-gradient(135deg, #0d1526 0%, #0078d4 60%, #00b4d8 100%)"
+              : "linear-gradient(135deg, #ffffff 0%, #c8e0ff 55%, #00d4ff 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
             marginBottom: 28,
           }}
         >
-          Secure.<br />Connected.<br />In Control.
+          {t("hero_h1").split("\n").map((line, i, arr) => (
+            <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+          ))}
         </motion.h1>
 
         {/* Subheadline */}
@@ -211,12 +214,13 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.6 }}
           style={{
-            color: "#8fa8c8", fontSize: "clamp(15px, 1.6vw, 18px)",
+            color: "var(--text-2)", fontSize: "clamp(15px, 1.6vw, 18px)",
             maxWidth: 500, lineHeight: 1.8, marginBottom: 40, fontWeight: 300,
           }}
         >
-          Cloud infrastructure. Cybersecurity. Microsoft 365. CCTV.
-          <br />All managed by one team — 24/7.
+          {t("hero_sub").split("\n").map((line, i, arr) => (
+            <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+          ))}
         </motion.p>
 
         {/* CTA buttons */}
@@ -227,19 +231,22 @@ export default function Hero() {
           className="rub-hero-btns"
           style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 60, alignItems: "center" }}
         >
-          <a
-            href="#contact"
-            className="btn-primary"
-            style={{ fontSize: 15 }}
-          >
-            Get a Free Consultation <ArrowRight size={15} />
+          <a href="#contact" style={{
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: "linear-gradient(135deg,#0078d4,#00b4d8)",
+            color: "#fff", padding: "13px 28px", borderRadius: 12,
+            fontSize: 15, fontWeight: 600, textDecoration: "none",
+            boxShadow: "0 4px 20px rgba(0,120,212,0.35)",
+          }}>
+            {t("hero_cta1")} <ArrowRight size={15} />
           </a>
-          <a
-            href="tel:+97254216 7219"
-            className="btn-ghost"
-            style={{ fontSize: 15 }}
-          >
-            <Phone size={15} /> Call Now
+          <a href="tel:+972542167219" style={{
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: "var(--card-bg)", border: "1px solid var(--border-md)",
+            color: "var(--text-1)", padding: "13px 28px", borderRadius: 12,
+            fontSize: 15, fontWeight: 600, textDecoration: "none",
+          }}>
+            <Phone size={15} /> {t("hero_cta2")}
           </a>
         </motion.div>
 
@@ -252,34 +259,17 @@ export default function Hero() {
           style={{
             display: "inline-grid",
             gridTemplateColumns: "repeat(4, 1fr)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--card-bg)",
             backdropFilter: "blur(12px)",
-            border: "1px solid rgba(255,255,255,0.07)",
+            border: "1px solid var(--border)",
             borderRadius: 16,
             overflow: "hidden",
           }}
         >
-          {stats.map((s, i) => (
-            <div
-              key={s.label}
-              style={{
-                padding: "20px 28px",
-                textAlign: "center",
-                borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
-              }}
-            >
-              <div style={{
-                fontFamily: "var(--font-epilogue)", fontSize: 26, fontWeight: 900,
-                color: "#00d4ff", lineHeight: 1,
-              }}>
-                {s.num}
-              </div>
-              <div style={{
-                fontSize: 10, color: "#4a6080", textTransform: "uppercase",
-                letterSpacing: "1.5px", marginTop: 5,
-              }}>
-                {s.label}
-              </div>
+          {statsNums.map((num, i) => (
+            <div key={i} style={{ padding: "20px 28px", textAlign: "center", borderRight: i < 3 ? "1px solid var(--border-sub)" : "none" }}>
+              <div style={{ fontFamily: "var(--font-epilogue)", fontSize: 26, fontWeight: 900, color: "#00d4ff", lineHeight: 1 }}>{num}</div>
+              <div style={{ fontSize: 10, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: "1.5px", marginTop: 5 }}>{t(statsKeys[i])}</div>
             </div>
           ))}
         </motion.div>
@@ -296,7 +286,7 @@ export default function Hero() {
           display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
         }}
       >
-        <span style={{ fontSize: 10, color: "#4a6080", textTransform: "uppercase", letterSpacing: "2px" }}>
+        <span style={{ fontSize: 10, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: "2px" }}>
           Scroll
         </span>
         <motion.div

@@ -1,4 +1,5 @@
 "use client";
+import { useApp } from "../contexts/AppContext";
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Phone, MessageCircle, AlertTriangle, Mail, ArrowRight, CheckCircle } from "lucide-react";
@@ -9,6 +10,8 @@ export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const [sent, setSent] = useState(false);
+  const { t, theme } = useApp();
+  const isLight = theme === "light";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,45 +20,49 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" style={{ padding: "100px 0", background: "linear-gradient(135deg,#132034 0%,#0d1526 100%)" }} ref={ref}>
+    <section id="contact" style={{ padding: "100px 0", background: "var(--bg-2)" }} ref={ref}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 clamp(24px, 6vw, 100px)" }}>
         <motion.span initial={{ opacity: 0 }} animate={inView ? { opacity: 0.8 } : {}}
           style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 4, color: "#00d4ff", display: "block", marginBottom: 16 }}>
-          Contact
+          {t("contact_label")}
         </motion.span>
         <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 }}
           style={{
             fontFamily: "var(--font-epilogue)", fontWeight: 900,
             fontSize: "clamp(34px,4.5vw,60px)", lineHeight: 1.0, letterSpacing: "-2.5px", marginBottom: 52,
-            background: "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
+            background: isLight
+              ? "linear-gradient(135deg,#0d1526 0%,#0078d4 60%,#00b4d8 100%)"
+              : "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
           }}>
-          Let&apos;s Build<br />Something Resilient.
+          {t("contact_h2").split("\n").map((l,i,a) => <span key={i}>{l}{i<a.length-1&&<br/>}</span>)}
         </motion.h2>
 
         <div className="rub-grid-2" style={{ alignItems: "start" }}>
           {/* Info */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 }}>
-            <h3 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 900, fontSize: 22, marginBottom: 8, color: "#fff" }}>Talk to Ruben Uzan.</h3>
-            <p style={{ color: "#8fa8c8", fontWeight: 300, marginBottom: 28, lineHeight: 1.7, fontSize: 15 }}>
-              No sales pitch. No fluff. Just an honest conversation about your IT — and how we fix it.
+            <h3 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 900, fontSize: 22, marginBottom: 8, color: "var(--text-1)" }}>
+              {t("contact_name")} —
+            </h3>
+            <p style={{ color: "var(--text-2)", fontWeight: 300, marginBottom: 28, lineHeight: 1.7, fontSize: 15 }}>
+              {t("contact_tagline")}
             </p>
 
             <div style={{
               background: "rgba(0,120,212,0.08)", border: "1px solid rgba(0,180,216,0.2)",
               backdropFilter: "blur(20px)", borderRadius: 18, padding: 24, marginBottom: 0,
             }}>
-              <div style={{ fontFamily: "var(--font-epilogue)", fontWeight: 900, fontSize: 19, marginBottom: 4, color: "#fff" }}>Ruben Uzan</div>
-              <div style={{ fontSize: 11, color: "#4a6080", marginBottom: 22, textTransform: "uppercase", letterSpacing: 2 }}>Founder & IT Director — RUB Solutions</div>
+              <div style={{ fontFamily: "var(--font-epilogue)", fontWeight: 900, fontSize: 19, marginBottom: 4, color: "var(--text-1)" }}>{t("contact_name")}</div>
+              <div style={{ fontSize: 11, color: "var(--text-3)", marginBottom: 22, textTransform: "uppercase", letterSpacing: 2 }}>Founder & IT Director — RUB Solutions</div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {[
-                  { href: "tel:+97254216 7219", icon: Phone, label: "Call: +972 54 216 7219", bg: "linear-gradient(135deg,#0078d4,#00b4d8)", color: "#fff" },
-                  { href: "https://wa.me/97254216 7219", icon: MessageCircle, label: "WhatsApp Ruben Now", bg: "linear-gradient(135deg,#25d366,#128c7e)", color: "#fff" },
-                  { href: "mailto:rubenuzan11@gmail.com", icon: Mail, label: "rubenuzan11@gmail.com", bg: "rgba(255,255,255,0.04)", color: "#fff", border: "1px solid rgba(0,180,216,0.25)" },
-                  { href: "tel:+97254216 7219", icon: AlertTriangle, label: "Emergency Support — 24/7", bg: "transparent", color: "#ff8080", border: "1px solid rgba(255,80,80,0.3)" },
+                  { href: "tel:+972542167219", icon: Phone, labelKey: "contact_call", bg: "linear-gradient(135deg,#0078d4,#00b4d8)", color: "#fff" },
+                  { href: "https://wa.me/972542167219", icon: MessageCircle, labelKey: "contact_whatsapp", bg: "linear-gradient(135deg,#25d366,#128c7e)", color: "#fff" },
+                  { href: "mailto:rubenuzan11@gmail.com", icon: Mail, labelKey: "contact_email", bg: "rgba(255,255,255,0.04)", color: "var(--text-1)", border: "1px solid rgba(0,180,216,0.25)" },
+                  { href: "tel:+972542167219", icon: AlertTriangle, labelKey: "contact_emergency", bg: "transparent", color: "#ff8080", border: "1px solid rgba(255,80,80,0.3)" },
                 ].map((btn) => (
-                  <a key={btn.label} href={btn.href} target={btn.href.startsWith("https") ? "_blank" : undefined} rel="noopener noreferrer"
+                  <a key={btn.labelKey} href={btn.href} target={btn.href.startsWith("https") ? "_blank" : undefined} rel="noopener noreferrer"
                     style={{
                       display: "flex", alignItems: "center", gap: 12,
                       background: btn.bg, border: btn.border || "none",
@@ -63,7 +70,7 @@ export default function Contact() {
                       padding: "13px 18px", borderRadius: 12,
                       textDecoration: "none", transition: "all 0.25s",
                     }}>
-                    <btn.icon size={15} /> {btn.label}
+                    <btn.icon size={15} /> {t(btn.labelKey)}
                   </a>
                 ))}
               </div>
@@ -73,19 +80,24 @@ export default function Contact() {
           {/* Form */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.3 }}
             style={{
-              background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)",
+              background: "var(--card-bg)", border: "1px solid var(--border)",
               backdropFilter: "blur(20px)", borderRadius: 24, padding: 36,
             }}>
-            <h3 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 900, fontSize: 20, marginBottom: 26, color: "#fff" }}>Get a Free Quote</h3>
+            <h3 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 900, fontSize: 20, marginBottom: 26, color: "var(--text-1)" }}>{t("hero_cta1")}</h3>
 
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div className="rub-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-                {[["Full Name","text","John Smith"],["Company Name","text","Acme Corp"],["Email Address","email","john@company.com"],["Phone Number","tel","+972..."]].map(([label, type, placeholder]) => (
+                {[
+                  [t("form_name"), "text", "John Smith"],
+                  [t("form_company"), "text", "Acme Corp"],
+                  [t("form_email"), "email", "john@company.com"],
+                  [t("form_phone"), "tel", "+972..."],
+                ].map(([label, type, placeholder]) => (
                   <div key={label}>
-                    <label style={{ display: "block", fontSize: 12, color: "#8fa8c8", fontWeight: 500, marginBottom: 7 }}>{label}</label>
+                    <label style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{label}</label>
                     <input type={type} placeholder={placeholder} style={{
-                      width: "100%", background: "#152640", border: "1px solid rgba(255,255,255,0.08)",
-                      borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "#fff",
+                      width: "100%", background: "var(--input-bg)", border: "1px solid var(--border-md)",
+                      borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "var(--text-1)",
                       outline: "none", fontFamily: "var(--font-inter)",
                     }} />
                   </div>
@@ -93,22 +105,22 @@ export default function Contact() {
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: 12, color: "#8fa8c8", fontWeight: 500, marginBottom: 7 }}>Service Required</label>
+                <label style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{t("form_service")}</label>
                 <select style={{
-                  width: "100%", background: "#152640", border: "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "#8fa8c8",
+                  width: "100%", background: "var(--input-bg)", border: "1px solid var(--border-md)",
+                  borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "var(--text-2)",
                   outline: "none", fontFamily: "var(--font-inter)",
                 }}>
-                  <option>Select a service...</option>
-                  {services.map(s => <option key={s} style={{ background: "#152640" }}>{s}</option>)}
+                  <option>{t("form_service_placeholder")}</option>
+                  {services.map(s => <option key={s} style={{ background: "var(--input-bg)" }}>{s}</option>)}
                 </select>
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: 12, color: "#8fa8c8", fontWeight: 500, marginBottom: 7 }}>Tell us about your needs</label>
-                <textarea rows={4} placeholder="Describe your IT challenges or project..." style={{
-                  width: "100%", background: "#152640", border: "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "#fff",
+                <label style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{t("form_message")}</label>
+                <textarea rows={4} placeholder={t("form_message")} style={{
+                  width: "100%", background: "var(--input-bg)", border: "1px solid var(--border-md)",
+                  borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "var(--text-1)",
                   outline: "none", fontFamily: "var(--font-inter)", resize: "vertical",
                 }} />
               </div>
@@ -125,8 +137,8 @@ export default function Contact() {
                   transition: "all 0.25s",
                 }}>
                 {sent
-                  ? <><CheckCircle size={17} /> Message Sent! We&apos;ll be in touch soon.</>
-                  : <>Send Message — Get Free Consultation <ArrowRight size={15} /></>}
+                  ? <><CheckCircle size={17} /> Message Sent!</>
+                  : <>{t("form_submit")} <ArrowRight size={15} /></>}
               </motion.button>
             </form>
           </motion.div>

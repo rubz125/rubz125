@@ -1,4 +1,5 @@
 "use client";
+import { useApp } from "../contexts/AppContext";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Camera, Radio, Smartphone, Bot, Disc, Building } from "lucide-react";
@@ -15,28 +16,32 @@ const items = [
 export default function CCTV() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { t, theme } = useApp();
+  const isLight = theme === "light";
 
   return (
-    <section id="cctv" style={{ padding: "100px 0", background: "#0d1526" }}>
+    <section id="cctv" style={{ padding: "100px 0", background: "var(--bg-1)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 clamp(24px, 6vw, 100px)" }} ref={ref}>
         <div className="rub-grid-2" style={{ alignItems: "start" }}>
           <div>
             <motion.span initial={{ opacity: 0 }} animate={inView ? { opacity: 0.8 } : {}}
               style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 4, color: "#00d4ff", display: "block", marginBottom: 16 }}>
-              CCTV & Surveillance
+              {t("cctv_label")}
             </motion.span>
             <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 }}
               style={{
                 fontFamily: "var(--font-epilogue)", fontWeight: 900,
                 fontSize: "clamp(34px,4.5vw,60px)", lineHeight: 1.0, letterSpacing: "-2.5px", marginBottom: 14,
-                background: "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
+                background: isLight
+                  ? "linear-gradient(135deg,#0d1526 0%,#0078d4 60%,#00b4d8 100%)"
+                  : "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
               }}>
-              See Everything.<br />Miss Nothing.
+              {t("cctv_h2").split("\n").map((l,i,a) => <span key={i}>{l}{i<a.length-1&&<br/>}</span>)}
             </motion.h2>
             <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.2 }}
-              style={{ color: "#8fa8c8", fontSize: 17, fontWeight: 300, marginBottom: 36, maxWidth: 420 }}>
-              AI-powered cameras. Remote access. Real-time alerts — from any device, anywhere.
+              style={{ color: "var(--text-2)", fontSize: 17, fontWeight: 300, marginBottom: 36, maxWidth: 420 }}>
+              {t("cctv_sub")}
             </motion.p>
 
             <div className="rub-cctv-items" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
@@ -44,7 +49,7 @@ export default function CCTV() {
                 <motion.div key={item.title}
                   initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + i * 0.07 }}
                   style={{
-                    background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)",
+                    background: "var(--card-bg)", border: "1px solid var(--border)",
                     backdropFilter: "blur(20px)", borderRadius: 14, padding: "16px 18px",
                     display: "flex", alignItems: "flex-start", gap: 12,
                     transition: "border-color 0.3s",
@@ -57,8 +62,8 @@ export default function CCTV() {
                     <item.icon size={16} style={{ color: "#00b4d8" }} />
                   </div>
                   <div>
-                    <h4 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 13, marginBottom: 3, color: "#fff" }}>{item.title}</h4>
-                    <p style={{ fontSize: 12, color: "#4a6080" }}>{item.desc}</p>
+                    <h4 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 13, marginBottom: 3, color: "var(--text-1)" }}>{item.title}</h4>
+                    <p style={{ fontSize: 12, color: "var(--text-3)" }}>{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -68,14 +73,14 @@ export default function CCTV() {
           {/* Camera UI visual */}
           <motion.div initial={{ opacity: 0, x: 40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.3, duration: 0.7 }}
             style={{
-              background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)",
+              background: "var(--card-bg)", border: "1px solid var(--border)",
               backdropFilter: "blur(20px)", borderRadius: 24, padding: 24,
             }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-              <span style={{ fontSize: 11, fontWeight: 600, color: "#8fa8c8", textTransform: "uppercase", letterSpacing: 2 }}>Live View</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-2)", textTransform: "uppercase", letterSpacing: 2 }}>{t("cctv_live")}</span>
               <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                 <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#00e676", boxShadow: "0 0 8px #00e676" }} />
-                <span style={{ fontSize: 11, color: "#00e676", fontWeight: 600 }}>4 Online</span>
+                <span style={{ fontSize: 11, color: "#00e676", fontWeight: 600 }}>{t("cctv_online")}</span>
               </div>
             </div>
 
@@ -92,7 +97,6 @@ export default function CCTV() {
                   }}>
                     <Camera size={20} color="#00d4ff" />
                   </div>
-                  {/* Corner brackets */}
                   {[["top","left"],["top","right"],["bottom","left"],["bottom","right"]].map(([v,h]) => (
                     <div key={`${v}${h}`} style={{
                       position: "absolute",
@@ -120,9 +124,9 @@ export default function CCTV() {
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
                 <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#00e676" }} />
-                <span style={{ fontSize: 12, color: "#8fa8c8" }}>All systems operational</span>
+                <span style={{ fontSize: 12, color: "var(--text-2)" }}>All systems operational</span>
               </div>
-              <span style={{ fontSize: 11, color: "#4a6080" }}>Recording 24/7</span>
+              <span style={{ fontSize: 11, color: "var(--text-3)" }}>Recording 24/7</span>
             </div>
           </motion.div>
         </div>

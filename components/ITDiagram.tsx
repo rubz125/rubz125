@@ -1,4 +1,5 @@
 "use client";
+import { useApp } from "../contexts/AppContext";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -41,9 +42,17 @@ function DataPacket({ from, to, delay }: { from: string; to: string; delay: numb
 
 export default function ITDiagram() {
   const [hovered, setHovered] = useState<string | null>(null);
+  const { t, theme } = useApp();
+  const isLight = theme === "light";
+
+  const steps = [
+    { num: "01", titleKey: "diagram_step1_title", descKey: "diagram_step1_desc" },
+    { num: "02", titleKey: "diagram_step2_title", descKey: "diagram_step2_desc" },
+    { num: "03", titleKey: "diagram_step3_title", descKey: "diagram_step3_desc" },
+  ];
 
   return (
-    <section style={{ padding: "100px 0", background: "#0d1526", position: "relative", overflow: "hidden" }}>
+    <section style={{ padding: "100px 0", background: "var(--bg-1)", position: "relative", overflow: "hidden" }}>
       {/* Glow */}
       <div style={{
         position: "absolute", top: "50%", left: "50%",
@@ -61,30 +70,28 @@ export default function ITDiagram() {
             <motion.span
               initial={{ opacity: 0 }} whileInView={{ opacity: 0.8 }} viewport={{ once: true }}
               style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 4, color: "#00d4ff", display: "block", marginBottom: 16 }}>
-              How It Works
+              {t("diagram_label")}
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
               style={{
                 fontFamily: "var(--font-epilogue)", fontWeight: 900,
                 fontSize: "clamp(32px,4vw,58px)", lineHeight: 1.0, letterSpacing: "-2.5px", marginBottom: 18,
-                background: "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
+                background: isLight
+                  ? "linear-gradient(135deg,#0d1526 0%,#0078d4 60%,#00b4d8 100%)"
+                  : "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
               }}>
-              One Team.<br />Every Layer.<br />Always On.
+              {t("diagram_h2").split("\n").map((l,i,a) => <span key={i}>{l}{i<a.length-1&&<br/>}</span>)}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-              style={{ color: "#8fa8c8", fontSize: 16, fontWeight: 300, lineHeight: 1.8, marginBottom: 36, maxWidth: 420 }}>
-              We connect and manage every part of your IT stack — from cloud infrastructure and security to endpoints, CCTV and Microsoft 365 — all under one roof.
+              style={{ color: "var(--text-2)", fontSize: 16, fontWeight: 300, lineHeight: 1.8, marginBottom: 36, maxWidth: 420 }}>
+              {t("diagram_sub")}
             </motion.p>
 
             {/* Steps */}
-            {[
-              { num: "01", title: "We Audit Your Infrastructure", desc: "Full assessment of your current IT environment — gaps, risks and opportunities." },
-              { num: "02", title: "We Design & Deploy", desc: "Cloud, security, network, 365 — all configured to your business needs." },
-              { num: "03", title: "We Monitor 24/7", desc: "Continuous monitoring, alerts and response. You focus on growth, we handle IT." },
-            ].map((step, i) => (
+            {steps.map((step, i) => (
               <motion.div
                 key={step.num}
                 initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
@@ -92,7 +99,7 @@ export default function ITDiagram() {
                 style={{
                   display: "flex", gap: 18, marginBottom: 22,
                   paddingBottom: i < 2 ? 22 : 0,
-                  borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.05)" : "none",
+                  borderBottom: i < 2 ? "1px solid var(--border-sub)" : "none",
                 }}
               >
                 <div style={{
@@ -100,8 +107,8 @@ export default function ITDiagram() {
                   color: "#00d4ff", opacity: 0.6, letterSpacing: 1, flexShrink: 0, paddingTop: 3,
                 }}>{step.num}</div>
                 <div>
-                  <div style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 14, color: "#fff", marginBottom: 4 }}>{step.title}</div>
-                  <div style={{ fontSize: 13, color: "#4a6080", lineHeight: 1.6 }}>{step.desc}</div>
+                  <div style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 14, color: "var(--text-1)", marginBottom: 4 }}>{t(step.titleKey)}</div>
+                  <div style={{ fontSize: 13, color: "var(--text-3)", lineHeight: 1.6 }}>{t(step.descKey)}</div>
                 </div>
               </motion.div>
             ))}
@@ -112,11 +119,11 @@ export default function ITDiagram() {
             initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2 }}
             style={{
-              background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)",
+              background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)",
               borderRadius: 24, padding: 28,
             }}
           >
-            <div style={{ fontSize: 11, color: "#4a6080", textTransform: "uppercase", letterSpacing: 3, marginBottom: 16, fontWeight: 600 }}>
+            <div style={{ fontSize: 11, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: 3, marginBottom: 16, fontWeight: 600 }}>
               Live Infrastructure Overview
             </div>
 
@@ -167,7 +174,6 @@ export default function ITDiagram() {
                     onMouseEnter={() => setHovered(node.id)}
                     onMouseLeave={() => setHovered(null)}
                   >
-                    {/* Pulse ring */}
                     {isHov && (
                       <motion.circle
                         cx={node.x} cy={node.y} r={node.size / 2 + 10}
@@ -176,8 +182,6 @@ export default function ITDiagram() {
                         transition={{ repeat: Infinity, duration: 1.2 }}
                       />
                     )}
-
-                    {/* Node circle */}
                     <motion.circle
                       cx={node.x} cy={node.y}
                       r={isHov ? node.size / 2 + 4 : node.size / 2}
@@ -188,20 +192,16 @@ export default function ITDiagram() {
                       animate={{ scale: isHov ? 1.08 : 1 }}
                       transition={{ duration: 0.25 }}
                     />
-
-                    {/* Icon */}
                     <text x={node.x} y={node.y + 6}
                       textAnchor="middle" fontSize={isHov ? 22 : 20}
                       style={{ userSelect: "none" }}
                     >{node.icon}</text>
-
-                    {/* Label */}
                     <text
                       x={node.x} y={node.y + node.size / 2 + 16}
                       textAnchor="middle"
                       fontSize={10}
                       fontWeight={isHov ? "700" : "500"}
-                      fill={isHov ? "#fff" : "#8fa8c8"}
+                      fill={isHov ? "var(--text-1)" : "var(--text-2)"}
                       fontFamily="var(--font-inter)"
                       style={{ transition: "fill 0.2s" }}
                     >{node.label}</text>
@@ -209,12 +209,11 @@ export default function ITDiagram() {
                 );
               })}
 
-              {/* Status bar at bottom */}
               <rect x={20} y={538} width={960} height={24} rx={6} fill="rgba(0,120,212,0.08)" stroke="rgba(0,180,216,0.15)" strokeWidth={1} />
               <circle cx={38} cy={550} r={5} fill="#00e676">
                 <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
               </circle>
-              <text x={52} y={554} fontSize={10} fill="#8fa8c8" fontFamily="var(--font-inter)" fontWeight="500">
+              <text x={52} y={554} fontSize={10} fill="var(--text-2)" fontFamily="var(--font-inter)" fontWeight="500">
                 All systems operational · 24/7 Monitoring Active · 0 Critical Alerts
               </text>
             </svg>

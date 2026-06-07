@@ -2,12 +2,52 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; background: #0d1526; }
+/* ── Theme variables ── */
+:root {
+  --bg-1: #0d1526;
+  --bg-2: #132034;
+  --bg-3: #0a1020;
+  --bg-4: #152640;
+  --bg-grad: linear-gradient(135deg,#061428 0%,#0a1f40 50%,#061428 100%);
+  --text-1: #e8f0fe;
+  --text-2: #8fa8c8;
+  --text-3: #4a6080;
+  --card-bg: rgba(255,255,255,0.03);
+  --card-bg-hover: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.07);
+  --border-md: rgba(255,255,255,0.1);
+  --border-sub: rgba(255,255,255,0.05);
+  --nav-bg: rgba(13,21,38,0.85);
+  --input-bg: #152640;
+  --emergency-bg: #030810;
+}
+
+[data-theme="light"] {
+  --bg-1: #f4f7ff;
+  --bg-2: #eaeff8;
+  --bg-3: #dde5f5;
+  --bg-4: #ffffff;
+  --bg-grad: linear-gradient(135deg,#e8f0ff 0%,#f4f7ff 50%,#e8f0ff 100%);
+  --text-1: #0d1526;
+  --text-2: #2e4a72;
+  --text-3: #6080a8;
+  --card-bg: rgba(255,255,255,0.9);
+  --card-bg-hover: rgba(255,255,255,1);
+  --border: rgba(0,60,150,0.1);
+  --border-md: rgba(0,60,150,0.15);
+  --border-sub: rgba(0,60,150,0.07);
+  --nav-bg: rgba(244,247,255,0.92);
+  --input-bg: #ffffff;
+  --emergency-bg: #0d1526;
+}
+
+html { scroll-behavior: smooth; background: var(--bg-1); }
 
 body {
-  background: #0d1526;
-  color: #e8f0fe;
+  background: var(--bg-1);
+  color: var(--text-1);
   overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
 }
 
 ::selection { background: rgba(0,180,216,0.3); color: #fff; }

@@ -1,4 +1,5 @@
-"use client";
+﻿"use client";
+import { useApp } from "../contexts/AppContext";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Server, Mail, Cloud, Shield, Camera, Lock, HardDrive, Network, Cpu, Headphones } from "lucide-react";
@@ -79,6 +80,7 @@ const services = [
 
 function ServiceCard({ s, i }: { s: (typeof services)[0]; i: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const { t } = useApp();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = cardRef.current?.getBoundingClientRect();
@@ -101,8 +103,8 @@ function ServiceCard({ s, i }: { s: (typeof services)[0]; i: number }) {
       onMouseMove={handleMouseMove}
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
       style={{
-        background: "rgba(255,255,255,0.03)",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--card-bg)",
+        border: "1px solid var(--border)",
         borderRadius: 20,
         padding: 28,
         cursor: "pointer",
@@ -125,7 +127,7 @@ function ServiceCard({ s, i }: { s: (typeof services)[0]; i: number }) {
       <h3 style={{
         fontFamily: "var(--font-epilogue)", fontSize: 16,
         fontWeight: 800, letterSpacing: "-0.3px",
-        color: "#fff", marginBottom: 8,
+        color: "var(--text-1)", marginBottom: 8,
       }}>
         {s.title}
       </h3>
@@ -134,14 +136,14 @@ function ServiceCard({ s, i }: { s: (typeof services)[0]; i: number }) {
         {s.desc}
       </p>
 
-      <p style={{ fontSize: 12.5, color: "#6a8aaa", lineHeight: 1.75, marginBottom: 16 }}>
+      <p style={{ fontSize: 12.5, color: "var(--text-3)", lineHeight: 1.75, marginBottom: 16 }}>
         {s.detail}
       </p>
 
       <ul style={{ listStyle: "none", marginBottom: 20 }}>
         {s.benefits.map((b) => (
           <li key={b} style={{
-            fontSize: 12, color: "#4a6080",
+            fontSize: 12, color: "var(--text-3)",
             padding: "3px 0", display: "flex", gap: 8,
           }}>
             <span style={{ color: s.color, flexShrink: 0 }}>→</span> {b}
@@ -154,7 +156,7 @@ function ServiceCard({ s, i }: { s: (typeof services)[0]; i: number }) {
         display: "flex", alignItems: "center", gap: 5,
         textDecoration: "none",
       }}>
-        Learn More →
+        {t("learn_more")}
       </Link>
     </motion.div>
   );
@@ -163,9 +165,11 @@ function ServiceCard({ s, i }: { s: (typeof services)[0]; i: number }) {
 export default function Services() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
+  const { t, theme } = useApp();
+  const isLight = theme === "light";
 
   return (
-    <section id="services" style={{ padding: "100px 0", background: "#0d1526" }}>
+    <section id="services" style={{ padding: "100px 0", background: "var(--bg-1)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 clamp(24px, 6vw, 100px)" }}>
         <div ref={ref} style={{ marginBottom: 56 }}>
           <motion.span
@@ -173,7 +177,7 @@ export default function Services() {
             animate={inView ? { opacity: 0.8 } : {}}
             style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 4, color: "#00d4ff", display: "block", marginBottom: 16 }}
           >
-            Services
+            {t("services_label")}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -183,19 +187,21 @@ export default function Services() {
               fontFamily: "var(--font-epilogue)", fontWeight: 900,
               fontSize: "clamp(34px, 4.5vw, 60px)", lineHeight: 1.0,
               letterSpacing: "-2.5px", marginBottom: 14,
-              background: "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
+              background: isLight
+                ? "linear-gradient(135deg,#0d1526 0%,#0078d4 60%,#00b4d8 100%)"
+                : "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
             }}
           >
-            Everything Your Business Needs.<br />Nothing It Doesn&apos;t.
+            {t("services_h2").split("\n").map((l,i,a) => <span key={i}>{l}{i<a.length-1&&<br/>}</span>)}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2 }}
-            style={{ color: "#8fa8c8", fontSize: 17, fontWeight: 300, maxWidth: 420 }}
+            style={{ color: "var(--text-2)", fontSize: 17, fontWeight: 300, maxWidth: 420 }}
           >
-            One partner. Every layer of your stack — covered.
+            {t("services_sub")}
           </motion.p>
         </div>
 

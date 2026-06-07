@@ -1,4 +1,5 @@
 "use client";
+import { useApp } from "../contexts/AppContext";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Shield, Search, Mail, Eye, HardDrive, Lock } from "lucide-react";
@@ -54,11 +55,13 @@ function Radar() {
 export default function Cybersecurity() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { t, theme } = useApp();
+  const isLight = theme === "light";
 
   return (
     <section id="cybersecurity" style={{
       padding: "100px 0",
-      background: "linear-gradient(180deg,#0d1526 0%,#0a1020 100%)",
+      background: "var(--bg-1)",
       position: "relative", overflow: "hidden",
     }}>
       <div style={{
@@ -73,20 +76,22 @@ export default function Cybersecurity() {
           <div>
             <motion.span initial={{ opacity: 0 }} animate={inView ? { opacity: 0.8 } : {}}
               style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 4, color: "#00d4ff", display: "block", marginBottom: 16 }}>
-              Cybersecurity
+              {t("cyber_label")}
             </motion.span>
             <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 }}
               style={{
                 fontFamily: "var(--font-epilogue)", fontWeight: 900,
                 fontSize: "clamp(34px,4.5vw,60px)", lineHeight: 1.0, letterSpacing: "-2.5px", marginBottom: 14,
-                background: "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
+                background: isLight
+                  ? "linear-gradient(135deg,#0d1526 0%,#0078d4 60%,#00b4d8 100%)"
+                  : "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
               }}>
-              Stop Threats<br />Before They Start.
+              {t("cyber_h2").split("\n").map((l,i,a) => <span key={i}>{l}{i<a.length-1&&<br/>}</span>)}
             </motion.h2>
             <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.2 }}
-              style={{ color: "#8fa8c8", fontSize: 17, fontWeight: 300, marginBottom: 36, maxWidth: 420 }}>
-              Every endpoint. Every user. Every workload. Protected.
+              style={{ color: "var(--text-2)", fontSize: 17, fontWeight: 300, marginBottom: 36, maxWidth: 420 }}>
+              {t("cyber_sub")}
             </motion.p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               {items.map((item, i) => (
@@ -98,8 +103,8 @@ export default function Cybersecurity() {
                     transition: "border-color 0.3s, transform 0.3s",
                   }}>
                   <item.icon size={18} style={{ color: item.color, marginBottom: 10 }} />
-                  <h4 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 13, marginBottom: 5, color: "#fff" }}>{item.title}</h4>
-                  <p style={{ fontSize: 12, color: "#4a6080", lineHeight: 1.5 }}>{item.desc}</p>
+                  <h4 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 13, marginBottom: 5, color: "var(--text-1)" }}>{item.title}</h4>
+                  <p style={{ fontSize: 12, color: "var(--text-3)", lineHeight: 1.5 }}>{item.desc}</p>
                 </motion.div>
               ))}
             </div>
