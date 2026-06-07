@@ -3,11 +3,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight, Phone } from 'lucide-react'
+import { useLang } from '@/lib/LangContext'
 
 export function CTABanner() {
+  const { t } = useLang()
+
   return (
     <section className="relative py-24 overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=1920&q=80"
@@ -30,9 +32,7 @@ export function CTABanner() {
             className="flex items-center gap-3 mb-6"
           >
             <div className="section-divider" />
-            <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">
-              Your Adventure Awaits
-            </span>
+            <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">{t.cta_eyebrow}</span>
           </motion.div>
 
           <motion.h2
@@ -43,11 +43,11 @@ export function CTABanner() {
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F5EDD8] leading-tight mb-6"
             style={{ fontFamily: 'var(--font-playfair)' }}
           >
-            The Desert
+            {t.cta_title1}
             <br />
-            <span className="text-gradient-gold">Won't Wait</span>
+            <span className="text-gradient-gold">{t.cta_title2}</span>
             <br />
-            Forever.
+            {t.cta_title3}
           </motion.h2>
 
           <motion.p
@@ -57,7 +57,7 @@ export function CTABanner() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-[#D6C9AD] text-lg leading-relaxed mb-10"
           >
-            Spots fill fast — especially on weekends and holidays. Book your Jeep Safari today and secure your place in one of Israel's most extraordinary adventures.
+            {t.cta_sub}
           </motion.p>
 
           <motion.div
@@ -68,19 +68,15 @@ export function CTABanner() {
             className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10"
           >
             <Link href="/book" className="btn-primary text-base px-8 py-4 w-full sm:w-auto text-center">
-              Book Your Safari
+              {t.cta_book}
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <a
-              href="tel:+972525217029"
-              className="btn-secondary text-base px-8 py-4 w-full sm:w-auto text-center"
-            >
+            <a href="tel:+972525217029" className="btn-secondary text-base px-8 py-4 w-full sm:w-auto text-center">
               <Phone className="w-4 h-4" />
-              Call to Book
+              {t.cta_call}
             </a>
           </motion.div>
 
-          {/* Trust signals */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -88,18 +84,9 @@ export function CTABanner() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="flex flex-wrap gap-4 text-xs text-[#7A6245]"
           >
-            <span className="flex items-center gap-1.5">
-              <span className="text-green-400">✓</span>
-              Free cancellation 48hrs before
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="text-green-400">✓</span>
-              No payment until confirmed
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="text-green-400">✓</span>
-              Instant booking confirmation
-            </span>
+            <span className="flex items-center gap-1.5"><span className="text-green-400">✓</span> Free cancellation 48hrs before</span>
+            <span className="flex items-center gap-1.5"><span className="text-green-400">✓</span> No payment until confirmed</span>
+            <span className="flex items-center gap-1.5"><span className="text-green-400">✓</span> Instant booking confirmation</span>
           </motion.div>
         </div>
       </div>
