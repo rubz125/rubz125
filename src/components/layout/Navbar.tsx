@@ -29,6 +29,14 @@ export function Navbar() {
           label: lang === 'fr' ? "Découverte des Monts d'Eilat" : lang === 'he' ? 'גילוי הרי אילת' : "Discovering the Eilat Mountains",
           href: '/tours/decouverte-des-monts-deilat',
         },
+        {
+          label: lang === 'fr' ? "Une Journée d'Aventures" : lang === 'he' ? 'יום הרפתקאות' : "A Day of Adventures",
+          href: '/tours/a-day-of-adventures',
+        },
+        {
+          label: lang === 'fr' ? "Émotions et Grands Frissons" : lang === 'he' ? 'רגשות וסערות נפש' : "Emotions & Thrills",
+          href: '/tours/emotions-et-grands-frissons',
+        },
         { label: t.nav_view_all, href: '/tours' },
       ],
     },
