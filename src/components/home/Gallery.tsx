@@ -1,19 +1,26 @@
 'use client'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useLang } from '@/lib/LangContext'
 
 const galleryImages = [
-  { src: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=600&q=80', alt: 'Negev Desert dunes', span: 'row-span-2' },
-  { src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80', alt: 'Desert canyon', span: '' },
-  { src: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=600&q=80', alt: 'Night sky Negev', span: '' },
-  { src: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80', alt: 'Mountain landscape', span: 'row-span-2' },
-  { src: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80', alt: 'Golan Heights', span: '' },
-  { src: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=600&q=80', alt: 'Forest trail', span: '' },
-  { src: 'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80', alt: 'Off-road adventure', span: '' },
-  { src: 'https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?w=600&q=80', alt: 'Desert sunset', span: '' },
+  { src: '/gallery/background3.jpg.jpeg', alt: 'Eilat desert landscape', span: 'row-span-2' },
+  { src: '/gallery/DSC03517.jpg.jpeg', alt: 'Jeep safari adventure', span: '' },
+  { src: '/gallery/DSC00748.jpg.jpeg', alt: 'Off-road terrain', span: '' },
+  { src: '/gallery/IMG_7469.jpg', alt: 'Desert exploration', span: '' },
+  { src: '/gallery/IMG_5772.jpg.jpeg', alt: 'Eilat mountains', span: 'row-span-2' },
+  { src: '/gallery/DSC02819-1024x576.jpg.jpeg', alt: 'Canyon views', span: '' },
+  { src: '/gallery/BALLADE-EN-JEEP-2.jpg.jpeg', alt: 'Jeep ride', span: '' },
+  { src: '/gallery/IMG_1730.jpg.jpeg', alt: 'Group adventure', span: '' },
+  { src: '/gallery/DSC02821-1024x576.jpg.jpeg', alt: 'Desert dunes', span: '' },
+  { src: '/gallery/IMG_3661.jpg.jpeg', alt: 'Sunset safari', span: '' },
+  { src: '/gallery/sinai-hardon1.jpg.jpeg', alt: 'Mountain trail', span: '' },
+  { src: '/gallery/DSC03558.jpg.jpeg', alt: 'Timna Valley', span: '' },
 ]
 
 export function Gallery() {
+  const { t } = useLang()
+
   return (
     <section id="gallery" className="py-24 bg-[#0A0603]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +34,7 @@ export function Gallery() {
             className="flex items-center justify-center gap-3 mb-4"
           >
             <div className="section-divider" />
-            <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">From the Field</span>
+            <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">{t.gallery_eyebrow}</span>
             <div className="section-divider" style={{ transform: 'scaleX(-1)' }} />
           </motion.div>
           <motion.h2
@@ -38,8 +45,8 @@ export function Gallery() {
             className="text-4xl sm:text-5xl font-bold text-[#F5EDD8]"
             style={{ fontFamily: 'var(--font-playfair)' }}
           >
-            The Landscapes
-            <span className="text-gradient-gold"> Await</span>
+            {t.gallery_title}
+            <span className="text-gradient-gold">{t.gallery_title2}</span>
           </motion.h2>
         </div>
 
