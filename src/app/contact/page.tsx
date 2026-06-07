@@ -47,7 +47,7 @@ export default function ContactPage() {
                   {[
                     { icon: Phone, title: 'Phone', lines: ['+972-52-521-7029', 'Sun–Fri, 8am–8pm'] },
                     { icon: Mail, title: 'Email', lines: ['Eilataction@gmail.com', 'We reply within 2 hours'] },
-                    { icon: MapPin, title: 'Office', lines: ['Eilat, Israel', 'Eilat, Israel'] },
+                    { icon: MapPin, title: 'Office', lines: ['Eilat, Israel', 'Available throughout Israel'] },
                     { icon: Clock, title: 'Hours', lines: ['Sun–Thu: 8am–8pm', 'Fri: 8am–3pm | Sat: Closed'] },
                   ].map(({ icon: Icon, title, lines }) => (
                     <div key={title} className="flex gap-4">
