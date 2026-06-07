@@ -1,41 +1,41 @@
+'use client'
 import Link from 'next/link'
 import { MapPin, Phone, Mail } from 'lucide-react'
 import { EilatActionLogo } from '@/components/ui/EilatActionLogo'
-
-const tourLinks = [
-  { label: 'Negev Crater Expedition', href: '/tours/negev-crater-expedition' },
-  { label: 'Golan Heights Wilderness', href: '/tours/golan-heights-wilderness' },
-  { label: 'Dead Sea & Judean Desert', href: '/tours/dead-sea-judean-desert' },
-  { label: 'Galilee Highlands Safari', href: '/tours/galilee-highlands-safari' },
-  { label: 'Negev Night Safari', href: '/tours/negev-night-safari' },
-  { label: 'Extreme Negev Challenge', href: '/tours/extreme-negev-challenge' },
-]
-
-const companyLinks = [
-  { label: 'About Eilat Action', href: '/about' },
-  { label: 'Our Guides', href: '/about#guides' },
-  { label: 'Safety Standards', href: '/about#safety' },
-  { label: 'Gallery', href: '/#gallery' },
-  { label: 'Reviews', href: '/#reviews' },
-  { label: 'Contact Us', href: '/contact' },
-]
-
-const supportLinks = [
-  { label: 'Book a Tour', href: '/book' },
-  { label: 'FAQ', href: '/#faq' },
-  { label: 'Cancellation Policy', href: '/contact#policy' },
-  { label: 'Private Groups', href: '/contact#groups' },
-  { label: 'Corporate Events', href: '/contact#corporate' },
-]
+import { useLang } from '@/lib/LangContext'
 
 export function Footer() {
+  const { t } = useLang()
+
+  const tourLinks = [
+    { label: t.footer_tour1, href: '/tours/decouverte-des-monts-deilat' },
+    { label: t.footer_tour2, href: '/tours/a-day-of-adventures' },
+    { label: t.footer_tour3, href: '/tours/emotions-et-grands-frissons' },
+  ]
+
+  const companyLinks = [
+    { label: t.footer_about, href: '/about' },
+    { label: t.footer_guides, href: '/about#guides' },
+    { label: t.footer_safety, href: '/about#safety' },
+    { label: t.nav_gallery, href: '/gallery' },
+    { label: t.nav_reviews, href: '/#reviews' },
+    { label: t.nav_contact, href: '/contact' },
+  ]
+
+  const supportLinks = [
+    { label: t.footer_book, href: '/book' },
+    { label: t.footer_faq, href: '/#faq' },
+    { label: t.footer_cancel, href: '/contact#policy' },
+    { label: t.footer_groups, href: '/contact#groups' },
+  ]
+
   return (
     <footer className="bg-[#0D0906] border-t border-[#D4A843]/10">
       {/* WhatsApp CTA Bar */}
       <div className="bg-gradient-to-r from-[#1C1108] via-[#2E1E0F] to-[#1C1108] border-b border-[#D4A843]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-[#D6C9AD] text-sm">
-            Questions? Our team is available <span className="text-[#D4A843] font-semibold">Sun–Fri, 8am–8pm</span>
+            {t.footer_questions} {t.footer_hours} <span className="text-[#D4A843] font-semibold">{t.footer_hours_days}</span>
           </div>
           <div className="flex items-center gap-3">
             <a
@@ -52,7 +52,7 @@ export function Footer() {
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
               </svg>
-              Chat on WhatsApp
+              {t.footer_chat}
             </a>
           </div>
         </div>
@@ -67,13 +67,12 @@ export function Footer() {
               <EilatActionLogo width={150} />
             </Link>
             <p className="text-[#7A6245] text-sm leading-relaxed max-w-sm mb-6">
-              Israel's most awarded Jeep Safari company. Fifteen years of unforgettable expeditions
-              across the Negev, Galilee, Golan, and beyond. Certified guides. Private tours. Memories for life.
+              {t.footer_desc}
             </p>
             <div className="space-y-2 mb-6">
               <div className="flex items-start gap-2 text-sm text-[#7A6245]">
                 <MapPin className="w-4 h-4 text-[#D4A843] mt-0.5 shrink-0" />
-                <span>Eilat, Israel, Eilat, Israel</span>
+                <span>Eilat, Israel</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-[#7A6245]">
                 <Phone className="w-4 h-4 text-[#D4A843] shrink-0" />
@@ -122,14 +121,11 @@ export function Footer() {
 
           {/* Tours */}
           <div>
-            <h3 className="text-[#F5EDD8] font-semibold text-sm uppercase tracking-[0.15em] mb-5">Our Tours</h3>
+            <h3 className="text-[#F5EDD8] font-semibold text-sm uppercase tracking-[0.15em] mb-5">{t.footer_tours}</h3>
             <ul className="space-y-2.5">
               {tourLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-[#7A6245] text-sm hover:text-[#D4A843] transition-colors duration-200"
-                  >
+                  <Link href={link.href} className="text-[#7A6245] text-sm hover:text-[#D4A843] transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -139,14 +135,11 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-[#F5EDD8] font-semibold text-sm uppercase tracking-[0.15em] mb-5">Company</h3>
+            <h3 className="text-[#F5EDD8] font-semibold text-sm uppercase tracking-[0.15em] mb-5">{t.footer_company}</h3>
             <ul className="space-y-2.5">
               {companyLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-[#7A6245] text-sm hover:text-[#D4A843] transition-colors duration-200"
-                  >
+                  <Link href={link.href} className="text-[#7A6245] text-sm hover:text-[#D4A843] transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -156,14 +149,11 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="text-[#F5EDD8] font-semibold text-sm uppercase tracking-[0.15em] mb-5">Support</h3>
+            <h3 className="text-[#F5EDD8] font-semibold text-sm uppercase tracking-[0.15em] mb-5">{t.footer_support}</h3>
             <ul className="space-y-2.5">
               {supportLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-[#7A6245] text-sm hover:text-[#D4A843] transition-colors duration-200"
-                  >
+                  <Link href={link.href} className="text-[#7A6245] text-sm hover:text-[#D4A843] transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -177,22 +167,18 @@ export function Footer() {
       <div className="border-t border-white/5 bg-[#080503]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[#4A3B26] text-xs">
-            © {new Date().getFullYear()} Eilat Action. All rights reserved.
+            © {new Date().getFullYear()} Eilat Action. {t.footer_rights}
           </p>
           <div className="flex items-center gap-4">
-            {['Privacy Policy', 'Terms of Service', 'Accessibility'].map((label) => (
-              <Link
-                key={label}
-                href="#"
-                className="text-[#4A3B26] text-xs hover:text-[#7A6245] transition-colors"
-              >
+            {[t.footer_privacy, t.footer_terms].map((label) => (
+              <Link key={label} href="#" className="text-[#4A3B26] text-xs hover:text-[#7A6245] transition-colors">
                 {label}
               </Link>
             ))}
           </div>
           <div className="flex items-center gap-2 text-[#4A3B26] text-xs">
             <span>🇮🇱</span>
-            <span>Licensed Tour Operator — Israel Ministry of Tourism</span>
+            <span>{t.footer_licensed}</span>
           </div>
         </div>
       </div>
