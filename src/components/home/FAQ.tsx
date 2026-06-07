@@ -14,7 +14,7 @@ const faqData: Record<Lang, { q: string; a: string }[]> = {
     { q: 'What is your cancellation policy?', a: "Free cancellation up to 48 hours before your tour. Cancellations within 24–48 hours receive a 50% refund. Within 24 hours, no refund is available — but we'll work with you to reschedule. No-shows are not refundable." },
     { q: 'Are the Jeeps safe? What safety measures do you have?', a: "All our vehicles are expedition-grade 4x4 Jeeps maintained to the highest standards. They're equipped with rollover protection, satellite communication, comprehensive first-aid kits, and emergency water reserves. Every guide is certified in desert first aid and wilderness emergency response." },
     { q: 'Do you offer airport transfers?', a: "We pick up from any hotel in Tel Aviv, Jerusalem, Haifa, and other major cities. Ben Gurion Airport pickups are available for an additional fee. Just include your accommodation details at booking and we'll handle the rest." },
-    { q: 'What languages do your guides speak?', a: "Our guides collectively speak English, Hebrew, Arabic, Russian, French, Spanish, and German. When booking, specify your preferred language and we'll match you with the right guide. All guides are fluent in English as a minimum." },
+    { q: 'What languages do your guides speak?', a: "Our guides speak English, Hebrew, and French. When booking, specify your preferred language and we'll match you with the right guide." },
   ],
   fr: [
     { q: 'Que dois-je porter et apporter ?', a: "Portez des vêtements confortables et respirants adaptés à la saison. En été, coton léger + chapeau + crème solaire. En hiver, vêtements en couches — les nuits dans le désert sont fraîches. Nous fournissons eau, collations et équipements spécialisés. Apportez juste votre pièce d'identité, vos lunettes de soleil et un appareil photo chargé." },
@@ -24,7 +24,7 @@ const faqData: Record<Lang, { q: string; a: string }[]> = {
     { q: "Quelle est votre politique d'annulation ?", a: "Annulation gratuite jusqu'à 48 heures avant le circuit. Les annulations entre 24 et 48 heures donnent droit à un remboursement de 50%. Dans les 24 heures, aucun remboursement n'est disponible — mais nous travaillerons avec vous pour reprogrammer." },
     { q: "Les Jeeps sont-ils sûrs ? Quelles mesures de sécurité prenez-vous ?", a: "Tous nos véhicules sont des Jeeps 4x4 de niveau expédition entretenus aux normes les plus élevées. Ils sont équipés de protection anti-retournement, communication satellite, trousses de premiers secours complètes et réserves d'eau d'urgence." },
     { q: "Proposez-vous des transferts depuis l'aéroport ?", a: "Nous prenons en charge depuis tout hôtel à Tel Aviv, Jérusalem, Haïfa et d'autres grandes villes. Les prises en charge à l'aéroport Ben Gourion sont disponibles moyennant un supplément." },
-    { q: "Quelles langues vos guides parlent-ils ?", a: "Nos guides parlent collectivement l'anglais, l'hébreu, l'arabe, le russe, le français, l'espagnol et l'allemand. Lors de la réservation, précisez votre langue préférée et nous vous associerons au bon guide." },
+    { q: "Quelles langues vos guides parlent-ils ?", a: "Nos guides parlent l'anglais, l'hébreu et le français. Lors de la réservation, précisez votre langue préférée et nous vous associerons au bon guide." },
   ],
   he: [
     { q: 'מה ללבוש ולהביא?', a: 'לבשו בגדים נוחים ונושמים המתאימים לעונה. בקיץ, כותנה קלה + כובע + קרם הגנה. בחורף, לבוש בשכבות — לילות המדבר קרים. אנחנו מספקים את כל המים, החטיפים והציוד המיוחד. פשוט הביאו תעודת זהות, משקפי שמש ומצלמה טעונה.' },
@@ -34,7 +34,7 @@ const faqData: Record<Lang, { q: string; a: string }[]> = {
     { q: 'מה מדיניות הביטול שלכם?', a: 'ביטול חינם עד 48 שעות לפני הסיור. ביטולים בין 24-48 שעות מקבלים החזר של 50%. בתוך 24 שעות, אין החזר זמין — אבל נעבוד איתכם לשינוי מועד.' },
     { q: 'האם הג׳יפים בטוחים? אילו אמצעי בטיחות יש לכם?', a: 'כל כלי הרכב שלנו הם ג׳יפי 4x4 ברמת משלחת המתוחזקים בסטנדרטים הגבוהים ביותר. הם מצוידים בהגנה מפני התהפכות, תקשורת לוויינית, ערכות עזרה ראשונה מקיפות ומאגרי מים חירום.' },
     { q: 'האם אתם מציעים העברות נסיעה מהנמל תעופה?', a: 'אנחנו אוספים מכל מלון בתל אביב, ירושלים, חיפה וערים גדולות אחרות. איסוף מנמל התעופה בן גוריון זמין בתשלום נוסף. פשוט כללו את פרטי המגורים שלכם בהזמנה ואנחנו נטפל בשאר.' },
-    { q: 'באילו שפות המדריכים שלכם מדברים?', a: 'המדריכים שלנו מדברים ביחד אנגלית, עברית, ערבית, רוסית, צרפתית, ספרדית וגרמנית. בעת ההזמנה, ציינו את השפה המועדפת עליכם ואנחנו נתאים לכם את המדריך הנכון.' },
+    { q: 'באילו שפות המדריכים שלכם מדברים?', a: 'המדריכים שלנו מדברים אנגלית, עברית וצרפתית. בעת ההזמנה, ציינו את השפה המועדפת עליכם ואנחנו נתאים לכם את המדריך הנכון.' },
   ],
 }
 

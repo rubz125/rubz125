@@ -188,7 +188,7 @@ function BookingForm() {
                   onChange={(e) => setForm({ ...form, language: e.target.value })}
                   className="w-full bg-[#1C1108] border border-[#D4A843]/20 text-[#F5EDD8] rounded-sm px-4 py-3 text-sm focus:outline-none focus:border-[#D4A843] transition-colors"
                 >
-                  {['English', 'Hebrew', 'Arabic', 'Russian', 'French', 'Spanish', 'German'].map((l) => (
+                  {['English', 'Hebrew', 'French'].map((l) => (
                     <option key={l}>{l}</option>
                   ))}
                 </select>

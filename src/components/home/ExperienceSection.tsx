@@ -7,19 +7,19 @@ import type { Lang } from '@/lib/i18n'
 
 const pillars: Record<Lang, { icon: typeof Compass; title: string; description: string; stat: string }[]> = {
   en: [
-    { icon: Compass, title: 'Expert Local Guides', description: 'Every guide is a certified Israeli geographer, historian, or former military tracker. They speak your language — literally. English, Hebrew, Arabic, Russian, French, and Spanish.', stat: '6 languages' },
+    { icon: Compass, title: 'Expert Local Guides', description: 'Every guide is a certified Israeli geographer, historian, or former military tracker. They speak your language — literally. English, Hebrew, and French.', stat: '3 languages' },
     { icon: Shield, title: 'Uncompromising Safety', description: 'Our Jeeps are expedition-grade with satellite communication, full first-aid equipment, and rollover protection. We hold a perfect 15-year safety record.', stat: 'Zero incidents' },
     { icon: Heart, title: 'Genuine Experiences', description: "We don't do tourist traps. We take you to places only locals know — hidden canyons, private viewpoints, and family-run Bedouin camps that aren't on any map.", stat: '100% off-the-beaten-path' },
     { icon: Award, title: 'Award-Winning', description: "TripAdvisor Hall of Fame inductee. Voted #1 Adventure Tour in Israel for four consecutive years. We have the reviews to prove it — 4.9★ from 847 verified travelers.", stat: '4.9★ from 847 reviews' },
   ],
   fr: [
-    { icon: Compass, title: 'Guides locaux experts', description: "Chaque guide est un géographe, historien ou ancien pisteur militaire israélien certifié. Ils parlent votre langue — littéralement. Anglais, hébreu, arabe, russe, français et espagnol.", stat: '6 langues' },
+    { icon: Compass, title: 'Guides locaux experts', description: "Chaque guide est un géographe, historien ou ancien pisteur militaire israélien certifié. Ils parlent votre langue — littéralement. Anglais, hébreu et français.", stat: '3 langues' },
     { icon: Shield, title: 'Sécurité irréprochable', description: "Nos Jeeps sont de niveau expédition avec communication satellite, équipement complet de premiers secours et protection anti-retournement. Bilan parfait sur 15 ans.", stat: 'Zéro incident' },
     { icon: Heart, title: 'Expériences authentiques', description: "Nous évitons les pièges à touristes. Nous vous emmenons dans des endroits que seuls les locaux connaissent — canyons cachés, points de vue privés, camps bédouins familiaux.", stat: '100% hors des sentiers battus' },
     { icon: Award, title: 'Primé', description: "Membre du TripAdvisor Hall of Fame. Élu #1 circuit d'aventure en Israël quatre années consécutives. Nos avis parlent d'eux-mêmes — 4.9★ de 847 voyageurs vérifiés.", stat: '4.9★ sur 847 avis' },
   ],
   he: [
-    { icon: Compass, title: 'מדריכים מקומיים מומחים', description: 'כל מדריך הוא גיאוגרף, היסטוריון ישראלי מוסמך, או עוקב צבאי לשעבר. הם מדברים בשפה שלך — ממש. אנגלית, עברית, ערבית, רוסית, צרפתית וספרדית.', stat: '6 שפות' },
+    { icon: Compass, title: 'מדריכים מקומיים מומחים', description: 'כל מדריך הוא גיאוגרף, היסטוריון ישראלי מוסמך, או עוקב צבאי לשעבר. הם מדברים בשפה שלך — ממש. אנגלית, עברית וצרפתית.', stat: '3 שפות' },
     { icon: Shield, title: 'בטיחות ללא פשרות', description: 'הג׳יפים שלנו הם ברמת משלחת עם תקשורת לוויינית, ציוד עזרה ראשונה מלא והגנה מפני התהפכות. שיא בטיחות מושלם של 15 שנה.', stat: 'אפס תקריות' },
     { icon: Heart, title: 'חוויות אמיתיות', description: 'אנחנו לא עושים מלכודות תיירים. אנחנו לוקחים אותך למקומות שרק מקומיים מכירים — קניונים נסתרים, נקודות תצפית פרטיות, ומחנות בדואיים משפחתיים שאינם על שום מפה.', stat: '100% מחוץ למסלולים הרגילים' },
     { icon: Award, title: 'זוכה פרסים', description: 'חבר בהיכל התהילה של TripAdvisor. נבחר כסיור ההרפתקאות מספר 1 בישראל ארבע שנים ברציפות. יש לנו את הביקורות להוכיח זאת — 4.9★ מ-847 מטיילים מאומתים.', stat: '4.9★ מ-847 ביקורות' },
