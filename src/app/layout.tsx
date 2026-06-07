@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
+import { LangProvider } from '@/lib/LangContext'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,10 +23,10 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://desertkingjeeep.com'),
+  metadataBase: new URL('https://eilat-action.com'),
   title: {
-    default: 'Desert Kings – Premium Jeep Safari Tours | Israel',
-    template: '%s | Desert Kings Jeep Safari',
+    default: 'Eilat Action – Premium Jeep Safari Tours | Israel',
+    template: '%s | Eilat Action',
   },
   description:
     "Experience Israel's most breathtaking landscapes on a private Jeep Safari. Negev Desert, Galilee, Golan Heights, Dead Sea. Book online — guides speak 6 languages.",
@@ -41,9 +42,9 @@ export const metadata: Metadata = {
     'ג׳יפ סיור מדבר הנגב',
     'ספארי גולן',
   ],
-  authors: [{ name: 'Desert Kings', url: 'https://desertkingjeeep.com' }],
-  creator: 'Desert Kings',
-  publisher: 'Desert Kings',
+  authors: [{ name: 'Eilat Action', url: 'https://eilat-action.com' }],
+  creator: 'Eilat Action',
+  publisher: 'Eilat Action',
   robots: {
     index: true,
     follow: true,
@@ -58,9 +59,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://desertkingjeeep.com',
-    siteName: 'Desert Kings Jeep Safari',
-    title: 'Desert Kings – Premium Jeep Safari Tours | Israel',
+    url: 'https://eilat-action.com',
+    siteName: 'Eilat Action',
+    title: 'Eilat Action – Premium Jeep Safari Tours | Israel',
     description:
       "Private Jeep Safaris across Israel's most epic landscapes. Negev, Galilee, Golan, Dead Sea. 15 years of unforgettable adventures.",
     images: [
@@ -74,14 +75,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Desert Kings – Premium Jeep Safari Tours | Israel',
+    title: 'Eilat Action – Premium Jeep Safari Tours | Israel',
     description:
       "Private Jeep Safaris across Israel's most epic landscapes.",
     images: ['https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200&q=80'],
     creator: '@desertkings',
   },
   alternates: {
-    canonical: 'https://desertkingjeeep.com',
+    canonical: 'https://eilat-action.com',
     languages: {
       'en-US': '/en',
       'he-IL': '/he',
@@ -101,13 +102,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'TouristInformationCenter',
-              name: 'Desert Kings Jeep Safari',
+              name: 'Eilat Action',
               description: 'Premium Jeep Safari tours across Israel',
-              url: 'https://desertkingjeeep.com',
-              telephone: '+972-50-000-0000',
+              url: 'https://eilat-action.com',
+              telephone: '+972-52-521-7029',
               address: {
                 '@type': 'PostalAddress',
-                streetAddress: 'Ben Gurion Blvd 1',
+                streetAddress: 'Eilat, Israel',
                 addressLocality: 'Tel Aviv',
                 addressCountry: 'IL',
               },
@@ -135,7 +136,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={`${inter.className} bg-[#0A0603] text-[#F5EDD8] antialiased`}>
-        {children}
+        <LangProvider>{children}</LangProvider>
       </body>
     </html>
   )

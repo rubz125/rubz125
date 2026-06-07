@@ -29,7 +29,7 @@ export default function HomePage() {
 
       {/* Floating WhatsApp button */}
       <a
-        href="https://wa.me/972500000000"
+        href="https://wa.me/972525217029"
         aria-label="Chat on WhatsApp"
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] shadow-lg shadow-[#25D366]/30 flex items-center justify-center hover:scale-110 transition-transform duration-200"
         style={{ animation: 'pulse-glow 3s ease-in-out infinite' }}

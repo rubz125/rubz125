@@ -8,7 +8,7 @@ import { tours } from '@/data/tours'
 export const metadata: Metadata = {
   title: 'All Jeep Safari Tours',
   description:
-    'Explore all Desert Kings Jeep Safari routes — Negev Desert, Golan Heights, Galilee, Dead Sea, and night safaris. Private tours, expert guides, 6 languages.',
+    'Explore all Eilat Action routes — Negev Desert, Golan Heights, Galilee, Dead Sea, and night safaris. Private tours, expert guides, 6 languages.',
 }
 
 export default function ToursPage() {
@@ -86,7 +86,7 @@ export default function ToursPage() {
               Multi-day expeditions, corporate events, large groups, proposals — we build bespoke safaris for any occasion.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="https://wa.me/972500000000" className="btn-primary">
+              <a href="https://wa.me/972525217029" className="btn-primary">
                 Chat With Us
               </a>
               <Link href="/contact" className="btn-secondary">

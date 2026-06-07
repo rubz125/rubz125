@@ -77,7 +77,7 @@ export function HeroSection() {
             ))}
           </div>
           <span className="text-[#D4A843] text-sm font-medium tracking-[0.2em] uppercase">
-            Israel's #1 Rated Jeep Safari
+            Israel's #1 Rated Jeep Safari Eilat
           </span>
         </motion.div>
 

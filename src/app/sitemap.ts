@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { tours } from '@/data/tours'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://desertkingjeeep.com'
+  const base = 'https://eilat-action.com'
 
   const tourPages = tours.map((t) => ({
     url: `${base}/tours/${t.slug}`,

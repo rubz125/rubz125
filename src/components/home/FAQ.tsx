@@ -125,7 +125,7 @@ export function FAQ() {
               className="space-y-3"
             >
               <a
-                href="https://wa.me/972500000000"
+                href="https://wa.me/972525217029"
                 className="flex items-center gap-2 w-full px-5 py-3.5 bg-[#25D366]/15 border border-[#25D366]/25 text-[#25D366] text-sm font-medium rounded-sm hover:bg-[#25D366]/25 transition-colors justify-center"
               >
                 <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
@@ -134,7 +134,7 @@ export function FAQ() {
                 Chat on WhatsApp — replies in &lt;30 min
               </a>
               <a
-                href="mailto:hello@desertkings.com"
+                href="mailto:Eilataction@gmail.com"
                 className="flex items-center gap-2 w-full px-5 py-3.5 bg-[#D4A843]/08 border border-[#D4A843]/20 text-[#D4A843] text-sm font-medium rounded-sm hover:bg-[#D4A843]/15 transition-colors justify-center"
               >
                 Email Our Team

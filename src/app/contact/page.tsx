@@ -45,9 +45,9 @@ export default function ContactPage() {
                 </h2>
                 <div className="space-y-6 mb-10">
                   {[
-                    { icon: Phone, title: 'Phone', lines: ['+972-50-000-0000', 'Sun–Fri, 8am–8pm'] },
-                    { icon: Mail, title: 'Email', lines: ['hello@desertkings.com', 'We reply within 2 hours'] },
-                    { icon: MapPin, title: 'Office', lines: ['Ben Gurion Blvd 1', 'Tel Aviv, Israel'] },
+                    { icon: Phone, title: 'Phone', lines: ['+972-52-521-7029', 'Sun–Fri, 8am–8pm'] },
+                    { icon: Mail, title: 'Email', lines: ['Eilataction@gmail.com', 'We reply within 2 hours'] },
+                    { icon: MapPin, title: 'Office', lines: ['Eilat, Israel', 'Eilat, Israel'] },
                     { icon: Clock, title: 'Hours', lines: ['Sun–Thu: 8am–8pm', 'Fri: 8am–3pm | Sat: Closed'] },
                   ].map(({ icon: Icon, title, lines }) => (
                     <div key={title} className="flex gap-4">
@@ -72,7 +72,7 @@ export default function ContactPage() {
                   </div>
                   <p className="text-[#7A6245] text-sm mb-3">We typically reply within minutes during business hours.</p>
                   <a
-                    href="https://wa.me/972500000000"
+                    href="https://wa.me/972525217029"
                     className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366]/15 border border-[#25D366]/30 text-[#25D366] text-sm font-medium rounded-sm hover:bg-[#25D366]/25 transition-colors"
                   >
                     Open WhatsApp Chat

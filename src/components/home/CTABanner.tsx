@@ -72,7 +72,7 @@ export function CTABanner() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
-              href="tel:+972500000000"
+              href="tel:+972525217029"
               className="btn-secondary text-base px-8 py-4 w-full sm:w-auto text-center"
             >
               <Phone className="w-4 h-4" />

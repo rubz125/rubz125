@@ -103,7 +103,7 @@ export function ExperienceSection() {
             >
               <div className="section-divider" />
               <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">
-                Why Desert Kings
+                Why Eilat Action
               </span>
             </motion.div>
 
@@ -127,7 +127,7 @@ export function ExperienceSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-[#A08860] text-base leading-relaxed mb-10"
             >
-              Since 2009, Desert Kings has redefined what a Jeep Safari means. We built this company because we were frustrated with mediocre, overcrowded tours that treated landscapes like checkboxes. We do the opposite.
+              Since 2009, Eilat Action has redefined what a Jeep Safari means. We built this company because we were frustrated with mediocre, overcrowded tours that treated landscapes like checkboxes. We do the opposite.
             </motion.p>
 
             <div className="space-y-7">

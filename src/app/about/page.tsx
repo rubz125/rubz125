@@ -8,7 +8,7 @@ import { Shield, Award, Globe, Mountain } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'About Us',
   description:
-    'Desert Kings is Israel\'s most awarded Jeep Safari company, founded in 2009. Expert local guides, private tours, and a perfect safety record across 15 years.',
+    'Eilat Action is Israel\'s most awarded Jeep Safari company, founded in 2009. Expert local guides, private tours, and a perfect safety record across 15 years.',
 }
 
 const team = [
@@ -43,7 +43,7 @@ const team = [
 ]
 
 const timeline = [
-  { year: '2009', event: 'Desert Kings founded with one Jeep and a dream' },
+  { year: '2009', event: 'Eilat Action founded with one Jeep and a dream' },
   { year: '2011', event: 'First TripAdvisor Certificate of Excellence' },
   { year: '2013', event: 'Expanded to Golan Heights routes' },
   { year: '2016', event: 'Voted #1 Adventure Tour in Israel' },
@@ -62,7 +62,7 @@ export default function AboutPage() {
         <section className="relative h-[50vh] min-h-[380px] flex items-end">
           <Image
             src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920&q=80"
-            alt="Desert Kings landscape"
+            alt="Eilat Action landscape"
             fill
             className="object-cover"
             sizes="100vw"
@@ -75,7 +75,7 @@ export default function AboutPage() {
               <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">Our Story</span>
             </div>
             <h1 className="text-5xl sm:text-6xl font-bold text-[#F5EDD8]" style={{ fontFamily: 'var(--font-playfair)' }}>
-              About Desert Kings
+              About Eilat Action
             </h1>
           </div>
         </section>
@@ -103,7 +103,7 @@ export default function AboutPage() {
                     In 2009, Avi Ben-David — former IDF tracker, desert ecologist, and lifelong Negev wanderer — took his family on a "reputable" Jeep tour of the desert. They spent two hours on a crowded, paved road with 30 strangers, listening to a bored guide recite Wikipedia facts.
                   </p>
                   <p>
-                    He came home and started Desert Kings.
+                    He came home and started Eilat Action.
                   </p>
                   <p>
                     Fifteen years later, we've guided over 12,000 guests from 60+ countries through Israel's most extraordinary landscapes. Every tour is private. Every guide is passionate. Every route is designed to show you something you couldn't find on your own.
@@ -186,7 +186,7 @@ export default function AboutPage() {
               Safety is Non-Negotiable
             </h2>
             <p className="text-[#A08860] mb-8">
-              Every Desert Kings vehicle is expedition-grade, maintained monthly, and equipped with satellite communication, professional first aid, and desert survival gear. Every guide holds wilderness first responder certification. We have operated for 15 years without a single incident.
+              Every Eilat Action vehicle is expedition-grade, maintained monthly, and equipped with satellite communication, professional first aid, and desert survival gear. Every guide holds wilderness first responder certification. We have operated for 15 years without a single incident.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {['Satellite Comms', 'Wilderness First Aid', 'Rollover Protection', 'Emergency Supplies'].map((item) => (

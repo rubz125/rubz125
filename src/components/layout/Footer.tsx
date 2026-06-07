@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { MapPin, Phone, Mail } from 'lucide-react'
+import { EilatActionLogo } from '@/components/ui/EilatActionLogo'
 
 const tourLinks = [
   { label: 'Negev Crater Expedition', href: '/tours/negev-crater-expedition' },
@@ -11,7 +12,7 @@ const tourLinks = [
 ]
 
 const companyLinks = [
-  { label: 'About Desert Kings', href: '/about' },
+  { label: 'About Eilat Action', href: '/about' },
   { label: 'Our Guides', href: '/about#guides' },
   { label: 'Safety Standards', href: '/about#safety' },
   { label: 'Gallery', href: '/#gallery' },
@@ -38,14 +39,14 @@ export function Footer() {
           </div>
           <div className="flex items-center gap-3">
             <a
-              href="tel:+972500000000"
+              href="tel:+972525217029"
               className="flex items-center gap-2 px-4 py-2 rounded-sm border border-[#D4A843]/30 text-[#D4A843] text-sm hover:bg-[#D4A843]/10 transition-colors"
             >
               <Phone className="w-4 h-4" />
-              +972-50-000-0000
+              +972-52-521-7029
             </a>
             <a
-              href="https://wa.me/972500000000"
+              href="https://wa.me/972525217029"
               className="flex items-center gap-2 px-4 py-2 rounded-sm bg-[#25D366]/20 border border-[#25D366]/30 text-[#25D366] text-sm font-medium hover:bg-[#25D366]/30 transition-colors"
             >
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
@@ -62,18 +63,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-sm bg-gradient-to-br from-[#D4A843] to-[#C4623A] flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-6 h-6 text-[#0A0603]" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-              <div>
-                <div className="text-[#F5EDD8] font-bold text-lg leading-none" style={{ fontFamily: 'var(--font-playfair)' }}>
-                  Desert Kings
-                </div>
-                <div className="text-[#D4A843] text-[10px] uppercase tracking-[0.25em] mt-0.5">Jeep Safari</div>
-              </div>
+            <Link href="/" className="inline-block mb-6">
+              <EilatActionLogo width={150} />
             </Link>
             <p className="text-[#7A6245] text-sm leading-relaxed max-w-sm mb-6">
               Israel's most awarded Jeep Safari company. Fifteen years of unforgettable expeditions
@@ -82,15 +73,15 @@ export function Footer() {
             <div className="space-y-2 mb-6">
               <div className="flex items-start gap-2 text-sm text-[#7A6245]">
                 <MapPin className="w-4 h-4 text-[#D4A843] mt-0.5 shrink-0" />
-                <span>Ben Gurion Blvd 1, Tel Aviv, Israel</span>
+                <span>Eilat, Israel, Eilat, Israel</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-[#7A6245]">
                 <Phone className="w-4 h-4 text-[#D4A843] shrink-0" />
-                <a href="tel:+972500000000" className="hover:text-[#D4A843] transition-colors">+972-50-000-0000</a>
+                <a href="tel:+972525217029" className="hover:text-[#D4A843] transition-colors">+972-52-521-7029</a>
               </div>
               <div className="flex items-center gap-2 text-sm text-[#7A6245]">
                 <Mail className="w-4 h-4 text-[#D4A843] shrink-0" />
-                <a href="mailto:hello@desertkings.com" className="hover:text-[#D4A843] transition-colors">hello@desertkings.com</a>
+                <a href="mailto:Eilataction@gmail.com" className="hover:text-[#D4A843] transition-colors">Eilataction@gmail.com</a>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -118,7 +109,7 @@ export function Footer() {
                 </a>
               ))}
               <a
-                href="https://wa.me/972500000000"
+                href="https://wa.me/972525217029"
                 aria-label="WhatsApp"
                 className="w-9 h-9 rounded-sm border border-[#25D366]/20 flex items-center justify-center text-[#25D366]/60 hover:text-[#25D366] hover:border-[#25D366]/50 hover:bg-[#25D366]/05 transition-all duration-200"
               >
@@ -186,7 +177,7 @@ export function Footer() {
       <div className="border-t border-white/5 bg-[#080503]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[#4A3B26] text-xs">
-            © {new Date().getFullYear()} Desert Kings Jeep Safari. All rights reserved.
+            © {new Date().getFullYear()} Eilat Action. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             {['Privacy Policy', 'Terms of Service', 'Accessibility'].map((label) => (

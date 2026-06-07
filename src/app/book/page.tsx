@@ -49,7 +49,7 @@ function BookingForm() {
             For immediate assistance, message us on WhatsApp.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="https://wa.me/972500000000" className="btn-primary">
+            <a href="https://wa.me/972525217029" className="btn-primary">
               Open WhatsApp
             </a>
             <Link href="/tours" className="btn-secondary">

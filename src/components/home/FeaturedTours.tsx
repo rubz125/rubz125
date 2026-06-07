@@ -82,7 +82,7 @@ export function FeaturedTours() {
               <span className="text-[#D4A843] font-semibold">Can't decide?</span> Our team will find the perfect safari for your group, dates, and preferences.
             </div>
             <a
-              href="https://wa.me/972500000000"
+              href="https://wa.me/972525217029"
               className="shrink-0 flex items-center gap-2 px-5 py-2.5 bg-[#25D366]/15 border border-[#25D366]/30 text-[#25D366] text-sm font-medium rounded-sm hover:bg-[#25D366]/25 transition-colors whitespace-nowrap"
             >
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">

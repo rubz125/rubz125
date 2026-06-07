@@ -194,7 +194,7 @@ export default async function TourPage({ params }: Props) {
                       Book This Tour
                     </Link>
                     <a
-                      href="https://wa.me/972500000000"
+                      href="https://wa.me/972525217029"
                       className="flex items-center justify-center gap-2 w-full py-3 rounded-sm bg-[#25D366]/10 border border-[#25D366]/25 text-[#25D366] text-sm font-medium hover:bg-[#25D366]/20 transition-colors"
                     >
                       <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
