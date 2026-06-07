@@ -5,80 +5,20 @@ import { motion, useInView } from "framer-motion";
 import { Server, Mail, Cloud, Shield, Camera, Lock, HardDrive, Network, Cpu, Headphones } from "lucide-react";
 import Link from "next/link";
 
-const services = [
-  {
-    icon: Server, color: "#0078d4", slug: "managed-it",
-    title: "Managed IT Services",
-    desc: "Your IT. Fully managed. Zero surprises.",
-    detail: "We take complete ownership of your IT environment — monitoring, maintaining, and resolving issues before they impact your business. One flat monthly fee, no hidden costs.",
-    benefits: ["Proactive monitoring & maintenance", "Remote & on-site support", "Predictable monthly pricing"],
-  },
-  {
-    icon: Mail, color: "#00b4d8", slug: "microsoft-365",
-    title: "Microsoft 365",
-    desc: "Deployed right. Secured properly. Managed daily.",
-    detail: "From initial setup to ongoing management, we handle your entire Microsoft 365 environment — including email, Teams, SharePoint, licensing and security policies.",
-    benefits: ["Email, Teams & SharePoint", "Security & compliance setup", "User management & licensing"],
-  },
-  {
-    icon: Cloud, color: "#00d4ff", slug: "cloud-infrastructure",
-    title: "Cloud Infrastructure",
-    desc: "Azure. AWS. Hybrid. Built to scale, built to last.",
-    detail: "We design, migrate and manage your cloud infrastructure on Azure or AWS. Whether you're moving from on-premise or scaling an existing cloud setup, we make it efficient and cost-effective.",
-    benefits: ["Cloud migration strategy", "Cost optimization", "Hybrid cloud solutions"],
-  },
-  {
-    icon: Shield, color: "#0078d4", slug: "cybersecurity",
-    title: "Cybersecurity",
-    desc: "Detect. Contain. Eliminate. Before damage is done.",
-    detail: "Ransomware, phishing, insider threats — we protect your business at every layer. EDR, email filtering, security awareness, and 24/7 threat monitoring keep you one step ahead.",
-    benefits: ["EDR & antivirus protection", "Threat detection & response", "Security audits"],
-  },
-  {
-    icon: Camera, color: "#00b4d8", slug: "cctv",
-    title: "CCTV Installation",
-    desc: "See everything. Record everything. Miss nothing.",
-    detail: "Professional installation of HD and 4K IP camera systems for offices, warehouses and retail. Remote access from your phone, AI-powered motion alerts, and cloud or NVR recording.",
-    benefits: ["HD & 4K camera systems", "Remote mobile monitoring", "AI motion detection"],
-  },
-  {
-    icon: Lock, color: "#00d4ff", slug: "access-control",
-    title: "Access Control",
-    desc: "Who gets in. When. Where. You decide.",
-    detail: "Control physical access to your premises with keycard, PIN or biometric systems. Manage multiple sites from one dashboard, with full audit trails of every entry and exit.",
-    benefits: ["Keycard & biometric systems", "Multi-site management", "Audit trails & reporting"],
-  },
-  {
-    icon: HardDrive, color: "#0078d4", slug: "backup-dr",
-    title: "Backup & DR",
-    desc: "When things go wrong — back up in minutes, not days.",
-    detail: "Automated daily backups to off-site and cloud storage, with tested recovery procedures. We define your RTO and RPO targets and guarantee them with SLA-backed contracts.",
-    benefits: ["Automated daily backups", "Off-site & cloud storage", "RTO/RPO SLA guarantees"],
-  },
-  {
-    icon: Network, color: "#00b4d8", slug: "network",
-    title: "Network Infrastructure",
-    desc: "Fast. Reliable. Secure. The network you deserve.",
-    detail: "From structured cabling and enterprise WiFi to firewalls and VPN — we design and deploy networks that handle real workloads, with 24/7 monitoring and rapid fault resolution.",
-    benefits: ["Structured cabling & WiFi", "Firewall & VPN setup", "Network monitoring 24/7"],
-  },
-  {
-    icon: Cpu, color: "#00d4ff", slug: "server-virtualization",
-    title: "Server Virtualization",
-    desc: "Do more with less. Hyper-V & VMware, architected right.",
-    detail: "Consolidate your physical servers into a lean, high-performance virtual environment. We architect, deploy and manage Hyper-V and VMware clusters with HA and live migration.",
-    benefits: ["Server consolidation", "High availability clustering", "Live migration support"],
-  },
-  {
-    icon: Headphones, color: "#0078d4", slug: "helpdesk",
-    title: "Helpdesk Support",
-    desc: "Real humans. Real answers. Issues resolved — fast.",
-    detail: "Your team gets direct access to our senior technicians — no bots, no first-level scripts. Remote support in minutes, on-site when needed, with priority queuing and SLA guarantees.",
-    benefits: ["Remote & on-site support", "Priority ticketing system", "SLA response guarantees"],
-  },
+const serviceKeys = [
+  { icon: Server, color: "#0078d4", slug: "managed-it",  prefix: "svc_managed" },
+  { icon: Mail,   color: "#00b4d8", slug: "microsoft-365", prefix: "svc_m365" },
+  { icon: Cloud,  color: "#00d4ff", slug: "cloud-infrastructure", prefix: "svc_cloud" },
+  { icon: Shield, color: "#0078d4", slug: "cybersecurity", prefix: "svc_cyber" },
+  { icon: Camera, color: "#00b4d8", slug: "cctv",         prefix: "svc_cctv" },
+  { icon: Lock,   color: "#00d4ff", slug: "access-control", prefix: "svc_access" },
+  { icon: HardDrive, color: "#0078d4", slug: "backup-dr", prefix: "svc_backup" },
+  { icon: Network,   color: "#00b4d8", slug: "network",   prefix: "svc_network" },
+  { icon: Cpu,    color: "#00d4ff", slug: "server-virtualization", prefix: "svc_virt" },
+  { icon: Headphones, color: "#0078d4", slug: "helpdesk", prefix: "svc_helpdesk" },
 ];
 
-function ServiceCard({ s, i }: { s: (typeof services)[0]; i: number }) {
+function ServiceCard({ s, i }: { s: (typeof serviceKeys)[0]; i: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const { t } = useApp();
 
@@ -128,24 +68,24 @@ function ServiceCard({ s, i }: { s: (typeof services)[0]; i: number }) {
         fontWeight: 800, letterSpacing: "-0.3px",
         color: "var(--text-1)", marginBottom: 8,
       }}>
-        {s.title}
+        {t(`${s.prefix}_title`)}
       </h3>
 
       <p style={{ fontSize: 13, color: "#00d4ff", lineHeight: 1.5, marginBottom: 10, fontWeight: 600, letterSpacing: "0.2px" }}>
-        {s.desc}
+        {t(`${s.prefix}_desc`)}
       </p>
 
       <p style={{ fontSize: 12.5, color: "var(--text-3)", lineHeight: 1.75, marginBottom: 16 }}>
-        {s.detail}
+        {t(`${s.prefix}_detail`)}
       </p>
 
       <ul style={{ listStyle: "none", marginBottom: 20 }}>
-        {s.benefits.map((b) => (
-          <li key={b} style={{
+        {[1, 2, 3].map((n) => (
+          <li key={n} style={{
             fontSize: 12, color: "var(--text-3)",
             padding: "3px 0", display: "flex", gap: 8,
           }}>
-            <span style={{ color: s.color, flexShrink: 0 }}>&#8594;</span> {b}
+            <span style={{ color: s.color, flexShrink: 0 }}>&#8594;</span> {t(`${s.prefix}_b${n}`)}
           </li>
         ))}
       </ul>
@@ -191,7 +131,7 @@ export default function Services() {
                 : { background: "linear-gradient(135deg,#fff 0%,#c8e0ff 55%,#00d4ff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }),
             }}
           >
-            {t("services_h2").split("\n").map((l,i,a) => <span key={i}>{l}{i<a.length-1&&<br/>}</span>)}
+            {t("services_h2").split("\n").map((l, i, a) => <span key={i}>{l}{i < a.length - 1 && <br />}</span>)}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -208,7 +148,7 @@ export default function Services() {
           gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
           gap: 16,
         }}>
-          {services.map((s, i) => <ServiceCard key={s.title} s={s} i={i} />)}
+          {serviceKeys.map((s, i) => <ServiceCard key={s.slug} s={s} i={i} />)}
         </div>
       </div>
     </section>
