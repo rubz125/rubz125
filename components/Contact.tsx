@@ -56,7 +56,7 @@ export default function Contact() {
 
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {[
-                  { href: "tel:+972542167219", icon: Phone, labelKey: "contact_call", bg: "linear-gradient(135deg,#0078d4,#00b4d8)", color: "#fff" },
+                  { href: "tel:+972542167219", icon: Phone, labelKey: "contact_call", bg: "linear-gradient(135deg,#0078d4,#00b4d8)", color: "#fff", phoneNum: "+972 54 216 7219" },
                   { href: "https://wa.me/972542167219", icon: MessageCircle, labelKey: "contact_whatsapp", bg: "linear-gradient(135deg,#25d366,#128c7e)", color: "#fff" },
                   { href: "mailto:rubenuzan11@gmail.com", icon: Mail, labelKey: "contact_email", bg: "rgba(255,255,255,0.04)", color: "var(--text-1)", border: "1px solid rgba(0,180,216,0.25)" },
                   { href: "tel:+972542167219", icon: AlertTriangle, labelKey: "contact_emergency", bg: "transparent", color: "#ff8080", border: "1px solid rgba(255,80,80,0.3)" },
@@ -65,12 +65,19 @@ export default function Contact() {
                     dir="ltr"
                     style={{
                       display: "flex", alignItems: "center", gap: 12,
+                      direction: "ltr",
                       background: btn.bg, border: btn.border || "none",
                       color: btn.color, fontWeight: 600, fontSize: 14,
                       padding: "13px 18px", borderRadius: 12,
                       textDecoration: "none", transition: "all 0.25s",
                     }}>
-                    <btn.icon size={15} /> {t(btn.labelKey)}
+                    <btn.icon size={15} />
+                    <span>{t(btn.labelKey)}</span>
+                    {btn.phoneNum && (
+                      <span dir="ltr" style={{ direction: "ltr", unicodeBidi: "isolate" }}>
+                        {btn.phoneNum}
+                      </span>
+                    )}
                   </a>
                 ))}
               </div>

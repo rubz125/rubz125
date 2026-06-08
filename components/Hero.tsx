@@ -82,8 +82,9 @@ const statsNums = ["24/7", "99.9%", "500+", "100+"];
 const statsKeys = ["hero_stat1", "hero_stat2", "hero_stat3", "hero_stat4"];
 
 export default function Hero() {
-  const { t, theme } = useApp();
+  const { t, theme, lang } = useApp();
   const isLight = theme === "light";
+  const isRtl = lang === "he";
   return (
     <section
       style={{
@@ -120,16 +121,19 @@ export default function Hero() {
 
       <ParticleCanvas />
 
-      {/* Floating badges — right side */}
+      {/* Floating badges — opposite side to text (right in LTR, left in RTL) */}
       <div className="rub-hero-badges" style={{
-        position: "absolute", right: "5%", top: "50%",
+        position: "absolute",
+        ...(isRtl ? { left: "5%" } : { right: "5%" }),
+        top: "50%",
         transform: "translateY(-50%)",
         display: "flex", flexDirection: "column", gap: 14,
+        direction: "ltr",
       }}>
         {floatingBadges.map((b, i) => (
           <motion.div
             key={b.label}
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: isRtl ? -40 : 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.9 + i * 0.15 }}
             style={{
@@ -231,8 +235,9 @@ export default function Hero() {
           className="rub-hero-btns"
           style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 60, alignItems: "center" }}
         >
-          <a href="#contact" style={{
+          <a href="#contact" dir="ltr" style={{
             display: "inline-flex", alignItems: "center", gap: 8,
+            direction: "ltr",
             background: "linear-gradient(135deg,#0078d4,#00b4d8)",
             color: "#fff", padding: "13px 28px", borderRadius: 12,
             fontSize: 15, fontWeight: 600, textDecoration: "none",
@@ -240,8 +245,9 @@ export default function Hero() {
           }}>
             {t("hero_cta1")} <ArrowRight size={15} />
           </a>
-          <a href="tel:+972542167219" style={{
+          <a href="tel:+972542167219" dir="ltr" style={{
             display: "inline-flex", alignItems: "center", gap: 8,
+            direction: "ltr",
             background: "var(--card-bg)", border: "1px solid var(--border-md)",
             color: "var(--text-1)", padding: "13px 28px", borderRadius: 12,
             fontSize: 15, fontWeight: 600, textDecoration: "none",

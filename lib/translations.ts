@@ -250,7 +250,7 @@ export const translations: Record<string, Record<string, string>> = {
     contact_h2: "בואו נדבר\nעל ה-IT שלך.",
     contact_name: "רובן אוזן",
     contact_tagline: "ללא מכירות. ללא פיתיונות. רק שיחה ישרה על ה-IT שלך — ואיך אנחנו מתקנים אותו.",
-    contact_call: "התקשר +972 54 216 7219",
+    contact_call: "התקשר",
     contact_whatsapp: "וואטסאפ",
     contact_email: "שלח מייל",
     contact_emergency: "תמיכת חירום",
