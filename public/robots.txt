@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://rubzlar.com/sitemap.xml
+
+# Disallow admin / api routes if added in future
+Disallow: /api/

@@ -51,9 +51,34 @@ body {
 }
 
 ::selection { background: rgba(0,180,216,0.3); color: #fff; }
+
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #0d1526; }
+::-webkit-scrollbar-track { background: var(--bg-1); }
 ::-webkit-scrollbar-thumb { background: #0078d4; border-radius: 3px; }
+
+/* ── Focus styles (accessibility) ── */
+:focus-visible {
+  outline: 2px solid #0078d4;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Prefers reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee,
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-radar,
+  .animate-blink {
+    animation: none !important;
+  }
+}
 
 .gradient-text {
   background: linear-gradient(135deg, #ffffff 0%, #c8e0ff 50%, #00d4ff 100%);

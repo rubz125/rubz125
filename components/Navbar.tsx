@@ -94,24 +94,28 @@ export default function Navbar() {
           {/* Actions */}
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             {/* Language toggle */}
-            <button onClick={toggleLang} style={{
-              background: isHe ? "rgba(0,120,212,0.12)" : "var(--card-bg)",
-              border: "1px solid var(--border)",
-              borderRadius: 8, padding: "6px 12px",
-              fontSize: 12, fontWeight: 700, cursor: "pointer",
-              color: "var(--text-1)", transition: "all 0.2s",
-              fontFamily: "var(--font-inter)",
-            }}>
+            <button onClick={toggleLang}
+              aria-label={isHe ? "Switch to English" : "עבור לעברית"}
+              style={{
+                background: isHe ? "rgba(0,120,212,0.12)" : "var(--card-bg)",
+                border: "1px solid var(--border)",
+                borderRadius: 8, padding: "6px 12px",
+                fontSize: 12, fontWeight: 700, cursor: "pointer",
+                color: "var(--text-1)", transition: "all 0.2s",
+                fontFamily: "var(--font-inter)",
+              }}>
               {isHe ? "EN" : "עב"}
             </button>
 
             {/* Theme toggle */}
-            <button onClick={toggleTheme} style={{
-              background: "var(--card-bg)", border: "1px solid var(--border)",
-              borderRadius: 8, padding: "6px 8px",
-              cursor: "pointer", color: "var(--text-1)",
-              display: "flex", alignItems: "center", transition: "all 0.2s",
-            }}>
+            <button onClick={toggleTheme}
+              aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
+              style={{
+                background: "var(--card-bg)", border: "1px solid var(--border)",
+                borderRadius: 8, padding: "6px 8px",
+                cursor: "pointer", color: "var(--text-1)",
+                display: "flex", alignItems: "center", transition: "all 0.2s",
+              }}>
               {isLight ? <Moon size={15} /> : <Sun size={15} />}
             </button>
 

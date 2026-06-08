@@ -21,13 +21,25 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
   const [lang, setLang] = useState<Lang>("en");
 
+  // Restore preferences from localStorage on mount
+  useEffect(() => {
+    try {
+      const savedTheme = localStorage.getItem("rub-theme") as Theme | null;
+      const savedLang = localStorage.getItem("rub-lang") as Lang | null;
+      if (savedTheme === "light" || savedTheme === "dark") setTheme(savedTheme);
+      if (savedLang === "en" || savedLang === "he") setLang(savedLang);
+    } catch {}
+  }, []);
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    try { localStorage.setItem("rub-theme", theme); } catch {}
   }, [theme]);
 
   useEffect(() => {
     document.documentElement.setAttribute("dir", lang === "he" ? "rtl" : "ltr");
     document.documentElement.setAttribute("lang", lang);
+    try { localStorage.setItem("rub-lang", lang); } catch {}
   }, [lang]);
 
   const toggleTheme = () => setTheme(t => t === "dark" ? "light" : "dark");

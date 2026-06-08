@@ -87,15 +87,15 @@ export default function Contact() {
 
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div className="rub-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-                {[
-                  [t("form_name"), "text", "John Smith"],
-                  [t("form_company"), "text", "Acme Corp"],
-                  [t("form_email"), "email", "john@company.com"],
-                  [t("form_phone"), "tel", "+972..."],
-                ].map(([label, type, placeholder]) => (
-                  <div key={label}>
-                    <label style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{label}</label>
-                    <input type={type} placeholder={placeholder} style={{
+                {([
+                  [t("form_name"), "text", "John Smith", "contact-name"],
+                  [t("form_company"), "text", "Acme Corp", "contact-company"],
+                  [t("form_email"), "email", "john@company.com", "contact-email"],
+                  [t("form_phone"), "tel", "+972...", "contact-phone"],
+                ] as [string,string,string,string][]).map(([label, type, placeholder, fieldId]) => (
+                  <div key={fieldId}>
+                    <label htmlFor={fieldId} style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{label}</label>
+                    <input id={fieldId} type={type} placeholder={placeholder} autoComplete={type === "email" ? "email" : type === "tel" ? "tel" : undefined} style={{
                       width: "100%", background: "var(--input-bg)", border: "1px solid var(--border-md)",
                       borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "var(--text-1)",
                       outline: "none", fontFamily: "var(--font-inter)",
@@ -105,8 +105,8 @@ export default function Contact() {
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{t("form_service")}</label>
-                <select style={{
+                <label htmlFor="contact-service" style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{t("form_service")}</label>
+                <select id="contact-service" style={{
                   width: "100%", background: "var(--input-bg)", border: "1px solid var(--border-md)",
                   borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "var(--text-2)",
                   outline: "none", fontFamily: "var(--font-inter)",
@@ -117,8 +117,8 @@ export default function Contact() {
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{t("form_message")}</label>
-                <textarea rows={4} placeholder={t("form_message")} style={{
+                <label htmlFor="contact-message" style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{t("form_message")}</label>
+                <textarea id="contact-message" rows={4} placeholder={t("form_message")} style={{
                   width: "100%", background: "var(--input-bg)", border: "1px solid var(--border-md)",
                   borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "var(--text-1)",
                   outline: "none", fontFamily: "var(--font-inter)", resize: "vertical",
