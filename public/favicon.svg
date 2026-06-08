@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#0078d4"/>
+      <stop offset="55%"  stop-color="#00b4d8"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+    <!-- subtle inner glow on the bg -->
+    <radialGradient id="bg" cx="50%" cy="30%" r="65%">
+      <stop offset="0%"   stop-color="#0d2a4a"/>
+      <stop offset="100%" stop-color="#080d1a"/>
+    </radialGradient>
+  </defs>
+
+  <!-- background with rounded corners -->
+  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
+
+  <!-- thin border ring -->
+  <rect width="32" height="32" rx="7" fill="none"
+        stroke="#0078d4" stroke-width="0.6" stroke-opacity="0.45"/>
+
+  <!-- "RUB" lettering — bold, tight, centered -->
+  <text
+    x="16" y="22.5"
+    text-anchor="middle"
+    font-family="'Arial Black', 'Arial Bold', Arial, Helvetica, sans-serif"
+    font-weight="900"
+    font-size="15"
+    letter-spacing="-0.8"
+    fill="url(#grad)"
+  >RUB</text>
+</svg>
