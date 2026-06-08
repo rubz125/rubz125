@@ -27,10 +27,37 @@ export default function Contact() {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [sending, setSending] = useState(false);
+  const [error, setError]     = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 5000);
+    setSending(true);
+    setError(null);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setSent(true);
+        form.reset();
+        setTimeout(() => setSent(false), 6000);
+      } else {
+        const json = await res.json().catch(() => ({}));
+        setError((json as { error?: string }).error ?? "Submission failed. Please try again.");
+      }
+    } catch {
+      setError("Network error. Please check your connection.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -107,14 +134,14 @@ export default function Contact() {
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div className="rub-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                 {([
-                  [t("form_name"),    "text",  "John Smith",        "contact-name"],
-                  [t("form_company"), "text",  "Acme Corp",         "contact-company"],
-                  [t("form_email"),   "email", "john@company.com",  "contact-email"],
-                  [t("form_phone"),   "tel",   "+972...",           "contact-phone"],
-                ] as [string,string,string,string][]).map(([label, type, placeholder, fieldId]) => (
+                  [t("form_name"),    "text",  "John Smith",        "contact-name",    "name"],
+                  [t("form_company"), "text",  "Acme Corp",         "contact-company", "company"],
+                  [t("form_email"),   "email", "john@company.com",  "contact-email",   "email"],
+                  [t("form_phone"),   "tel",   "+972...",           "contact-phone",   "phone"],
+                ] as [string,string,string,string,string][]).map(([label, type, placeholder, fieldId, fieldName]) => (
                   <div key={fieldId}>
                     <label htmlFor={fieldId} style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{label}</label>
-                    <input id={fieldId} type={type} placeholder={placeholder}
+                    <input id={fieldId} name={fieldName} type={type} placeholder={placeholder}
                       autoComplete={type === "email" ? "email" : type === "tel" ? "tel" : undefined}
                       style={{
                         width: "100%", background: "var(--input-bg)", border: "1px solid var(--border-md)",
@@ -127,7 +154,7 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="contact-service" style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{t("form_service")}</label>
-                <select id="contact-service" style={{
+                <select id="contact-service" name="service" style={{
                   width: "100%", background: "var(--input-bg)", border: "1px solid var(--border-md)",
                   borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "var(--text-2)",
                   outline: "none", fontFamily: "var(--font-inter)",
@@ -139,29 +166,39 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="contact-message" style={{ display: "block", fontSize: 12, color: "var(--text-2)", fontWeight: 500, marginBottom: 7 }}>{t("form_message")}</label>
-                <textarea id="contact-message" rows={4} placeholder={t("form_message")} style={{
+                <textarea id="contact-message" name="message" rows={4} placeholder={t("form_message")} style={{
                   width: "100%", background: "var(--input-bg)", border: "1px solid var(--border-md)",
                   borderRadius: 12, padding: "11px 14px", fontSize: 13, color: "var(--text-1)",
                   outline: "none", fontFamily: "var(--font-inter)", resize: "vertical",
                 }} />
               </div>
 
+              {error && (
+                <p style={{ fontSize: 12, color: "#ff6b6b", background: "rgba(255,80,80,0.08)", border: "1px solid rgba(255,80,80,0.2)", borderRadius: 8, padding: "10px 14px", margin: 0 }}>
+                  {error}
+                </p>
+              )}
+
               <button
                 ref={submitRef}
                 type="submit"
-                onMouseEnter={() => gsap.to(submitRef.current, { y: -2, boxShadow: "0 16px 40px rgba(0,120,212,0.5)", duration: 0.2 })}
+                disabled={sending || sent}
+                onMouseEnter={() => !sending && !sent && gsap.to(submitRef.current, { y: -2, boxShadow: "0 16px 40px rgba(0,120,212,0.5)", duration: 0.2 })}
                 onMouseLeave={() => gsap.to(submitRef.current, { y: 0,  boxShadow: "0 8px 24px rgba(0,120,212,0.3)", duration: 0.2 })}
                 onMouseDown={() => gsap.to(submitRef.current, { scale: 0.98, duration: 0.1 })}
                 onMouseUp={()   => gsap.to(submitRef.current, { scale: 1,    duration: 0.1 })}
                 style={{
-                  width: "100%", background: "linear-gradient(135deg,#0078d4,#00b4d8)",
+                  width: "100%", background: sent ? "linear-gradient(135deg,#00b86b,#00d488)" : "linear-gradient(135deg,#0078d4,#00b4d8)",
                   color: "#fff", border: "none", padding: "15px", borderRadius: 14,
-                  fontSize: 15, fontWeight: 700, cursor: "pointer",
+                  fontSize: 15, fontWeight: 700, cursor: sending ? "wait" : sent ? "default" : "pointer",
                   display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
                   boxShadow: "0 8px 24px rgba(0,120,212,0.3)", fontFamily: "var(--font-inter)",
+                  opacity: sending ? 0.75 : 1, transition: "background 0.3s",
                 }}>
                 {sent
                   ? <><CheckCircle size={17} /> {t("contact_sent")}</>
+                  : sending
+                  ? <>{t("form_submit")}…</>
                   : <>{t("form_submit")} <ArrowRight size={15} /></>}
               </button>
             </form>
