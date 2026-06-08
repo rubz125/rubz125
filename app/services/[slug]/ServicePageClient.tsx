@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight, Phone, MessageCircle, Server, Mail, Cloud, Shield, Camera, Lock, HardDrive, Network, Cpu, Headphones } from "lucide-react";
-import { serviceData } from "./data";
+import { serviceData as serviceDataEn } from "./data";
+import { serviceDataHe } from "./data-he";
 import { useApp } from "../../../contexts/AppContext";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -19,9 +20,10 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export default function ServicePageClient({ slug }: { slug: string }) {
-  const s = serviceData[slug];
+  const { theme, lang, t } = useApp();
+  const serviceData = lang === "he" ? serviceDataHe : serviceDataEn;
+  const s = serviceData[slug] ?? serviceDataEn[slug];
   const Icon = iconMap[slug] ?? Server;
-  const { theme } = useApp();
   const isLight = theme === "light";
 
   return (
@@ -31,7 +33,7 @@ export default function ServicePageClient({ slug }: { slug: string }) {
       <div style={{ padding: "24px clamp(24px,6vw,100px)", borderBottom: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link href="/" style={{ fontFamily: "var(--font-epilogue)", fontWeight: 900, fontSize: 22, background: "linear-gradient(135deg,#0078d4,#00b4d8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", textDecoration: "none", letterSpacing: "-1px" }}>RUB</Link>
-          <Link href="/#services" style={{ fontSize: 13, color: "var(--text-3)", textDecoration: "none" }}>← All Services</Link>
+          <Link href="/#services" style={{ fontSize: 13, color: "var(--text-3)", textDecoration: "none" }}>{t("svc_back")}</Link>
         </div>
       </div>
 
@@ -65,7 +67,7 @@ export default function ServicePageClient({ slug }: { slug: string }) {
               </motion.div>
             ))}
 
-            <h2 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 800, fontSize: "clamp(20px,2.5vw,28px)", letterSpacing: "-0.8px", color: "var(--text-1)", marginBottom: 28 }}>Common Questions</h2>
+            <h2 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 800, fontSize: "clamp(20px,2.5vw,28px)", letterSpacing: "-0.8px", color: "var(--text-1)", marginBottom: 28 }}>{t("svc_common_q")}</h2>
             {s.faq.map((item, i) => (
               <motion.div key={item.q} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
                 style={{ marginBottom: 16, padding: "20px 24px", background: "var(--card-bg)", border: "1px solid var(--border)", borderRadius: 14 }}>
@@ -79,7 +81,7 @@ export default function ServicePageClient({ slug }: { slug: string }) {
           <div className="rub-sidebar-sticky" style={{ position: "sticky", top: 100 }}>
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
               style={{ background: "var(--card-bg)", border: "1px solid var(--border)", borderRadius: 20, padding: 28, marginBottom: 20 }}>
-              <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 3, color: s.color, marginBottom: 20 }}>What&apos;s Included</p>
+              <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 3, color: s.color, marginBottom: 20 }}>{t("svc_whats_included")}</p>
               <ul style={{ listStyle: "none" }}>
                 {s.bullets.map((b) => (
                   <li key={b} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 13 }}>
@@ -92,8 +94,8 @@ export default function ServicePageClient({ slug }: { slug: string }) {
 
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
               style={{ background: `linear-gradient(135deg, ${s.color}15 0%, rgba(0,180,216,0.08) 100%)`, border: `1px solid ${s.color}25`, borderRadius: 20, padding: 28 }}>
-              <p style={{ fontFamily: "var(--font-epilogue)", fontWeight: 800, fontSize: 18, color: "var(--text-1)", marginBottom: 8, letterSpacing: "-0.5px" }}>Ready to get started?</p>
-              <p style={{ fontSize: 13, color: "var(--text-2)", marginBottom: 24, lineHeight: 1.6 }}>Talk to Ruben directly. No sales team, no middleman.</p>
+              <p style={{ fontFamily: "var(--font-epilogue)", fontWeight: 800, fontSize: 18, color: "var(--text-1)", marginBottom: 8, letterSpacing: "-0.5px" }}>{t("svc_ready_title")}</p>
+              <p style={{ fontSize: 13, color: "var(--text-2)", marginBottom: 24, lineHeight: 1.6 }}>{t("svc_ready_sub")}</p>
               <a href="tel:+972542167219" style={{ display: "flex", alignItems: "center", gap: 8, background: s.color, color: "#fff", borderRadius: 10, padding: "12px 18px", textDecoration: "none", fontWeight: 700, fontSize: 13, marginBottom: 10 }}>
                 <Phone size={15} /> +972 54 216 7219
               </a>
@@ -101,7 +103,7 @@ export default function ServicePageClient({ slug }: { slug: string }) {
                 <MessageCircle size={15} /> WhatsApp
               </a>
               <Link href="/#contact" style={{ display: "flex", alignItems: "center", gap: 8, background: "var(--card-bg)", color: "var(--text-1)", borderRadius: 10, padding: "12px 18px", textDecoration: "none", fontWeight: 600, fontSize: 13, justifyContent: "center" }}>
-                Get a Free Quote <ArrowRight size={14} />
+                {t("svc_free_quote")} <ArrowRight size={14} />
               </Link>
             </motion.div>
           </div>

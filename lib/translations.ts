@@ -219,6 +219,30 @@ export const translations: Record<string, Record<string, string>> = {
     footer_badge2: "Israel",
     footer_badge3: "Enterprise IT",
 
+    // Hero floating badges + scroll
+    hero_float_cyber: "Cybersecurity",
+    hero_float_cloud: "Cloud & Azure",
+    hero_float_monitor: "24/7 Monitoring",
+    hero_scroll: "Scroll",
+
+    // ITDiagram
+    diagram_live_title: "Live Infrastructure Overview",
+    diagram_status: "All systems operational · 24/7 Monitoring · 0 Critical Alerts",
+    diagram_node_server: "Server Room",
+    diagram_node_security: "Security Layer",
+    diagram_node_endpoints: "Endpoints",
+    diagram_node_network: "Network / WiFi",
+    diagram_node_mobile: "Mobile",
+    diagram_node_backup: "Backup & DR",
+
+    // Service page UI
+    svc_back: "← All Services",
+    svc_common_q: "Common Questions",
+    svc_whats_included: "What's Included",
+    svc_ready_title: "Ready to get started?",
+    svc_ready_sub: "Talk to Ruben directly. No sales team, no middleman.",
+    svc_free_quote: "Get a Free Quote",
+
     // 404
     notfound_title: "Page Not Found",
     notfound_sub: "The page you're looking for doesn't exist. Let's get you back on track.",
@@ -507,6 +531,30 @@ export const translations: Record<string, Record<string, string>> = {
     footer_badge2: "Israël",
     footer_badge3: "IT Entreprise",
 
+    // Hero floating badges + scroll
+    hero_float_cyber: "Cybersécurité",
+    hero_float_cloud: "Cloud & Azure",
+    hero_float_monitor: "Surveillance 24h/24",
+    hero_scroll: "Défiler",
+
+    // ITDiagram
+    diagram_live_title: "Vue en direct de l'infrastructure",
+    diagram_status: "Tous les systèmes opérationnels · Surveillance 24h/24 · 0 alerte critique",
+    diagram_node_server: "Salle serveurs",
+    diagram_node_security: "Couche sécurité",
+    diagram_node_endpoints: "Terminaux",
+    diagram_node_network: "Réseau / WiFi",
+    diagram_node_mobile: "Mobile",
+    diagram_node_backup: "Sauvegarde & PRA",
+
+    // Service page UI
+    svc_back: "← Tous les services",
+    svc_common_q: "Questions fréquentes",
+    svc_whats_included: "Ce qui est inclus",
+    svc_ready_title: "Prêt à démarrer ?",
+    svc_ready_sub: "Parlez directement à Ruben. Sans équipe commerciale, sans intermédiaire.",
+    svc_free_quote: "Obtenir un devis gratuit",
+
     // 404
     notfound_title: "Page introuvable",
     notfound_sub: "La page que vous recherchez n'existe pas. Retournons sur la bonne voie.",
@@ -794,6 +842,30 @@ export const translations: Record<string, Record<string, string>> = {
     footer_badge1: "תמיכה 24/7",
     footer_badge2: "ישראל",
     footer_badge3: "IT ארגוני",
+
+    // Hero floating badges + scroll
+    hero_float_cyber: "אבטחת סייבר",
+    hero_float_cloud: "ענן ו-Azure",
+    hero_float_monitor: "ניטור 24/7",
+    hero_scroll: "גלול",
+
+    // ITDiagram
+    diagram_live_title: "סקירת תשתית בזמן אמת",
+    diagram_status: "כל המערכות פועלות · ניטור 24/7 · 0 התראות קריטיות",
+    diagram_node_server: "חדר שרתים",
+    diagram_node_security: "שכבת אבטחה",
+    diagram_node_endpoints: "נקודות קצה",
+    diagram_node_network: "רשת / WiFi",
+    diagram_node_mobile: "נייד",
+    diagram_node_backup: "גיבוי ושחזור",
+
+    // Service page UI
+    svc_back: "כל השירותים ←",
+    svc_common_q: "שאלות נפוצות",
+    svc_whats_included: "מה כלול",
+    svc_ready_title: "מוכן להתחיל?",
+    svc_ready_sub: "דבר עם רובן ישירות. ללא צוות מכירות, ללא מתווכים.",
+    svc_free_quote: "קבל הצעת מחיר חינם",
 
     // 404
     notfound_title: "דף לא נמצא",

@@ -72,10 +72,10 @@ function ParticleCanvas() {
   return <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, pointerEvents: "none" }} />;
 }
 
-const floatingBadges = [
-  { icon: Shield, label: "Cybersecurity", color: "#0078d4" },
-  { icon: Cloud, label: "Cloud & Azure", color: "#00b4d8" },
-  { icon: Monitor, label: "24/7 Monitoring", color: "#00d4ff" },
+const floatingBadgesDef = [
+  { icon: Shield, labelKey: "hero_float_cyber", color: "#0078d4" },
+  { icon: Cloud,  labelKey: "hero_float_cloud",   color: "#00b4d8" },
+  { icon: Monitor,labelKey: "hero_float_monitor", color: "#00d4ff" },
 ];
 
 const statsNums = ["24/7", "99.9%", "500+", "100+"];
@@ -130,9 +130,9 @@ export default function Hero() {
         display: "flex", flexDirection: "column", gap: 14,
         direction: "ltr",
       }}>
-        {floatingBadges.map((b, i) => (
+        {floatingBadgesDef.map((b, i) => (
           <motion.div
-            key={b.label}
+            key={b.labelKey}
             initial={{ opacity: 0, x: isRtl ? -40 : 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.9 + i * 0.15 }}
@@ -155,7 +155,7 @@ export default function Hero() {
               <b.icon size={16} style={{ color: b.color }} />
             </div>
             <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-1)" }}>
-              {b.label}
+              {t(b.labelKey)}
             </span>
           </motion.div>
         ))}
@@ -293,7 +293,7 @@ export default function Hero() {
         }}
       >
         <span style={{ fontSize: 10, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: "2px" }}>
-          Scroll
+          {t("hero_scroll")}
         </span>
         <motion.div
           animate={{ y: [0, 7, 0] }}

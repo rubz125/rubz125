@@ -3,16 +3,29 @@ import { useApp } from "../contexts/AppContext";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const nodes = [
-  { id: "cloud",    x: 480, y: 80,  label: "Azure / AWS",       icon: "☁️",  color: "#0078d4", size: 68 },
-  { id: "server",   x: 140, y: 260, label: "Server Room",        icon: "🖥️",  color: "#00b4d8", size: 60 },
-  { id: "security", x: 480, y: 260, label: "Security Layer",     icon: "🛡️",  color: "#00d4ff", size: 60 },
-  { id: "m365",     x: 820, y: 260, label: "Microsoft 365",      icon: "📧",  color: "#0078d4", size: 60 },
-  { id: "laptop",   x: 100, y: 470, label: "Endpoints",          icon: "💻",  color: "#00b4d8", size: 54 },
-  { id: "cctv",     x: 300, y: 470, label: "CCTV",               icon: "📹",  color: "#00d4ff", size: 54 },
-  { id: "wifi",     x: 500, y: 470, label: "Network / WiFi",     icon: "📡",  color: "#0078d4", size: 54 },
-  { id: "phone",    x: 700, y: 470, label: "Mobile",             icon: "📱",  color: "#00b4d8", size: 54 },
-  { id: "backup",   x: 900, y: 470, label: "Backup & DR",        icon: "💾",  color: "#00d4ff", size: 54 },
+// Static brand names that never translate
+const STATIC_LABELS: Record<string, string> = {
+  cloud:    "Azure / AWS",
+  m365:     "Microsoft 365",
+  cctv:     "CCTV",
+  wifi:     "", // filled below from t()
+  server:   "",
+  security: "",
+  laptop:   "",
+  phone:    "",
+  backup:   "",
+};
+
+const NODE_BASE = [
+  { id: "cloud",    x: 480, y: 80,  icon: "☁️",  color: "#0078d4", size: 68, tKey: null },
+  { id: "server",   x: 140, y: 260, icon: "🖥️",  color: "#00b4d8", size: 60, tKey: "diagram_node_server" },
+  { id: "security", x: 480, y: 260, icon: "🛡️",  color: "#00d4ff", size: 60, tKey: "diagram_node_security" },
+  { id: "m365",     x: 820, y: 260, icon: "📧",  color: "#0078d4", size: 60, tKey: null },
+  { id: "laptop",   x: 100, y: 470, icon: "💻",  color: "#00b4d8", size: 54, tKey: "diagram_node_endpoints" },
+  { id: "cctv",     x: 300, y: 470, icon: "📹",  color: "#00d4ff", size: 54, tKey: null },
+  { id: "wifi",     x: 500, y: 470, icon: "📡",  color: "#0078d4", size: 54, tKey: "diagram_node_network" },
+  { id: "phone",    x: 700, y: 470, icon: "📱",  color: "#00b4d8", size: 54, tKey: "diagram_node_mobile" },
+  { id: "backup",   x: 900, y: 470, icon: "💾",  color: "#00d4ff", size: 54, tKey: "diagram_node_backup" },
 ];
 
 const edges = [
@@ -23,11 +36,11 @@ const edges = [
   ["cloud","backup"],["server","backup"],
 ];
 
-function getNode(id: string) { return nodes.find(n => n.id === id)!; }
+function getNodeById(nodes: typeof NODE_BASE, id: string) { return nodes.find(n => n.id === id)!; }
 
-function DataPacket({ from, to, delay }: { from: string; to: string; delay: number }) {
-  const a = getNode(from);
-  const b = getNode(to);
+function DataPacket({ nodes, from, to, delay }: { nodes: typeof NODE_BASE; from: string; to: string; delay: number }) {
+  const a = getNodeById(nodes, from);
+  const b = getNodeById(nodes, to);
   return (
     <motion.circle
       r={3}
@@ -44,6 +57,12 @@ export default function ITDiagram() {
   const [hovered, setHovered] = useState<string | null>(null);
   const { t, theme } = useApp();
   const isLight = theme === "light";
+
+  // Build nodes with translated labels
+  const nodes = NODE_BASE.map(n => ({
+    ...n,
+    label: n.tKey ? t(n.tKey) : (n.id === "cloud" ? "Azure / AWS" : n.id === "m365" ? "Microsoft 365" : "CCTV"),
+  }));
 
   const steps = [
     { num: "01", titleKey: "diagram_step1_title", descKey: "diagram_step1_desc" },
@@ -89,7 +108,6 @@ export default function ITDiagram() {
               {t("diagram_sub")}
             </motion.p>
 
-            {/* Steps */}
             {steps.map((step, i) => (
               <motion.div
                 key={step.num}
@@ -123,7 +141,7 @@ export default function ITDiagram() {
             }}
           >
             <div style={{ fontSize: 11, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: 3, marginBottom: 16, fontWeight: 600 }}>
-              Live Infrastructure Overview
+              {t("diagram_live_title")}
             </div>
 
             <svg viewBox="0 0 1000 570" style={{ width: "100%", height: "auto" }}>
@@ -140,10 +158,9 @@ export default function ITDiagram() {
 
               <rect width="1000" height="570" fill="url(#bgGlow)" rx="16" />
 
-              {/* Edges */}
               {edges.map(([a, b], i) => {
-                const na = getNode(a);
-                const nb = getNode(b);
+                const na = getNodeById(nodes, a);
+                const nb = getNodeById(nodes, b);
                 const isHovered = hovered === a || hovered === b;
                 return (
                   <line key={i}
@@ -156,15 +173,13 @@ export default function ITDiagram() {
                 );
               })}
 
-              {/* Animated data packets */}
               {edges.map(([a, b], i) => (
-                <DataPacket key={`p-${i}`} from={a} to={b} delay={i * 0.3} />
+                <DataPacket key={`p-${i}`} nodes={nodes} from={a} to={b} delay={i * 0.3} />
               ))}
               {edges.map(([a, b], i) => (
-                <DataPacket key={`rp-${i}`} from={b} to={a} delay={i * 0.3 + 1.2} />
+                <DataPacket key={`rp-${i}`} nodes={nodes} from={b} to={a} delay={i * 0.3 + 1.2} />
               ))}
 
-              {/* Nodes */}
               {nodes.map((node) => {
                 const isHov = hovered === node.id;
                 return (
@@ -213,7 +228,7 @@ export default function ITDiagram() {
                 <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
               </circle>
               <text x={52} y={554} fontSize={10} fill="var(--text-2)" fontFamily="var(--font-inter)" fontWeight="500">
-                All systems operational · 24/7 Monitoring Active · 0 Critical Alerts
+                {t("diagram_status")}
               </text>
             </svg>
           </motion.div>
