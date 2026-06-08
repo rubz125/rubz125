@@ -52,7 +52,7 @@ export default function Contact() {
               backdropFilter: "blur(20px)", borderRadius: 18, padding: 24, marginBottom: 0,
             }}>
               <div style={{ fontFamily: "var(--font-epilogue)", fontWeight: 900, fontSize: 19, marginBottom: 4, color: "var(--text-1)" }}>{t("contact_name")}</div>
-              <div style={{ fontSize: 11, color: "var(--text-3)", marginBottom: 22, textTransform: "uppercase", letterSpacing: 2 }}>Founder & IT Director — RUB Solutions</div>
+              <div style={{ fontSize: 11, color: "var(--text-3)", marginBottom: 22, textTransform: "uppercase", letterSpacing: 2 }}>{t("contact_role")}</div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {[
@@ -144,7 +144,7 @@ export default function Contact() {
                   transition: "all 0.25s",
                 }}>
                 {sent
-                  ? <><CheckCircle size={17} /> Message Sent!</>
+                  ? <><CheckCircle size={17} /> {t("contact_sent")}</>
                   : <>{t("form_submit")} <ArrowRight size={15} /></>}
               </motion.button>
             </form>

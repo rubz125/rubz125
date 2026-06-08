@@ -2,8 +2,15 @@
 import { useApp } from "../contexts/AppContext";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 
-const col1 = ["Managed IT","Microsoft 365","Cloud Solutions","Cybersecurity"];
-const col2 = ["CCTV Installation","Access Control","Backup & DR","Helpdesk"];
+const COL1_KEYS = [1, 2, 3, 4];
+const COL2_KEYS = [1, 2, 3, 4];
+const QUICK_LINKS = [
+  { key: 1, href: "#contact" },
+  { key: 2, href: "#faq" },
+  { key: 3, href: "#cloud" },
+  { key: 4, href: "#cybersecurity" },
+];
+const BADGE_KEYS = [1, 2, 3];
 
 export default function Footer() {
   const { t, theme } = useApp();
@@ -35,33 +42,58 @@ export default function Footer() {
             ))}
           </div>
 
-          {[["Services", col1], ["More", col2], ["Quick Links", [["Contact","#contact"],["FAQ","#faq"],["Cloud","#cloud"],["Security","#cybersecurity"]]]].map(([heading, items]) => (
-            <div key={heading as string}>
-              <h4 style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 3, color: "var(--text-2)", marginBottom: 18 }}>{heading as string}</h4>
-              <ul style={{ listStyle: "none" }}>
-                {(items as (string | string[])[]).map(item => {
-                  const label = Array.isArray(item) ? item[0] : item;
-                  const href = Array.isArray(item) ? item[1] : "#services";
-                  return (
-                    <li key={label} style={{ marginBottom: 10 }}>
-                      <a href={href} style={{ fontSize: 13, color: "var(--text-3)", textDecoration: "none" }}>{label}</a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))}
+          {/* Services column */}
+          <div>
+            <h4 style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 3, color: "var(--text-2)", marginBottom: 18 }}>
+              {t("footer_col1_heading")}
+            </h4>
+            <ul style={{ listStyle: "none" }}>
+              {COL1_KEYS.map(n => (
+                <li key={n} style={{ marginBottom: 10 }}>
+                  <a href="#services" style={{ fontSize: 13, color: "var(--text-3)", textDecoration: "none" }}>{t(`footer_col1_${n}`)}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* More column */}
+          <div>
+            <h4 style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 3, color: "var(--text-2)", marginBottom: 18 }}>
+              {t("footer_col2_heading")}
+            </h4>
+            <ul style={{ listStyle: "none" }}>
+              {COL2_KEYS.map(n => (
+                <li key={n} style={{ marginBottom: 10 }}>
+                  <a href="#services" style={{ fontSize: 13, color: "var(--text-3)", textDecoration: "none" }}>{t(`footer_col2_${n}`)}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Quick Links column */}
+          <div>
+            <h4 style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 3, color: "var(--text-2)", marginBottom: 18 }}>
+              {t("footer_col3_heading")}
+            </h4>
+            <ul style={{ listStyle: "none" }}>
+              {QUICK_LINKS.map(({ key, href }) => (
+                <li key={key} style={{ marginBottom: 10 }}>
+                  <a href={href} style={{ fontSize: 13, color: "var(--text-3)", textDecoration: "none" }}>{t(`footer_link${key}`)}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div style={{ borderTop: "1px solid var(--border-sub)", paddingTop: 22, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
           <p style={{ fontSize: 12, color: "var(--text-3)" }}>{t("footer_copyright")}</p>
           <div style={{ display: "flex", gap: 8 }}>
-            {["24/7 Support","Israel","Enterprise IT"].map(b => (
-              <span key={b} style={{
+            {BADGE_KEYS.map(n => (
+              <span key={n} style={{
                 background: "rgba(255,255,255,0.04)", border: "1px solid var(--border-md)",
                 fontSize: 10, color: "var(--text-3)", fontWeight: 600, textTransform: "uppercase",
                 letterSpacing: 1, padding: "5px 12px", borderRadius: 8,
-              }}>{b}</span>
+              }}>{t(`footer_badge${n}`)}</span>
             ))}
           </div>
         </div>

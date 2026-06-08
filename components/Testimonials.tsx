@@ -3,11 +3,7 @@ import { useApp } from "../contexts/AppContext";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const testimonials = [
-  { initials: "DK", name: "David K.", role: "CEO, Tech Startup — Tel Aviv", text: "RUB transformed our entire IT infrastructure. Ruben migrated us to Azure, set up Microsoft 365, and now we have zero downtime. Best investment we made." },
-  { initials: "SL", name: "Sara L.", role: "COO, Law Firm — Jerusalem", text: "After a ransomware scare, RUB overhauled our cybersecurity. EDR, backups, email filtering — everything. We sleep better knowing Ruben is on call." },
-  { initials: "MR", name: "Michael R.", role: "Operations Director, Retail Chain", text: "The CCTV system RUB installed covers all 3 of our locations. The AI detection caught an incident in the first week. Professional and reliable." },
-];
+const TESTIMONIAL_KEYS = [1, 2, 3];
 
 export default function Testimonials() {
   const ref = useRef(null);
@@ -34,8 +30,8 @@ export default function Testimonials() {
         </motion.h2>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr))", gap: 18 }}>
-          {testimonials.map((item, i) => (
-            <motion.div key={item.name}
+          {TESTIMONIAL_KEYS.map((n, i) => (
+            <motion.div key={n}
               initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.15 + i * 0.1 }}
               whileHover={{ y: -6, transition: { duration: 0.28 } }}
               style={{
@@ -45,7 +41,7 @@ export default function Testimonials() {
               }}>
               <div style={{ color: "#ffd700", fontSize: 13, letterSpacing: 3, marginBottom: 14 }}>★★★★★</div>
               <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.8, marginBottom: 20, fontStyle: "italic" }}>
-                &ldquo;{item.text}&rdquo;
+                &ldquo;{t(`testimonial_${n}_text`)}&rdquo;
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <div style={{
@@ -53,10 +49,14 @@ export default function Testimonials() {
                   background: "linear-gradient(135deg,#0078d4,#00b4d8)",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   fontWeight: 700, fontSize: 13, color: "#fff",
-                }}>{item.initials}</div>
+                }}>{t(`testimonial_${n}_initials`)}</div>
                 <div>
-                  <div style={{ fontWeight: 600, fontSize: 13, color: "var(--text-1)" }}>{item.name}</div>
-                  <div style={{ fontSize: 11, color: "var(--text-3)" }}>{item.role}</div>
+                  <div style={{ fontWeight: 600, fontSize: 13, color: "var(--text-1)" }}>
+                    {t(`testimonial_${n}_name`)}
+                  </div>
+                  <div style={{ fontSize: 11, color: "var(--text-3)" }}>
+                    {t(`testimonial_${n}_role`)}
+                  </div>
                 </div>
               </div>
             </motion.div>

@@ -4,14 +4,9 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Camera, Radio, Smartphone, Bot, Disc, Building } from "lucide-react";
 
-const items = [
-  { icon: Camera, title: "Camera Installation", desc: "HD/4K indoor & outdoor cameras" },
-  { icon: Radio, title: "Remote Viewing", desc: "Access live feeds from anywhere" },
-  { icon: Smartphone, title: "Mobile Monitoring", desc: "iOS & Android app control" },
-  { icon: Bot, title: "AI Detection", desc: "Smart motion & person detection" },
-  { icon: Disc, title: "Recording Systems", desc: "NVR/DVR with cloud backup" },
-  { icon: Building, title: "Business Security", desc: "Multi-site & enterprise systems" },
-];
+const ITEM_ICONS = [Camera, Radio, Smartphone, Bot, Disc, Building];
+const ITEM_KEYS = [1, 2, 3, 4, 5, 6];
+const CAM_KEYS = [1, 2, 3, 4];
 
 export default function CCTV() {
   const ref = useRef(null);
@@ -44,28 +39,35 @@ export default function CCTV() {
             </motion.p>
 
             <div className="rub-cctv-items" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-              {items.map((item, i) => (
-                <motion.div key={item.title}
-                  initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + i * 0.07 }}
-                  style={{
-                    background: "var(--card-bg)", border: "1px solid var(--border)",
-                    backdropFilter: "blur(20px)", borderRadius: 14, padding: "16px 18px",
-                    display: "flex", alignItems: "flex-start", gap: 12,
-                    transition: "border-color 0.3s",
-                  }}>
-                  <div style={{
-                    width: 38, height: 38, borderRadius: 10, flexShrink: 0,
-                    background: "rgba(0,120,212,0.1)", border: "1px solid rgba(0,180,216,0.2)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                  }}>
-                    <item.icon size={16} style={{ color: "#00b4d8" }} />
-                  </div>
-                  <div>
-                    <h4 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 13, marginBottom: 3, color: "var(--text-1)" }}>{item.title}</h4>
-                    <p style={{ fontSize: 12, color: "var(--text-3)" }}>{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
+              {ITEM_KEYS.map((n, i) => {
+                const Icon = ITEM_ICONS[i];
+                return (
+                  <motion.div key={n}
+                    initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + i * 0.07 }}
+                    style={{
+                      background: "var(--card-bg)", border: "1px solid var(--border)",
+                      backdropFilter: "blur(20px)", borderRadius: 14, padding: "16px 18px",
+                      display: "flex", alignItems: "flex-start", gap: 12,
+                      transition: "border-color 0.3s",
+                    }}>
+                    <div style={{
+                      width: 38, height: 38, borderRadius: 10, flexShrink: 0,
+                      background: "rgba(0,120,212,0.1)", border: "1px solid rgba(0,180,216,0.2)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                    }}>
+                      <Icon size={16} style={{ color: "#00b4d8" }} />
+                    </div>
+                    <div>
+                      <h4 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 13, marginBottom: 3, color: "var(--text-1)" }}>
+                        {t(`cctv_item_${n}_title`)}
+                      </h4>
+                      <p style={{ fontSize: 12, color: "var(--text-3)" }}>
+                        {t(`cctv_item_${n}_desc`)}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
 
@@ -84,8 +86,8 @@ export default function CCTV() {
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 14 }}>
-              {["Entrance", "Parking", "Office", "Server Room"].map((label) => (
-                <div key={label} style={{
+              {CAM_KEYS.map((n) => (
+                <div key={n} style={{
                   aspectRatio: "16/9", borderRadius: 10, position: "relative", overflow: "hidden",
                   background: "linear-gradient(135deg,#132034,#152640)",
                 }}>
@@ -111,7 +113,9 @@ export default function CCTV() {
                     <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#ff3333", animation: "blink 1.5s infinite" }} />
                     <span style={{ fontSize: 8, color: "#ff6666", fontWeight: 700 }}>REC</span>
                   </div>
-                  <div style={{ position: "absolute", bottom: 5, left: 7, fontSize: 9, color: "rgba(0,212,255,0.6)", fontWeight: 500 }}>{label}</div>
+                  <div style={{ position: "absolute", bottom: 5, left: 7, fontSize: 9, color: "rgba(0,212,255,0.6)", fontWeight: 500, direction: "ltr" }}>
+                    {t(`cctv_cam_${n}`)}
+                  </div>
                 </div>
               ))}
             </div>
@@ -123,9 +127,9 @@ export default function CCTV() {
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
                 <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#00e676" }} />
-                <span style={{ fontSize: 12, color: "var(--text-2)" }}>All systems operational</span>
+                <span style={{ fontSize: 12, color: "var(--text-2)" }}>{t("cctv_status")}</span>
               </div>
-              <span style={{ fontSize: 11, color: "var(--text-3)" }}>Recording 24/7</span>
+              <span style={{ fontSize: 11, color: "var(--text-3)" }}>{t("cctv_recording")}</span>
             </div>
           </motion.div>
         </div>

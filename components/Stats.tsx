@@ -3,11 +3,11 @@ import { useApp } from "../contexts/AppContext";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
-const stats = [
-  { target: 100, suffix: "+", label: "Businesses Supported" },
-  { target: 500, suffix: "+", label: "Devices Managed" },
-  { target: 99, suffix: "%", label: "Uptime SLA" },
-  { target: 8, suffix: " yrs", label: "Experience" },
+const STATS = [
+  { target: 100, suffix: "+" },
+  { target: 500, suffix: "+" },
+  { target: 99,  suffix: "%" },
+  { target: 8,   suffix: "" },
 ];
 
 function Counter({ target, suffix, isLight }: { target: number; suffix: string; isLight: boolean }) {
@@ -45,17 +45,19 @@ function Counter({ target, suffix, isLight }: { target: number; suffix: string; 
 export default function Stats() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const { theme } = useApp();
+  const { t, theme } = useApp();
   const isLight = theme === "light";
 
   return (
     <section style={{ padding: "88px 0", borderTop: "1px solid var(--border-sub)", borderBottom: "1px solid var(--border-sub)" }} ref={ref}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 clamp(24px, 6vw, 100px)" }}>
         <div className="rub-grid-4">
-          {stats.map((s, i) => (
-            <motion.div key={s.label} initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.1 }}>
+          {STATS.map((s, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.1 }}>
               <Counter target={s.target} suffix={s.suffix} isLight={isLight} />
-              <div style={{ fontSize: 11, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: "1.5px", marginTop: 10 }}>{s.label}</div>
+              <div style={{ fontSize: 11, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: "1.5px", marginTop: 10 }}>
+                {t(`stat_${i + 1}_label`)}
+              </div>
             </motion.div>
           ))}
         </div>

@@ -4,16 +4,7 @@ import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 
-const faqs = [
-  { q: "What areas in Israel do you serve?", a: "We provide IT services across Israel, including Tel Aviv, Jerusalem, Haifa, Be'er Sheva and surrounding areas. Remote support is available nationwide." },
-  { q: "How quickly can you respond to an emergency?", a: "We offer 24/7 emergency response. For critical issues, we aim to respond within 1 hour remotely and same-day for on-site emergencies." },
-  { q: "Do you offer monthly managed IT contracts?", a: "Yes, we offer flexible monthly contracts tailored to your business size. Pricing is transparent and predictable — no surprise fees." },
-  { q: "Can you migrate our business to Microsoft 365?", a: "Absolutely. We handle complete M365 migrations including email, Teams, SharePoint, OneDrive, security configuration and user training." },
-  { q: "What cybersecurity services do you provide?", a: "We offer EDR/antivirus, email security, threat monitoring, vulnerability assessments, backup protection and zero-trust architecture." },
-  { q: "Do you install CCTV for businesses of all sizes?", a: "Yes — from single-office setups to multi-site enterprise deployments. We design, install and support IP camera systems with remote access." },
-  { q: "What cloud platforms do you support?", a: "We specialize in Microsoft Azure and Amazon AWS, including hybrid cloud, VM management, backup, disaster recovery and cost optimization." },
-  { q: "How do I get started?", a: "Simply call +972 54 216 7219, send a WhatsApp, or fill out the contact form. We'll schedule a free consultation to assess your needs." },
-];
+const FAQ_KEYS = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
@@ -41,8 +32,8 @@ export default function FAQ() {
         </motion.h2>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          {faqs.map((faq, i) => (
-            <motion.div key={i}
+          {FAQ_KEYS.map((n, i) => (
+            <motion.div key={n}
               initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 + i * 0.05 }}
               style={{
                 background: "var(--card-bg)",
@@ -51,13 +42,16 @@ export default function FAQ() {
                 transition: "border-color 0.3s",
               }}>
               <button onClick={() => setOpen(open === i ? null : i)}
+                aria-expanded={open === i}
                 style={{
                   width: "100%", padding: "18px 22px", display: "flex",
                   justifyContent: "space-between", alignItems: "center",
                   background: "none", border: "none", cursor: "pointer",
                   textAlign: "left", gap: 16,
                 }}>
-                <span style={{ fontWeight: 600, fontSize: 14, color: "var(--text-1)" }}>{faq.q}</span>
+                <span style={{ fontWeight: 600, fontSize: 14, color: "var(--text-1)" }}>
+                  {t(`faq_q${n}`)}
+                </span>
                 <motion.span animate={{ rotate: open === i ? 45 : 0 }} transition={{ duration: 0.2 }}
                   style={{ color: "#00d4ff", flexShrink: 0, display: "flex" }}>
                   <Plus size={17} />
@@ -74,7 +68,7 @@ export default function FAQ() {
                       padding: "0 22px 18px", fontSize: 13, color: "var(--text-2)",
                       lineHeight: 1.7, borderTop: "1px solid var(--border-sub)", paddingTop: 14,
                     }}>
-                      {faq.a}
+                      {t(`faq_a${n}`)}
                     </div>
                   </motion.div>
                 )}

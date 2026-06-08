@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IL",
-    alternateLocale: ["he_IL"],
+    alternateLocale: ["he_IL", "fr_FR"],
     url: SITE_URL,
     siteName: "RUB IT Solutions",
     title: "RUB – Enterprise IT, Cloud & Security Solutions | Israel",
@@ -51,6 +51,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
     languages: {
       "en": SITE_URL,
+      "fr": SITE_URL,
       "he": SITE_URL,
     },
   },

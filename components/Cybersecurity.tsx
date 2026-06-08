@@ -4,22 +4,16 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Shield, Search, Mail, Eye, HardDrive, Lock } from "lucide-react";
 
-const items = [
-  { icon: Shield, title: "Antivirus / EDR", desc: "Next-gen endpoint detection and response", color: "#0078d4" },
-  { icon: Search, title: "Threat Detection", desc: "AI-powered threat hunting and real-time alerts", color: "#00b4d8" },
-  { icon: Mail, title: "Email Security", desc: "Anti-phishing, spam and malware filters", color: "#00d4ff" },
-  { icon: Eye, title: "24/7 Monitoring", desc: "Continuous SIEM and log monitoring", color: "#0078d4" },
-  { icon: HardDrive, title: "Backup Protection", desc: "Ransomware-proof immutable backups", color: "#00b4d8" },
-  { icon: Lock, title: "Zero Trust", desc: "Identity-first security architecture", color: "#00d4ff" },
-];
+const ITEM_ICONS = [Shield, Search, Mail, Eye, HardDrive, Lock];
+const ITEM_COLORS = ["#0078d4", "#00b4d8", "#00d4ff", "#0078d4", "#00b4d8", "#00d4ff"];
+const ITEM_KEYS = [1, 2, 3, 4, 5, 6];
 
 function Radar() {
   return (
     <div style={{ position: "relative", width: 280, height: 280, margin: "0 auto" }}>
       {[1, 0.72, 0.44].map((scale, i) => (
         <div key={i} style={{
-          position: "absolute",
-          borderRadius: "50%",
+          position: "absolute", borderRadius: "50%",
           border: "1px solid rgba(0,212,255,0.12)",
           inset: `${(1 - scale) * 50}%`,
         }} />
@@ -29,10 +23,7 @@ function Radar() {
         background: "conic-gradient(from 0deg, transparent 0%, rgba(0,212,255,0.12) 30%, transparent 35%)",
         animation: "radar 3.5s linear infinite",
       }} />
-      <div style={{
-        position: "absolute", inset: 0,
-        display: "flex", alignItems: "center", justifyContent: "center",
-      }}>
+      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{
           width: 52, height: 52, borderRadius: "50%",
           background: "rgba(0,120,212,0.15)", border: "1.5px solid rgba(0,212,255,0.4)",
@@ -44,7 +35,7 @@ function Radar() {
         <div key={i} style={{
           position: "absolute", width: 9, height: 9, borderRadius: "50%",
           background: "#00d4ff", boxShadow: "0 0 10px #00d4ff",
-          animation: `blink 2s infinite`, animationDelay: `${i * 0.5}s`,
+          animation: "blink 2s infinite", animationDelay: `${i * 0.5}s`,
           ...pos,
         }} />
       ))}
@@ -59,11 +50,7 @@ export default function Cybersecurity() {
   const isLight = theme === "light";
 
   return (
-    <section id="cybersecurity" style={{
-      padding: "100px 0",
-      background: "var(--bg-1)",
-      position: "relative", overflow: "hidden",
-    }}>
+    <section id="cybersecurity" style={{ padding: "100px 0", background: "var(--bg-1)", position: "relative", overflow: "hidden" }}>
       <div style={{
         position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)",
         width: 500, height: 500, borderRadius: "50%",
@@ -92,20 +79,29 @@ export default function Cybersecurity() {
               style={{ color: "var(--text-2)", fontSize: 17, fontWeight: 300, marginBottom: 36, maxWidth: 420 }}>
               {t("cyber_sub")}
             </motion.p>
+
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-              {items.map((item, i) => (
-                <motion.div key={item.title}
-                  initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + i * 0.07 }}
-                  style={{
-                    background: "rgba(0,120,212,0.07)", border: "1px solid rgba(0,180,216,0.18)",
-                    borderRadius: 14, padding: "18px 20px",
-                    transition: "border-color 0.3s, transform 0.3s",
-                  }}>
-                  <item.icon size={18} style={{ color: item.color, marginBottom: 10 }} />
-                  <h4 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 13, marginBottom: 5, color: "var(--text-1)" }}>{item.title}</h4>
-                  <p style={{ fontSize: 12, color: "var(--text-3)", lineHeight: 1.5 }}>{item.desc}</p>
-                </motion.div>
-              ))}
+              {ITEM_KEYS.map((n, i) => {
+                const Icon = ITEM_ICONS[i];
+                const color = ITEM_COLORS[i];
+                return (
+                  <motion.div key={n}
+                    initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + i * 0.07 }}
+                    style={{
+                      background: "rgba(0,120,212,0.07)", border: "1px solid rgba(0,180,216,0.18)",
+                      borderRadius: 14, padding: "18px 20px",
+                      transition: "border-color 0.3s, transform 0.3s",
+                    }}>
+                    <Icon size={18} style={{ color, marginBottom: 10 }} />
+                    <h4 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 13, marginBottom: 5, color: "var(--text-1)" }}>
+                      {t(`cyber_item_${n}_title`)}
+                    </h4>
+                    <p style={{ fontSize: 12, color: "var(--text-3)", lineHeight: 1.5 }}>
+                      {t(`cyber_item_${n}_desc`)}
+                    </p>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ delay: 0.3, duration: 0.7 }}>

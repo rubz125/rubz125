@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronRight, Sun, Moon } from "lucide-react";
 import { useApp } from "../contexts/AppContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar() {
-  const { theme, lang, toggleTheme, toggleLang, t } = useApp();
+  const { theme, toggleTheme, t } = useApp();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const isLight = theme === "light";
-  const isHe = lang === "he";
 
   const links = [
     { label: t("nav_services"), href: "#services" },
@@ -93,19 +93,8 @@ export default function Navbar() {
 
           {/* Actions */}
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            {/* Language toggle */}
-            <button onClick={toggleLang}
-              aria-label={isHe ? "Switch to English" : "עבור לעברית"}
-              style={{
-                background: isHe ? "rgba(0,120,212,0.12)" : "var(--card-bg)",
-                border: "1px solid var(--border)",
-                borderRadius: 8, padding: "6px 12px",
-                fontSize: 12, fontWeight: 700, cursor: "pointer",
-                color: "var(--text-1)", transition: "all 0.2s",
-                fontFamily: "var(--font-inter)",
-              }}>
-              {isHe ? "EN" : "עב"}
-            </button>
+            {/* Language selector */}
+            <LanguageSwitcher />
 
             {/* Theme toggle */}
             <button onClick={toggleTheme}

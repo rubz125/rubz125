@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
+import { useApp } from "../contexts/AppContext";
 
 export default function NotFound() {
+  const { t } = useApp();
+
   return (
     <div
       style={{
@@ -64,7 +67,7 @@ export default function NotFound() {
           color: "var(--text-1)",
         }}
       >
-        Page Not Found
+        {t("notfound_title")}
       </h1>
       <p
         style={{
@@ -75,7 +78,7 @@ export default function NotFound() {
           marginBottom: 40,
         }}
       >
-        The page you&apos;re looking for doesn&apos;t exist. Let&apos;s get you back on track.
+        {t("notfound_sub")}
       </p>
 
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
@@ -92,7 +95,7 @@ export default function NotFound() {
             boxShadow: "0 8px 24px rgba(0,120,212,0.3)",
           }}
         >
-          Go Home
+          {t("notfound_home")}
         </Link>
         <Link
           href="/#contact"
@@ -107,13 +110,13 @@ export default function NotFound() {
             textDecoration: "none",
           }}
         >
-          Contact Us
+          {t("notfound_contact")}
         </Link>
       </div>
 
       {/* Emergency bar */}
       <div style={{ marginTop: 64, fontSize: 13, color: "var(--text-3)" }}>
-        Need emergency IT support?{" "}
+        {t("notfound_emergency")}{" "}
         <a
           href="tel:+972542167219"
           dir="ltr"

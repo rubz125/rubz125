@@ -4,16 +4,10 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Rocket, Monitor, RefreshCw, Globe, TrendingUp, ShieldCheck } from "lucide-react";
 
-const items = [
-  { icon: Rocket, title: "Cloud Migration", desc: "Lift-and-shift or full re-architecture for Azure and AWS." },
-  { icon: Monitor, title: "Virtual Machines", desc: "Scalable VM deployment, management and cost optimization." },
-  { icon: RefreshCw, title: "Backup & DR", desc: "Automated cloud backups with tested recovery procedures." },
-  { icon: Globe, title: "Hybrid Connectivity", desc: "VPN gateways, ExpressRoute and site-to-site connectivity." },
-  { icon: TrendingUp, title: "Cost Management", desc: "Reserved instances, right-sizing and spend analytics." },
-  { icon: ShieldCheck, title: "Cloud Security", desc: "IAM, network security groups and compliance automation." },
-];
-
-const providers = [["☁️", "Microsoft Azure"], ["🔶", "Amazon AWS"], ["🔄", "Hybrid Cloud"], ["🔁", "Disaster Recovery"]];
+const ITEM_ICONS = [Rocket, Monitor, RefreshCw, Globe, TrendingUp, ShieldCheck];
+const ITEM_KEYS = [1, 2, 3, 4, 5, 6];
+const PROVIDER_KEYS = [1, 2, 3, 4];
+const PROVIDER_ICONS = ["☁️", "🔶", "🔄", "🔁"];
 
 export default function Cloud() {
   const ref = useRef(null);
@@ -45,33 +39,40 @@ export default function Cloud() {
 
         <motion.div initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.25 }}
           style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 44 }}>
-          {providers.map(([icon, label]) => (
-            <div key={label} style={{
+          {PROVIDER_KEYS.map((n, i) => (
+            <div key={n} style={{
               background: "rgba(255,255,255,0.04)", border: "1px solid var(--border-md)",
               backdropFilter: "blur(20px)", borderRadius: 12,
               padding: "12px 20px", display: "flex", alignItems: "center",
               gap: 10, fontSize: 14, fontWeight: 600, color: "var(--text-1)",
             }}>
-              <span style={{ fontSize: 20 }}>{icon}</span> {label}
+              <span style={{ fontSize: 20 }}>{PROVIDER_ICONS[i]}</span> {t(`cloud_provider_${n}`)}
             </div>
           ))}
         </motion.div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))", gap: 14 }}>
-          {items.map((item, i) => (
-            <motion.div key={item.title}
-              initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + i * 0.07 }}
-              whileHover={{ y: -4, transition: { duration: 0.25 } }}
-              style={{
-                background: "var(--card-bg)", border: "1px solid var(--border)",
-                backdropFilter: "blur(20px)", borderRadius: 16, padding: "22px 24px",
-                transition: "border-color 0.3s",
-              }}>
-              <item.icon size={22} style={{ color: "#00b4d8", marginBottom: 12 }} />
-              <h4 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 14, marginBottom: 7, color: "var(--text-1)" }}>{item.title}</h4>
-              <p style={{ fontSize: 13, color: "var(--text-3)", lineHeight: 1.55 }}>{item.desc}</p>
-            </motion.div>
-          ))}
+          {ITEM_KEYS.map((n, i) => {
+            const Icon = ITEM_ICONS[i];
+            return (
+              <motion.div key={n}
+                initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + i * 0.07 }}
+                whileHover={{ y: -4, transition: { duration: 0.25 } }}
+                style={{
+                  background: "var(--card-bg)", border: "1px solid var(--border)",
+                  backdropFilter: "blur(20px)", borderRadius: 16, padding: "22px 24px",
+                  transition: "border-color 0.3s",
+                }}>
+                <Icon size={22} style={{ color: "#00b4d8", marginBottom: 12 }} />
+                <h4 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 14, marginBottom: 7, color: "var(--text-1)" }}>
+                  {t(`cloud_item_${n}_title`)}
+                </h4>
+                <p style={{ fontSize: 13, color: "var(--text-3)", lineHeight: 1.55 }}>
+                  {t(`cloud_item_${n}_desc`)}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,34 +1,53 @@
 "use client";
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { translations } from "../lib/translations";
 
-type Theme = "dark" | "light";
-type Lang = "en" | "he";
+export type Theme = "dark" | "light";
+export type Lang = "en" | "fr" | "he";
 
 interface AppCtx {
   theme: Theme;
   lang: Lang;
   toggleTheme: () => void;
-  toggleLang: () => void;
+  setLang: (l: Lang) => void;
+  toggleLang: () => void; // legacy 2-way toggle kept for compatibility
   t: (key: string) => string;
 }
 
 const AppContext = createContext<AppCtx>({} as AppCtx);
 export const useApp = () => useContext(AppContext);
 
-import { translations } from "../lib/translations";
+/** Detect browser preferred language and map to a supported Lang */
+function detectBrowserLang(): Lang {
+  if (typeof navigator === "undefined") return "en";
+  const nav = navigator.language || "";
+  if (nav.startsWith("he")) return "he";
+  if (nav.startsWith("fr")) return "fr";
+  return "en";
+}
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLangState] = useState<Lang>("en");
 
-  // Restore preferences from localStorage on mount
+  // Restore preferences from localStorage on mount; fall back to browser lang
   useEffect(() => {
     try {
       const savedTheme = localStorage.getItem("rub-theme") as Theme | null;
-      const savedLang = localStorage.getItem("rub-lang") as Lang | null;
-      if (savedTheme === "light" || savedTheme === "dark") setTheme(savedTheme);
-      if (savedLang === "en" || savedLang === "he") setLang(savedLang);
-    } catch {}
+      const savedLang  = localStorage.getItem("rub-lang")  as Lang  | null;
+
+      if (savedTheme === "light" || savedTheme === "dark") {
+        setTheme(savedTheme);
+      }
+      if (savedLang === "en" || savedLang === "fr" || savedLang === "he") {
+        setLangState(savedLang);
+      } else {
+        // First visit — use browser language
+        setLangState(detectBrowserLang());
+      }
+    } catch {
+      setLangState(detectBrowserLang());
+    }
   }, []);
 
   useEffect(() => {
@@ -37,21 +56,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [theme]);
 
   useEffect(() => {
-    document.documentElement.setAttribute("dir", lang === "he" ? "rtl" : "ltr");
+    const isRtl = lang === "he";
+    document.documentElement.setAttribute("dir",  isRtl ? "rtl" : "ltr");
     document.documentElement.setAttribute("lang", lang);
     try { localStorage.setItem("rub-lang", lang); } catch {}
   }, [lang]);
 
   const toggleTheme = () => setTheme(t => t === "dark" ? "light" : "dark");
-  const toggleLang = () => setLang(l => l === "en" ? "he" : "en");
 
-  const t = (key: string) => {
+  // Cycle: en → fr → he → en
+  const toggleLang = () => setLangState(l => l === "en" ? "fr" : l === "fr" ? "he" : "en");
+
+  const setLang = (l: Lang) => setLangState(l);
+
+  const t = (key: string): string => {
     const val = translations[lang]?.[key];
     return val ?? translations["en"][key] ?? key;
   };
 
   return (
-    <AppContext.Provider value={{ theme, lang, toggleTheme, toggleLang, t }}>
+    <AppContext.Provider value={{ theme, lang, toggleTheme, toggleLang, setLang, t }}>
       {children}
     </AppContext.Provider>
   );
