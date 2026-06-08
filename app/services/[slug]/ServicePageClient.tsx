@@ -1,30 +1,61 @@
 "use client";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight, Phone, MessageCircle, Server, Mail, Cloud, Shield, Camera, Lock, HardDrive, Network, Cpu, Headphones } from "lucide-react";
 import { serviceData as serviceDataEn } from "./data";
 import { serviceDataHe } from "./data-he";
 import { useApp } from "../../../contexts/AppContext";
+import { gsap } from "../../../lib/gsap";
 
 const iconMap: Record<string, React.ElementType> = {
-  "managed-it": Server,
-  "microsoft-365": Mail,
-  "cloud-infrastructure": Cloud,
-  "cybersecurity": Shield,
-  "cctv": Camera,
-  "access-control": Lock,
-  "backup-dr": HardDrive,
-  "network": Network,
+  "managed-it":            Server,
+  "microsoft-365":         Mail,
+  "cloud-infrastructure":  Cloud,
+  "cybersecurity":         Shield,
+  "cctv":                  Camera,
+  "access-control":        Lock,
+  "backup-dr":             HardDrive,
+  "network":               Network,
   "server-virtualization": Cpu,
-  "helpdesk": Headphones,
+  "helpdesk":              Headphones,
 };
 
 export default function ServicePageClient({ slug }: { slug: string }) {
   const { theme, lang, t } = useApp();
   const serviceData = lang === "he" ? serviceDataHe : serviceDataEn;
-  const s = serviceData[slug] ?? serviceDataEn[slug];
+  const s    = serviceData[slug] ?? serviceDataEn[slug];
   const Icon = iconMap[slug] ?? Server;
   const isLight = theme === "light";
+
+  const heroRef    = useRef<HTMLDivElement>(null);
+  const sectionsRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (heroRef.current) {
+      gsap.fromTo(heroRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+    }
+    if (sidebarRef.current) {
+      gsap.fromTo(sidebarRef.current,
+        { opacity: 0, x: 20 },
+        { opacity: 1, x: 0, duration: 0.6, delay: 0.3, ease: "power2.out" });
+    }
+    if (sectionsRef.current) {
+      const ctx = gsap.context(() => {
+        gsap.fromTo(".gs-section",
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.55, stagger: 0.08, ease: "power2.out",
+            scrollTrigger: { trigger: ".gs-section", start: "top 88%", once: true } });
+        gsap.fromTo(".gs-faq-entry",
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.4, stagger: 0.06, ease: "power2.out",
+            scrollTrigger: { trigger: ".gs-faq-entry", start: "top 88%", once: true } });
+      }, sectionsRef);
+      return () => ctx.revert();
+    }
+  }, []);
 
   return (
     <div style={{ background: "var(--bg-1)", minHeight: "100vh", color: "var(--text-1)" }}>
@@ -40,16 +71,20 @@ export default function ServicePageClient({ slug }: { slug: string }) {
       {/* Hero */}
       <div style={{ padding: "80px clamp(24px,6vw,100px) 60px", borderBottom: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          <div ref={heroRef}>
             <div style={{ width: 60, height: 60, borderRadius: 16, background: `${s.color}15`, border: `1px solid ${s.color}30`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 28 }}>
               <Icon size={28} style={{ color: s.color }} />
             </div>
             <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 4, color: s.color, marginBottom: 14 }}>{s.title}</p>
-            <h1 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 900, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, letterSpacing: "-3px", marginBottom: 20, maxWidth: 800, ...(isLight ? { color: "#0d1526", WebkitTextFillColor: "#0d1526" } : { background: "linear-gradient(135deg,#fff 0%,#c8e0ff 60%,#00d4ff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }) }}>
+            <h1 style={{
+              fontFamily: "var(--font-epilogue)", fontWeight: 900,
+              fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, letterSpacing: "-3px", marginBottom: 20, maxWidth: 800,
+              ...(isLight ? { color: "#0d1526", WebkitTextFillColor: "#0d1526" } : { background: "linear-gradient(135deg,#fff 0%,#c8e0ff 60%,#00d4ff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }),
+            }}>
               {s.hero}
             </h1>
             <p style={{ fontSize: 18, color: "var(--text-2)", fontWeight: 300, lineHeight: 1.8, maxWidth: 680 }}>{s.intro}</p>
-          </motion.div>
+          </div>
         </div>
       </div>
 
@@ -58,29 +93,32 @@ export default function ServicePageClient({ slug }: { slug: string }) {
         <div className="rub-grid-side">
 
           {/* Main */}
-          <div>
+          <div ref={sectionsRef}>
             {s.sections.map((sec, i) => (
-              <motion.div key={sec.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                style={{ marginBottom: 48, paddingBottom: 48, borderBottom: i < s.sections.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none" }}>
+              <div key={sec.title} className="gs-section" style={{
+                marginBottom: 48, paddingBottom: 48,
+                borderBottom: i < s.sections.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
+              }}>
                 <h2 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 800, fontSize: "clamp(20px,2.5vw,28px)", letterSpacing: "-0.8px", color: "var(--text-1)", marginBottom: 16 }}>{sec.title}</h2>
                 <p style={{ fontSize: 15, color: "var(--text-2)", lineHeight: 1.85, fontWeight: 300 }}>{sec.body}</p>
-              </motion.div>
+              </div>
             ))}
 
             <h2 style={{ fontFamily: "var(--font-epilogue)", fontWeight: 800, fontSize: "clamp(20px,2.5vw,28px)", letterSpacing: "-0.8px", color: "var(--text-1)", marginBottom: 28 }}>{t("svc_common_q")}</h2>
-            {s.faq.map((item, i) => (
-              <motion.div key={item.q} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-                style={{ marginBottom: 16, padding: "20px 24px", background: "var(--card-bg)", border: "1px solid var(--border)", borderRadius: 14 }}>
+            {s.faq.map((item) => (
+              <div key={item.q} className="gs-faq-entry" style={{
+                marginBottom: 16, padding: "20px 24px",
+                background: "var(--card-bg)", border: "1px solid var(--border)", borderRadius: 14,
+              }}>
                 <p style={{ fontFamily: "var(--font-epilogue)", fontWeight: 700, fontSize: 14, color: "var(--text-1)", marginBottom: 8 }}>{item.q}</p>
                 <p style={{ fontSize: 13.5, color: "var(--text-2)", lineHeight: 1.75 }}>{item.a}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Sidebar */}
-          <div className="rub-sidebar-sticky" style={{ position: "sticky", top: 100 }}>
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
-              style={{ background: "var(--card-bg)", border: "1px solid var(--border)", borderRadius: 20, padding: 28, marginBottom: 20 }}>
+          <div ref={sidebarRef} className="rub-sidebar-sticky" style={{ position: "sticky", top: 100 }}>
+            <div style={{ background: "var(--card-bg)", border: "1px solid var(--border)", borderRadius: 20, padding: 28, marginBottom: 20 }}>
               <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 3, color: s.color, marginBottom: 20 }}>{t("svc_whats_included")}</p>
               <ul style={{ listStyle: "none" }}>
                 {s.bullets.map((b) => (
@@ -90,10 +128,9 @@ export default function ServicePageClient({ slug }: { slug: string }) {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
-              style={{ background: `linear-gradient(135deg, ${s.color}15 0%, rgba(0,180,216,0.08) 100%)`, border: `1px solid ${s.color}25`, borderRadius: 20, padding: 28 }}>
+            <div style={{ background: `linear-gradient(135deg, ${s.color}15 0%, rgba(0,180,216,0.08) 100%)`, border: `1px solid ${s.color}25`, borderRadius: 20, padding: 28 }}>
               <p style={{ fontFamily: "var(--font-epilogue)", fontWeight: 800, fontSize: 18, color: "var(--text-1)", marginBottom: 8, letterSpacing: "-0.5px" }}>{t("svc_ready_title")}</p>
               <p style={{ fontSize: 13, color: "var(--text-2)", marginBottom: 24, lineHeight: 1.6 }}>{t("svc_ready_sub")}</p>
               <a href="tel:+972542167219" style={{ display: "flex", alignItems: "center", gap: 8, background: s.color, color: "#fff", borderRadius: 10, padding: "12px 18px", textDecoration: "none", fontWeight: 700, fontSize: 13, marginBottom: 10 }}>
@@ -105,9 +142,8 @@ export default function ServicePageClient({ slug }: { slug: string }) {
               <Link href="/#contact" style={{ display: "flex", alignItems: "center", gap: 8, background: "var(--card-bg)", color: "var(--text-1)", borderRadius: 10, padding: "12px 18px", textDecoration: "none", fontWeight: 600, fontSize: 13, justifyContent: "center" }}>
                 {t("svc_free_quote")} <ArrowRight size={14} />
               </Link>
-            </motion.div>
+            </div>
           </div>
-
         </div>
       </div>
     </div>
