@@ -155,6 +155,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     } catch(e) {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
+    try {
+      var l = localStorage.getItem('lang');
+      if (l) {
+        document.documentElement.setAttribute('data-lang', l);
+        document.documentElement.setAttribute('dir', l === 'he' ? 'rtl' : 'ltr');
+      }
+    } catch(e) {}
   })()
 ` }} />
         <ThemeProvider>

@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
-[data-lang="he"] {
+[data-lang="he"],
+[dir="rtl"] {
   font-family: var(--font-heebo), 'Heebo', sans-serif;
   letter-spacing: 0;
+  text-align: right;
+  direction: rtl;
 }
 
 [data-lang="he"] h1,
@@ -10,10 +13,20 @@
 [data-lang="he"] h3,
 [data-lang="he"] h4,
 [data-lang="he"] h5,
-[data-lang="he"] h6 {
+[data-lang="he"] h6,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6 {
   font-family: var(--font-heebo), 'Heebo', sans-serif;
   font-weight: 700;
   letter-spacing: 0;
+}
+
+[dir="rtl"] .section-divider {
+  transform: scaleX(-1);
 }
 
 :root {
