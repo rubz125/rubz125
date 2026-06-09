@@ -112,7 +112,7 @@ export function Testimonials() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-12 text-center"
         >
-          <a href="https://www.tripadvisor.com" className="inline-flex items-center gap-2 text-[var(--gold)] font-semibold text-sm hover:text-[var(--gold-light)] transition-colors">
+          <a href="https://www.tripadvisor.com/Attraction_Review-g293980-d12002842-Reviews-or10-Eilat_Action-Eilat_Southern_District.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[var(--gold)] font-semibold text-sm hover:text-[var(--gold-light)] transition-colors">
             {t.testimonials_all}
           </a>
         </motion.div>
