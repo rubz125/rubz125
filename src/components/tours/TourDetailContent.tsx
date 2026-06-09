@@ -59,6 +59,7 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
       <section className="relative h-[55vh] min-h-[380px] flex items-end">
         <Image src={tour.image} alt={title} fill className="object-cover" sizes="100vw" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)] via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 w-full">
           <div className="flex items-center gap-2 text-xs text-[var(--text-4)] mb-3">
             <Link href="/" className="hover:text-[var(--gold)] transition-colors">{L.home}</Link>
