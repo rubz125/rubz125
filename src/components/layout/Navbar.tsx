@@ -8,10 +8,10 @@ import { useLang } from '@/lib/LangContext'
 import { useTheme } from '@/lib/ThemeContext'
 import type { Lang } from '@/lib/i18n'
 
-const LANGS: { code: Lang; label: string; flag: string }[] = [
-  { code: 'en', label: 'EN', flag: '🇬🇧' },
-  { code: 'fr', label: 'FR', flag: '🇫🇷' },
-  { code: 'he', label: 'עב', flag: '🇮🇱' },
+const LANGS: { code: Lang; label: string }[] = [
+  { code: 'en', label: 'En' },
+  { code: 'fr', label: 'Fr' },
+  { code: 'he', label: 'Heb' },
 ]
 
 export function Navbar() {
@@ -112,7 +112,7 @@ export function Navbar() {
               {/* Language switcher */}
               <div className="relative" onMouseEnter={() => setLangOpen(true)} onMouseLeave={() => setLangOpen(false)}>
                 <button className={`flex items-center gap-1.5 transition-colors text-sm font-medium px-2 py-1 rounded-sm border border-transparent hover:text-[var(--sand-light)] hover:border-[var(--border-lg)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
-                  {LANGS.find(l => l.code === lang)?.flag} {LANGS.find(l => l.code === lang)?.label}
+                  {LANGS.find(l => l.code === lang)?.label}
                   <ChevronDown className="w-3 h-3" />
                 </button>
                 <AnimatePresence>
@@ -127,7 +127,7 @@ export function Navbar() {
                       {LANGS.map((l) => (
                         <button key={l.code} onClick={() => { setLang(l.code); setLangOpen(false) }}
                           className={`w-full flex items-center gap-2 px-3 py-2.5 text-sm transition-colors ${lang === l.code ? 'text-[var(--gold)] bg-[var(--gold-tint-08)]' : 'text-[var(--text-2)] hover:text-[var(--gold)] hover:bg-[var(--gold-tint-05)]'}`}>
-                          {l.flag} {l.label}
+                          {l.label}
                         </button>
                       ))}
                     </motion.div>
@@ -179,7 +179,7 @@ export function Navbar() {
                 {LANGS.map((l) => (
                   <button key={l.code} onClick={() => setLang(l.code)}
                     className={`flex-1 py-2 rounded-sm text-sm font-medium transition-colors ${lang === l.code ? 'bg-[var(--gold)] text-[var(--bg-base)]' : 'border border-[var(--border-md)] text-[var(--text-4)] hover:text-[var(--gold)]'}`}>
-                    {l.flag} {l.label}
+                    {l.label}
                   </button>
                 ))}
               </div>
