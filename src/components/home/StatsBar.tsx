@@ -7,7 +7,7 @@ const stats = [
   { icon: '🗺️', value: '6', label: 'Unique Routes', sub: 'Across Israel' },
   { icon: '👥', value: '12,000+', label: 'Happy Adventurers', sub: 'Since 2009' },
   { icon: '🛡️', value: '100%', label: 'Safety Record', sub: 'Zero Incidents' },
-  { icon: '🌍', value: '6', label: 'Languages Spoken', sub: 'By Our Guides' },
+  { icon: '🌍', value: '3', label: 'Languages Spoken', sub: 'By Our Guides' },
   { icon: '⏱️', value: '15', label: 'Years Operating', sub: 'Licensed & Certified' },
 ]
 

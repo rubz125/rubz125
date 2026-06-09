@@ -111,7 +111,7 @@ export function HeroSection() {
             { number: '847+', label: t.hero_reviews },
             { number: '4.9★', label: t.hero_rating },
             { number: '15 yrs', label: t.hero_experience },
-            { number: '6 langs', label: t.hero_languages },
+            { number: '3 langs', label: t.hero_languages },
           ].map(({ number, label }) => (
             <div key={label} className="text-center">
               <div className="text-[#D4A843] font-bold text-xl sm:text-2xl leading-none">{number}</div>
