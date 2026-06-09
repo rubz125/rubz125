@@ -442,11 +442,14 @@ export const tours: Tour[] = [
     whatToBringFr: ['Couche chaude (les nuits du désert sont fraîches)', "Bouteille d'eau personnelle", 'Appareil photo', 'Chaussures plates confortables', 'Crème solaire (pour le trajet en jeep)'],
     whatToBringHe: ['שכבה חמה (לילות המדבר קרים)', 'בקבוק מים אישי', 'מצלמה', 'נעלי שטוח נוחות', 'קרם הגנה (לנסיעת הג\'יפ)'],
 
-    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80',
+    image: '/gallery/5.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80',
-      'https://images.unsplash.com/photo-1475552113915-6fcb52652ba2?w=800&q=80',
-      'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=800&q=80',
+      '/gallery/5.jpg',
+      '/gallery/1.jpg',
+      '/gallery/3.jpg',
+      '/gallery/6.jpg',
+      '/gallery/2.jpg',
+      '/gallery/4.jpg',
     ],
     difficulty: 'Easy',
     rating: 4.9, reviewCount: 74,
