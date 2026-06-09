@@ -1,6 +1,7 @@
 export interface TourPackage {
   name: string; nameFr: string; nameHe: string
   price: number
+  priceOnRequest?: boolean
   duration: string
   description: string; descriptionFr: string; descriptionHe: string
   mealIncluded?: boolean
@@ -31,6 +32,7 @@ export interface Tour {
   departure: string
   badge?: string
   featured: boolean
+  priceOnRequest?: boolean
   // computed (lowest package price, for card)
   price: number
   currency: string
@@ -239,42 +241,42 @@ export const tours: Tour[] = [
     quote: 'A rose-red city half as old as time.',
     quoteAuthor: 'John William Burgon',
 
-    description: `Just one hour from Eilat, across the Jordanian border, lies one of the most extraordinary archaeological sites on earth. Petra — the "Rose City" of the Nabataeans — is carved entirely from rose-red sandstone, hidden in a labyrinth of canyons, and designated a UNESCO World Heritage Site.\n\nWe cross the Yitzhak Rabin border together, then drive through the southern Jordanian desert to reach the Petra visitor centre. We enter through the Siq — a spectacular 1.2 km natural gorge with towering 200-metre walls — before the moment that takes every visitor's breath away: the sudden reveal of Al-Khazneh, the Treasury, glowing pink in the morning light. We then explore the ancient Nabataean city at our own pace — the Street of Facades, the Roman amphitheatre, the Royal Tombs — while your guide brings 2,000 years of history to life. A journey across borders, through time.`,
+    description: `Petra, the "Rose of the Desert" of Jordan, listed as a UNESCO World Heritage Site, crossroads of East and West, North and South, on the caravan routes from Arabia, Syria and Mesopotamia: a city carved in stone by the Nabataeans. This people, originally from Arabia, settled in Petra in the 5th century BC and over six centuries carved more than 700 monuments in the rocks, across an area spanning several kilometres. Petra was named by the Romans "Petrum" meaning rock, but its first name was "Reqmu" meaning multicoloured.\n\nPetra, one of the most magical sites in the Middle East, is both a natural and architectural wonder. Natural first, with its gorges like the Siq, and its sandstone cliffs with coloured patterns — where the jagged rocks, shaped by wind and sand, give the site its extraordinary palette of colours ranging from yellow to violet through orange, red, green and blue. Architectural too, with its Roman remains, but above all with its imposing tombs, dug and sculpted into the mountain rocks by the Nabataeans.`,
 
-    descriptionFr: `À une heure à peine d'Eilat, de l'autre côté de la frontière jordanienne, se trouve l'un des sites archéologiques les plus extraordinaires de la planète. Pétra — la "Cité Rose" des Nabatéens — est entièrement taillée dans le grès rose-rouge, cachée dans un labyrinthe de canyons, et classée au patrimoine mondial de l'UNESCO.\n\nNous traversons ensemble la frontière Yitzhak Rabin, puis traversons le désert du sud de la Jordanie pour rejoindre le centre des visiteurs de Pétra. Nous entrons par le Siq — un spectaculaire canyon naturel de 1,2 km aux parois de 200 mètres — avant le moment qui coupe le souffle à chaque visiteur : la révélation soudaine d'Al-Khazneh, le Trésor, qui rayonne rose dans la lumière du matin. Nous explorons ensuite l'antique cité nabatéenne à notre rythme — la Rue des Façades, le théâtre romain, les Tombeaux Royaux — tandis que votre guide fait revivre 2 000 ans d'histoire. Un voyage qui franchit les frontières et le temps.`,
+    descriptionFr: `Pétra la « Rose du désert » jordanienne, classée au patrimoine mondial de l'humanité par l'Unesco, carrefour de l'Orient et de l'Occident, du Nord et du Sud, sur la route des caravanes venues d'Arabie, de Syrie, de Mésopotamie : la ville creusée dans la pierre par les Nabatéens. Ce peuple originaire d'Arabie s'installe à Pétra au V° siècle avant J.C. et durant six siècles va tailler dans les rochers plus de 700 monuments, sur une zone qui s'étend sur plusieurs kilomètres. Pétra est baptisée par les Romains de « Petrum », le rocher mais son premier nom était « Reqmu » qui signifie multicolore.\n\nPétra, un des sites les plus magiques du Proche-Orient, est une merveille naturelle et architecturale. Naturelle d'abord, avec ses défilés, comme le Siq, et ses falaises de grès aux dessins colorés. Pétra où le grès des roches déchiquetées, façonnées par le vent et le sable, donnent au site son extraordinaire palette de couleurs qui s'étend du jaune au violet en passant par l'orange, le rouge, le vert et le bleu. Architecturale ensuite, avec ses vestiges romains, mais surtout avec ses imposants tombeaux, creusés puis sculptés dans la roche des montagnes par les Nabatéens.`,
 
-    descriptionHe: `רק שעה אחת מאילת, מעבר לגבול הירדני, נמצא אחד מהאתרים הארכיאולוגיים המרהיבים ביותר על פני האדמה. פטרה — "העיר הורודה" של הנבטים — חצובה כולה מאבן חולית ורודה-אדומה, מוסתרת במבוך של קניונים, ומוכרזת כאתר מורשת עולמית של יונסקו.\n\nאנחנו חוצים יחד את גבול יצחק רבין, ואז נוסעים דרך מדבר דרום ירדן להגיע למרכז המבקרים של פטרה. אנחנו נכנסים דרך הסיק — ערוץ טבעי מרהיב באורך 1.2 ק"מ עם קירות של 200 מטר — לפני הרגע שגורם לכל מבקר לעצור נשימה: הגילוי הפתאומי של אל-ח'זנה, האוצר, המנצנץ בוורוד באור הבוקר. אנחנו חוקרים את העיר הנבטית העתיקה בקצב שלנו — רחוב החזיתות, האמפיתיאטרון הרומי, הקברות המלכותיים — בזמן שהמדריך שלך מחיה 2,000 שנות היסטוריה. מסע שחוצה גבולות ועובר בזמן.`,
+    descriptionHe: `פטרה, "ורד המדבר" הירדנית, מוכרזת כאתר מורשת עולמית של יונסקו, צומת של מזרח ומערב, צפון ודרום, על דרכי השיירות מערב, סוריה ומסופוטמיה: עיר חצובה בסלע על ידי הנבטים. עם זה, שמוצאו מערב, התיישב בפטרה במאה ה-5 לפנה"ס ובמשך שישה מאות שנה חצב בסלעים למעלה מ-700 מונומנטים, על פני שטח המשתרע על פני מספר קילומטרים. פטרה קיבלה את שמה מהרומאים "פטרום" שפירושו סלע, אך שמה הראשון היה "רקמו" שפירושו צבעוני.\n\nפטרה, אחד האתרים הקסומים ביותר במזרח הקרוב, הינה פלא טבעי ואדריכלי כאחד. טבעי ראשית, עם ערוציה כמו הסיק, ומצוקי הגיר עם ציורים צבעוניים — שבהם הסלעים המחוספסים, שעוצבו על ידי הרוח והחול, מעניקים לאתר את פלטת הצבעים הבלתי-רגילה שלו, הנמתחת מצהוב לסגול דרך כתום, אדום, ירוק וכחול. אדריכלי גם כן, עם שרידיה הרומיים, אך בעיקר עם קבריה המרשימים, שנחצבו ונפסלו בסלעי ההרים על ידי הנבטים.`,
 
-    shortDescription: 'A day trip from Eilat to Petra — through the Siq gorge to the famous Treasury, guided by an expert in the rose-red Nabataean city.',
-    shortDescriptionFr: "Excursion d'une journée d'Eilat à Pétra — le Siq, le Trésor et les tombeaux royaux de la cité nabatéenne rose guidée par un expert.",
-    shortDescriptionHe: "טיול יום מאילת לפטרה — דרך הסיק לאוצר המפורסם, עם מדריך מומחה בעיר הנבטית הורודה.",
+    shortDescription: 'A day trip from Eilat to Petra — UNESCO World Heritage Site, rose-red city of the Nabataeans, carved in stone over six centuries.',
+    shortDescriptionFr: "Excursion d'Eilat à Pétra — cité rose des Nabatéens classée à l'Unesco, taillée dans le rocher sur six siècles, merveille naturelle et architecturale.",
+    shortDescriptionHe: "טיול יום מאילת לפטרה — עיר הסלע הורודה של הנבטים, אתר מורשת עולמית של יונסקו, פלא טבעי ואדריכלי.",
 
-    highlights: ['Yitzhak Rabin border crossing', 'The Siq — 1.2 km natural gorge', 'Al-Khazneh — The Treasury', 'Street of Facades & Roman Theatre', 'Royal Tombs of the Nabataeans'],
-    highlightsFr: ["Passage de la frontière Yitzhak Rabin", "Le Siq — canyon naturel de 1,2 km", "Al-Khazneh — Le Trésor", "Rue des Façades & Théâtre romain", "Tombeaux Royaux des Nabatéens"],
-    highlightsHe: ["מעבר גבול יצחק רבין", "הסיק — ערוץ טבעי 1.2 ק\"מ", "אל-ח'זנה — האוצר", "רחוב החזיתות והתיאטרון הרומי", "הקברות המלכותיים של הנבטים"],
+    highlights: ['Pick-up at your hotel', 'Border crossing', 'Welcome on the Jordanian side — departure for Petra', 'Approx. 2h30 drive with a 20-min break', 'Guided tour of Petra in English (French guide on request)', 'Return to entrance — lunch at a local restaurant (drinks extra)', 'Return to Eilat at end of day'],
+    highlightsFr: ["Pick up à l'hôtel (ou votre adresse)", "Passage de la frontière", "Accueil côté jordanien puis départ pour Pétra", "Trajet de 2h30 environ avec une pause de 20 mn", "Visite guidée de Pétra en anglais (guide francophone en option)", "Retour à l'entrée du site — déjeuner local (boissons en supplément)", "Retour sur Eilat en fin de journée"],
+    highlightsHe: ["איסוף מהמלון (או הכתובת שלך)", "מעבר גבול", "קבלת פנים בצד הירדני — יציאה לפטרה", "נסיעה של כ-2.5 שעות עם הפסקה של 20 דקות", "סיור מודרך בפטרה באנגלית (מדריך דובר צרפתית באפשרות)", "חזרה לכניסה — ארוחת צהריים מקומית (משקאות בתוספת)", "חזרה לאילת בסוף היום"],
 
     packages: [
       {
         name: 'Petra Classic', nameFr: 'Pétra Classique', nameHe: 'פטרה קלאסי',
-        price: 490, duration: '10–11h',
+        price: 0, priceOnRequest: true, duration: '10–11h',
         entryIncluded: true,
-        description: 'Border crossing + guided Petra visit: the Siq, Al-Khazneh Treasury, Street of Facades, Roman Theatre. Lunch at a local Jordanian restaurant. Return to Eilat by evening.',
-        descriptionFr: "Passage de frontière + visite guidée de Pétra : le Siq, le Trésor Al-Khazneh, Rue des Façades, Théâtre romain. Déjeuner dans un restaurant jordanien local. Retour à Eilat en soirée.",
-        descriptionHe: "מעבר גבול + ביקור מודרך בפטרה: הסיק, אוצר אל-ח'זנה, רחוב החזיתות, התיאטרון הרומי. ארוחת צהריים במסעדה ירדנית מקומית. חזרה לאילת בערב.",
+        description: 'Border crossing + guided visit: the Siq, Al-Khazneh Treasury, Street of Facades, Roman Theatre. Lunch at a local Jordanian restaurant. Return to Eilat by evening.',
+        descriptionFr: "Passage de frontière + visite guidée : le Siq, le Trésor Al-Khazneh, Rue des Façades, Théâtre romain. Déjeuner dans un restaurant jordanien local. Retour à Eilat en soirée.",
+        descriptionHe: "מעבר גבול + ביקור מודרך: הסיק, אוצר אל-ח'זנה, רחוב החזיתות, התיאטרון הרומי. ארוחת צהריים במסעדה ירדנית מקומית. חזרה לאילת בערב.",
       },
       {
         name: 'Petra Full Discovery', nameFr: 'Pétra Découverte Complète', nameHe: 'פטרה גילוי מלא',
-        price: 590, duration: '12–13h',
+        price: 0, priceOnRequest: true, duration: '12–13h',
         entryIncluded: true, mealIncluded: true,
-        description: 'Everything in Classic + the Monastery (Al-Deir) — a 45-minute climb rewarded with Petra\'s most impressive monument. The High Place of Sacrifice. Extended free time to explore. Dinner included.',
-        descriptionFr: "Tout du Classique + le Monastère (Al-Deir) — une montée de 45 minutes récompensée par le monument le plus impressionnant de Pétra. Le Haut Lieu du Sacrifice. Temps libre prolongé pour explorer. Dîner inclus.",
-        descriptionHe: "כל מה שבקלאסי + המנזר (אל-דיר) — עלייה של 45 דקות המתוגמלת במונומנט המרהיב ביותר של פטרה. מקום הקרבן הגבוה. זמן חופשי מורחב לחקירה. ארוחת ערב כלולה.",
+        description: 'Everything in Classic + the Monastery (Al-Deir) — a 45-minute climb rewarded with Petra\'s most impressive monument. The High Place of Sacrifice. Extended free time. Dinner included.',
+        descriptionFr: "Tout du Classique + le Monastère (Al-Deir) — une montée de 45 minutes récompensée par le monument le plus impressionnant de Pétra. Le Haut Lieu du Sacrifice. Temps libre prolongé. Dîner inclus.",
+        descriptionHe: "כל מה שבקלאסי + המנזר (אל-דיר) — עלייה של 45 דקות המתוגמלת במונומנט המרהיב ביותר של פטרה. מקום הקרבן הגבוה. זמן חופשי מורחב. ארוחת ערב כלולה.",
       },
     ],
 
-    includes: ['Border crossing assistance', 'Licensed Jordanian guide', 'Jordan entry ticket included', 'Pick-up and drop-off at hotel', 'Lunch included', 'Water & snacks'],
-    includesFr: ["Assistance au passage de frontière", "Guide jordanien agréé", "Billet d'entrée Jordanie inclus", "Navette aller-retour depuis l'hôtel", "Déjeuner inclus", "Eau et collations"],
-    includesHe: ["סיוע במעבר גבול", "מדריך ירדני מורשה", "כרטיס כניסה לירדן כלול", "הסעה הלוך ושוב מהמלון", "ארוחת צהריים כלולה", "מים וחטיפים"],
+    includes: ['Border crossing assistance', 'Licensed Jordanian guide', 'Jordan entry ticket', 'Pick-up and drop-off at hotel', 'Lunch included', 'Water & snacks'],
+    includesFr: ["Assistance au passage de frontière", "Guide jordanien agréé", "Billet d'entrée Jordanie", "Navette aller-retour depuis l'hôtel", "Déjeuner inclus", "Eau et collations"],
+    includesHe: ["סיוע במעבר גבול", "מדריך ירדני מורשה", "כרטיס כניסה לירדן", "הסעה הלוך ושוב מהמלון", "ארוחת צהריים כלולה", "מים וחטיפים"],
 
     whatToBring: ['Passport (mandatory)', 'Comfortable walking shoes', 'Hat & sunscreen', 'Camera', 'Light jacket (evenings)'],
     whatToBringFr: ['Passeport (obligatoire)', 'Chaussures de marche confortables', 'Chapeau et crème solaire', 'Appareil photo', 'Veste légère (soirées)'],
@@ -291,7 +293,8 @@ export const tours: Tour[] = [
     groupSize: '2–8', languages: ['English', 'French', 'Hebrew'],
     departure: 'Daily, Year-Round',
     badge: 'Jordan', featured: true,
-    price: 490, currency: '₪', duration: '10–13h', region: 'Petra, Jordan',
+    priceOnRequest: true,
+    price: 0, currency: '₪', duration: '10–13h', region: 'Petra, Jordan',
   },
 ]
 

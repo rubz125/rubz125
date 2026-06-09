@@ -21,6 +21,7 @@ export function TourCard({ tour, featured = false }: TourCardProps) {
   const fromLabel = lang === 'fr' ? 'Dès' : lang === 'he' ? 'מ-' : 'From'
   const perPersonLabel = lang === 'fr' ? 'par personne' : lang === 'he' ? 'לאדם' : 'per person'
   const peopleLabel = lang === 'fr' ? 'personnes' : lang === 'he' ? 'אנשים' : 'people'
+  const contactLabel = lang === 'fr' ? 'Nous consulter' : lang === 'he' ? 'צרו קשר' : 'Contact us'
 
   return (
     <Link
@@ -87,9 +88,15 @@ export function TourCard({ tour, featured = false }: TourCardProps) {
 
         <div className="flex items-center justify-between mt-auto pt-4 border-t border-[#D4A843]/10">
           <div>
-            <span className="text-[#7A6245] text-xs">{fromLabel}</span>
-            <div className="text-[#D4A843] font-bold text-xl leading-none">{formatPrice(tour.price, tour.currency)}</div>
-            <span className="text-[#7A6245] text-xs">{perPersonLabel}</span>
+            {tour.priceOnRequest ? (
+              <div className="text-[#D4A843] font-bold text-xl leading-none">{contactLabel}</div>
+            ) : (
+              <>
+                <span className="text-[#7A6245] text-xs">{fromLabel}</span>
+                <div className="text-[#D4A843] font-bold text-xl leading-none">{formatPrice(tour.price, tour.currency)}</div>
+                <span className="text-[#7A6245] text-xs">{perPersonLabel}</span>
+              </>
+            )}
           </div>
           <div className="flex items-center gap-1.5 text-[#D4A843] text-sm font-semibold group-hover:gap-2.5 transition-all duration-200">
             {viewLabel}
