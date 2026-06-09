@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import Link from 'next/link'
+import Image from 'next/image'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { MapPin, Phone, Mail, Clock, Check } from 'lucide-react'
@@ -17,25 +17,32 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-20 bg-[var(--bg-base)] min-h-screen">
-        {/* Header */}
-        <section className="py-16 bg-[var(--bg-surface)] border-b border-[var(--border-sm)]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
+      <main className="bg-[var(--bg-base)] min-h-screen">
+        {/* Hero */}
+        <section className="relative h-[55vh] min-h-[380px] flex items-end">
+          <Image
+            src="/gallery/contact.jpg"
+            alt="Contact Eilat Action"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80" />
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
+            <div className="flex items-center gap-3 mb-4">
               <div className="section-divider" />
-              <span className="text-[var(--gold)] text-sm uppercase tracking-[0.2em] font-medium">Get in Touch</span>
-              <div className="section-divider" style={{ transform: 'scaleX(-1)' }} />
+              <span className="text-[var(--sand-light)] text-sm uppercase tracking-[0.2em] font-medium">Get in Touch</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-[var(--text-1)]" style={{ fontFamily: 'var(--font-playfair)' }}>
+            <h1 className="text-4xl sm:text-5xl font-bold text-white" style={{ fontFamily: 'var(--font-playfair)' }}>
               Contact Us
             </h1>
-            <p className="text-[var(--text-4)] mt-3 max-w-lg mx-auto">
+            <p className="text-white/70 mt-3 max-w-lg">
               Questions, custom tours, or just want to say hello — we'd love to hear from you.
             </p>
           </div>
         </section>
 
-        <section className="py-16">
+        <section className="py-16 bg-[var(--bg-base)]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-14">
               {/* Contact info */}
