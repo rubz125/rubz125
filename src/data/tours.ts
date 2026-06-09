@@ -442,12 +442,13 @@ export const tours: Tour[] = [
     whatToBringFr: ['Couche chaude (les nuits du désert sont fraîches)', "Bouteille d'eau personnelle", 'Appareil photo', 'Chaussures plates confortables', 'Crème solaire (pour le trajet en jeep)'],
     whatToBringHe: ['שכבה חמה (לילות המדבר קרים)', 'בקבוק מים אישי', 'מצלמה', 'נעלי שטוח נוחות', 'קרם הגנה (לנסיעת הג\'יפ)'],
 
-    image: '/gallery/6.jpg',
+    image: '/gallery/night desert .jpg',
     gallery: [
-      '/gallery/6.jpg',
+      '/gallery/night desert .jpg',
       '/gallery/5.jpg',
       '/gallery/1.jpg',
       '/gallery/3.jpg',
+      '/gallery/6.jpg',
       '/gallery/2.jpg',
       '/gallery/4.jpg',
     ],
