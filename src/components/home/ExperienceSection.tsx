@@ -48,7 +48,7 @@ export function ExperienceSection() {
           >
             <div className="relative rounded-sm overflow-hidden" style={{ aspectRatio: '4/5' }}>
               <Image
-                src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=700&q=80"
+                src="/gallery/montage.png"
                 alt="Jeep Safari landscape"
                 fill
                 className="object-cover"
