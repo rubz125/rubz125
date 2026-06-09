@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+[data-lang="he"] {
+  font-family: var(--font-heebo), 'Heebo', sans-serif;
+  letter-spacing: 0;
+}
+
+[data-lang="he"] h1,
+[data-lang="he"] h2,
+[data-lang="he"] h3,
+[data-lang="he"] h4,
+[data-lang="he"] h5,
+[data-lang="he"] h6 {
+  font-family: var(--font-heebo), 'Heebo', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
 :root {
   /* Core palette */
   --sand: #D4A843;

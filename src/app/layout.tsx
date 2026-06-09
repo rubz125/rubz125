@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter, Playfair_Display, Heebo } from 'next/font/google'
 import './globals.css'
 import { LangProvider } from '@/lib/LangContext'
 import { ThemeProvider } from '@/lib/ThemeContext'
@@ -13,6 +13,12 @@ const inter = Inter({
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
+  display: 'swap',
+})
+
+const heebo = Heebo({
+  subsets: ['hebrew', 'latin'],
+  variable: '--font-heebo',
   display: 'swap',
 })
 
@@ -93,7 +99,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" data-theme="dark" className={`${inter.variable} ${playfair.variable} ${heebo.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
