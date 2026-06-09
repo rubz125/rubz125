@@ -348,10 +348,6 @@ export function AboutContent() {
       <div className="py-6 text-center border-t border-[var(--border-sm)]">
         <p className="text-[var(--text-5)] text-xs">
           Website designed & developed by{' '}
-          <a href="https://github.com/rubz125" target="_blank" rel="noopener noreferrer" className="text-[var(--gold)] hover:underline font-medium">
-            @RubenUzan
-          </a>
-          {' · '}
           <a href="https://instagram.com/ruben.uzan" target="_blank" rel="noopener noreferrer" className="text-[var(--gold)] hover:underline font-medium">
             @ruben.uzan
           </a>
