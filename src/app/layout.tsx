@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Playfair_Display, Heebo } from 'next/font/google'
+import { Nunito, Playfair_Display, Heebo } from 'next/font/google'
 import './globals.css'
 import { LangProvider } from '@/lib/LangContext'
 import { ThemeProvider } from '@/lib/ThemeContext'
 
-const inter = Inter({
+const nunito = Nunito({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-nunito',
   display: 'swap',
 })
 
@@ -99,7 +99,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark" className={`${inter.variable} ${playfair.variable} ${heebo.variable}`}>
+    <html lang="en" data-theme="dark" className={`${nunito.variable} ${playfair.variable} ${heebo.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
@@ -142,7 +142,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${nunito.className} antialiased`}>
         <script dangerouslySetInnerHTML={{ __html: `
   (function(){
     try {
