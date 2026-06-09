@@ -13,6 +13,7 @@ export function Footer() {
     { label: t.footer_tour3, href: '/tours/emotions-et-grands-frissons' },
     { label: t.footer_tour4, href: '/tours/petra-jordanie' },
     { label: t.footer_tour5, href: '/tours/combo-voilier-jeep' },
+    { label: t.footer_tour6, href: '/tours/un-diner-une-nuit-sous-les-etoiles' },
   ]
 
   const companyLinks = [

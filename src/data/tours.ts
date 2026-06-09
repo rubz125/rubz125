@@ -390,6 +390,71 @@ export const tours: Tour[] = [
     pricePerGroup: true,
     price: 1390, currency: '₪', duration: '5h → 9h', region: 'Red Sea · Eilat Mountains',
   },
+
+  // ─── 6. Dinner & a Night Under the Stars ────────────────────────────────────
+  {
+    slug: 'un-diner-une-nuit-sous-les-etoiles',
+    category: 'Evening · Night', categoryFr: 'Soirée · Nuit', categoryHe: 'ערב · לילה',
+    title: 'Dinner & a Night Under the Stars',
+    titleFr: 'Un Dîner, Une Nuit sous les Étoiles',
+    titleHe: 'ארוחת ערב, לילה תחת הכוכבים',
+    quote: 'The desert is not only silence — it is the only place where the stars still speak.',
+    quoteAuthor: 'Didier Uzan, Eilat Action',
+
+    description: `The Eilat desert becomes a different universe once the sun sets. Far from city lights and noise, in a secret clearing deep in the mountains, we set up a Bedouin camp just for you: Moroccan lanterns, embroidered cushions, a crackling wood fire and the scent of herbs drifting through the evening air.\n\nAs darkness falls, the Milky Way blazes overhead — the skies of Eilat are among the darkest in Israel, making them ideal for stargazing. Your guide leads you through the constellations, shares stories of the desert at night, and serves a traditional Bedouin dinner: fresh-baked laffas, grilled meats, homemade hummus, mezze, mint tea and warm desserts.\n\nFor those who wish to stay, fall asleep under the open sky on mattresses laid out in the desert — and wake to the silence of dawn and a warm breakfast before the world comes alive.`,
+
+    descriptionFr: `Le désert d'Eilat devient un autre univers dès que le soleil se couche. Loin des lumières de la ville et de son agitation, dans une clairière secrète au cœur des montagnes, nous dressons un campement bédouin rien que pour vous : lanternes marocaines, coussins brodés, feu de bois crépitant et effluves d'herbes qui se mêlent à l'air du soir.\n\nQuand l'obscurité tombe, la Voie lactée éclate au-dessus de vous — les ciels d'Eilat sont parmi les plus sombres d'Israël, parfaits pour l'observation des étoiles. Votre guide vous emmène à travers les constellations, vous conte les histoires du désert nocturne, et vous sert un dîner bédouin traditionnel : laffas fraîchement cuites, viandes grillées, houmous maison, mezze, thé à la menthe et desserts chauds.\n\nPour ceux qui souhaitent rester, endormez-vous sous le ciel ouvert sur des matelas dans le désert — et réveillez-vous dans le silence de l'aube avec un petit-déjeuner chaud, avant que le monde ne s'éveille.`,
+
+    descriptionHe: `מדבר אילת הופך לעולם אחר ברגע שהשמש שוקעת. רחוק מאורות העיר ומהמולתה, בסתר בין ההרים, אנו מקימים מחנה בדואי עבורכם בלבד: פנסי מרוקו, כריות רקומות, מדורת עצים חורקת וריחות עשבים הנישאים באוויר הלילה.\n\nכשהחשיכה יורדת, שביל החלב בוהק מעליכם — שמיי אילת הם מבין הכהים ביותר בישראל, אידיאליים לצפייה בכוכבים. המדריך שלכם ילווה אתכם בין הקבוצות, יספר סיפורי המדבר בלילה, וישרת ארוחת ערב בדואית מסורתית: לאפות אפויות טרי, בשר על האש, חומוס ביתי, מזה, תה נענע ועוגות חמות.\n\nלמי שרוצה להישאר — הירדמו תחת כיפת השמיים על מזרנים פרוסים במדבר, והתעוררו בדממת שחר לארוחת בוקר חמה, לפני שהעולם יתעורר.`,
+
+    shortDescription: 'Private Bedouin camp deep in the Eilat Mountains — lanterns, campfire, traditional desert dinner, and stargazing under the darkest skies in Israel.',
+    shortDescriptionFr: "Campement bédouin privé au cœur des monts d'Eilat — lanternes, feu de camp, dîner bédouin traditionnel et observation des étoiles sous les ciels les plus sombres d'Israël.",
+    shortDescriptionHe: 'מחנה בדואי פרטי בלב הרי אילת — פנסים, מדורה, ארוחת ערב בדואית מסורתית וצפייה בכוכבים תחת השמיים הכהים ביותר בישראל.',
+
+    highlights: ['Jeep ride to a secret desert clearing', 'Moroccan lanterns & Bedouin cushions', 'Wood fire & stargazing with guide', 'Traditional Bedouin dinner (laffas, grilled meats, mezze)', 'Mint tea & warm desserts', 'Overnight option — sleep under the open sky'],
+    highlightsFr: ["Transfert en jeep vers une clairière secrète", "Lanternes marocaines & coussins bédouins", "Feu de bois & observation des étoiles avec guide", "Dîner bédouin traditionnel (laffas, viandes grillées, mezze)", "Thé à la menthe & desserts chauds", "Option nuit — dormir à la belle étoile"],
+    highlightsHe: ["נסיעת ג'יפ לסתר מדברי", 'פנסי מרוקו וכריות בדואיות', 'מדורת עצים וצפייה בכוכבים עם מדריך', 'ארוחת ערב בדואית מסורתית (לאפות, בשר, מזה)', 'תה נענע ועוגות חמות', 'אופציית לינה — שינה תחת כיפת השמיים'],
+
+    packages: [
+      {
+        name: 'Desert Dinner', nameFr: 'Dîner dans le Désert', nameHe: 'ארוחת ערב במדבר',
+        price: 290, duration: '~3h',
+        mealIncluded: true,
+        description: 'Jeep to a secret desert site · Bedouin camp setup (lanterns, cushions, fire) · Stargazing with guide · Traditional Bedouin dinner: fresh laffas, grilled meats, hummus, mezze · Mint tea & warm desserts. Returns to hotel around midnight.',
+        descriptionFr: "Jeep vers un site désertique secret · Campement bédouin (lanternes, coussins, feu) · Observation des étoiles avec guide · Dîner bédouin traditionnel : laffas fraîches, viandes grillées, houmous, mezze · Thé à la menthe & desserts chauds. Retour à l'hôtel vers minuit.",
+        descriptionHe: "ג'יפ לאתר מדברי סודי · הקמת מחנה בדואי (פנסים, כריות, מדורה) · צפייה בכוכבים עם מדריך · ארוחת ערב בדואית מסורתית: לאפות טריות, בשר על האש, חומוס, מזה · תה נענע ועוגות חמות. חזרה למלון לקראת חצות.",
+      },
+      {
+        name: 'Night Under the Stars', nameFr: 'Nuit sous les Étoiles', nameHe: 'לילה תחת הכוכבים',
+        price: 490, duration: 'Overnight',
+        mealIncluded: true,
+        description: 'Everything in Desert Dinner + sleep on mattresses under the open desert sky · Wake to the silence of dawn · Warm Bedouin breakfast at sunrise (fresh bread, eggs, labneh, olives, seasonal fruits, coffee & tea) · Return to hotel by morning.',
+        descriptionFr: "Tout du Dîner dans le Désert + nuit sur matelas sous le ciel étoilé · Réveil dans le silence de l'aube · Petit-déjeuner bédouin chaud au lever du soleil (pain frais, œufs, labneh, olives, fruits de saison, café & thé) · Retour à l'hôtel en matinée.",
+        descriptionHe: "כל מה שבארוחת הערב + לינה על מזרנים תחת כיפת שמיים פתוחה · התעוררות בדממת שחר · ארוחת בוקר בדואית חמה עם הזריחה (לחם טרי, ביצים, לבנה, זיתים, פירות עונתיים, קפה ותה) · חזרה למלון בבוקר.",
+      },
+    ],
+
+    includes: ['Jeep transfer to / from camp site', 'Pick-up and drop-off at hotel', 'Full Bedouin dinner', 'Stargazing guide', 'Campfire & Bedouin tea', 'Mattresses & blankets for overnight'],
+    includesFr: ["Transfert jeep aller-retour au campement", "Navette aller-retour depuis l'hôtel", "Dîner bédouin complet", "Guide observation des étoiles", "Feu de camp & thé bédouin", "Matelas & couvertures pour la nuit"],
+    includesHe: ["העברת ג'יפ הלוך ושוב לאתר", "הסעה הלוך ושוב מהמלון", "ארוחת ערב בדואית מלאה", "מדריך צפייה בכוכבים", "מדורה ותה בדואי", "מזרנים ושמיכות ללינה"],
+
+    whatToBring: ['Warm layer (desert nights are cold)', 'Personal water bottle', 'Camera', 'Comfortable flat shoes', 'Sunscreen (for jeep ride)'],
+    whatToBringFr: ['Couche chaude (les nuits du désert sont fraîches)', "Bouteille d'eau personnelle", 'Appareil photo', 'Chaussures plates confortables', 'Crème solaire (pour le trajet en jeep)'],
+    whatToBringHe: ['שכבה חמה (לילות המדבר קרים)', 'בקבוק מים אישי', 'מצלמה', 'נעלי שטוח נוחות', 'קרם הגנה (לנסיעת הג\'יפ)'],
+
+    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80',
+      'https://images.unsplash.com/photo-1475552113915-6fcb52652ba2?w=800&q=80',
+      'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=800&q=80',
+    ],
+    difficulty: 'Easy',
+    rating: 4.9, reviewCount: 74,
+    groupSize: '2–12', languages: ['English', 'French', 'Hebrew'],
+    departure: 'Daily, Year-Round',
+    badge: 'Stargazing', featured: true,
+    price: 290, currency: '₪', duration: '3h / Overnight', region: 'Eilat Mountains',
+  },
 ]
 
 export const getFeaturedTours = () => tours.filter((t) => t.featured)
