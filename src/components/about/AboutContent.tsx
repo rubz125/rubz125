@@ -152,33 +152,33 @@ export function AboutContent() {
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0603] via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)] via-black/40 to-transparent" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full">
           <div className="flex items-center gap-3 mb-4">
             <div className="section-divider" />
-            <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">{c.eyebrow}</span>
+            <span className="text-[var(--gold)] text-sm uppercase tracking-[0.2em] font-medium">{c.eyebrow}</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl font-bold text-[#F5EDD8]" style={{ fontFamily: 'var(--font-playfair)' }}>
+          <h1 className="text-5xl sm:text-6xl font-bold text-[var(--text-1)]" style={{ fontFamily: 'var(--font-playfair)' }}>
             About Eilat Action
           </h1>
         </div>
       </section>
 
       {/* Opening quote */}
-      <section className="py-16 bg-[#0A0603]">
+      <section className="py-16 bg-[var(--bg-base)]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <blockquote>
-            <div className="text-[#D4A843] text-6xl font-serif leading-none mb-4 opacity-40">"</div>
-            <p className="text-2xl sm:text-3xl text-[#F5EDD8] italic leading-relaxed mb-6" style={{ fontFamily: 'var(--font-playfair)' }}>
+            <div className="text-[var(--gold)] text-6xl font-serif leading-none mb-4 opacity-40">"</div>
+            <p className="text-2xl sm:text-3xl text-[var(--text-1)] italic leading-relaxed mb-6" style={{ fontFamily: 'var(--font-playfair)' }}>
               {c.quote}
             </p>
-            <footer className="text-[#7A6245] text-sm tracking-wider uppercase">{c.quoteAuthor}</footer>
+            <footer className="text-[var(--text-4)] text-sm tracking-wider uppercase">{c.quoteAuthor}</footer>
           </blockquote>
         </div>
       </section>
 
       {/* The Desert Specialist — photo + text */}
-      <section className="py-20 bg-[#1C1108]">
+      <section className="py-20 bg-[var(--bg-surface)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
 
@@ -191,10 +191,10 @@ export function AboutContent() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0603]/70 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)]/70 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
-                <div className="text-[#F5EDD8] font-bold text-xl" style={{ fontFamily: 'var(--font-playfair)' }}>Didier Uzan</div>
-                <div className="text-[#D4A843] text-sm">Eilat Action — Founder & Guide</div>
+                <div className="text-[var(--text-1)] font-bold text-xl" style={{ fontFamily: 'var(--font-playfair)' }}>Didier Uzan</div>
+                <div className="text-[var(--gold)] text-sm">Eilat Action — Founder & Guide</div>
               </div>
             </div>
 
@@ -202,25 +202,25 @@ export function AboutContent() {
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="section-divider" />
-                <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">{c.specialistEyebrow}</span>
+                <span className="text-[var(--gold)] text-sm uppercase tracking-[0.2em] font-medium">{c.specialistEyebrow}</span>
               </div>
-              <h2 className="text-4xl font-bold text-[#F5EDD8] mb-8 leading-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
+              <h2 className="text-4xl font-bold text-[var(--text-1)] mb-8 leading-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
                 {c.specialistTitle}<br />
-                <span style={{ background: 'linear-gradient(135deg, #F2C464, #D4A843)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                <span className="text-gradient-gold">
                   {c.specialistSubtitle}
                 </span>
               </h2>
-              <div className="space-y-5 text-[#A08860] leading-relaxed mb-10">
+              <div className="space-y-5 text-[var(--text-3)] leading-relaxed mb-10">
                 <p>{c.p1}</p>
                 <p>{c.p2}</p>
                 <p>{c.p3}</p>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {c.stats.map(({ icon: Icon, title, desc }) => (
-                  <div key={title} className="bg-[#0A0603] border border-[#D4A843]/10 rounded-sm p-4">
-                    <Icon className="w-5 h-5 text-[#D4A843] mb-2" />
-                    <div className="text-[#F5EDD8] font-semibold text-sm mb-1">{title}</div>
-                    <div className="text-[#7A6245] text-xs leading-relaxed">{desc}</div>
+                  <div key={title} className="bg-[var(--bg-base)] border border-[var(--border-sm)] rounded-sm p-4">
+                    <Icon className="w-5 h-5 text-[var(--gold)] mb-2" />
+                    <div className="text-[var(--text-1)] font-semibold text-sm mb-1">{title}</div>
+                    <div className="text-[var(--text-4)] text-xs leading-relaxed">{desc}</div>
                   </div>
                 ))}
               </div>
@@ -230,15 +230,15 @@ export function AboutContent() {
       </section>
 
       {/* Eilat between desert and sea + Adventures */}
-      <section className="py-20 bg-[#0A0603]">
+      <section className="py-20 bg-[var(--bg-base)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="section-divider" />
-                <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">{c.desertEyebrow}</span>
+                <span className="text-[var(--gold)] text-sm uppercase tracking-[0.2em] font-medium">{c.desertEyebrow}</span>
               </div>
-              <div className="space-y-5 text-[#A08860] leading-relaxed">
+              <div className="space-y-5 text-[var(--text-3)] leading-relaxed">
                 <p>{c.desertP1}</p>
                 <p>{c.desertP2}</p>
                 <p>{c.desertP3}</p>
@@ -247,13 +247,13 @@ export function AboutContent() {
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="section-divider" />
-                <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">{c.adventuresEyebrow}</span>
+                <span className="text-[var(--gold)] text-sm uppercase tracking-[0.2em] font-medium">{c.adventuresEyebrow}</span>
               </div>
-              <div className="space-y-5 text-[#A08860] leading-relaxed">
+              <div className="space-y-5 text-[var(--text-3)] leading-relaxed">
                 <p>{c.adventuresP1}</p>
                 <p>{c.adventuresP2}</p>
-                <p className="text-[#D4A843] italic">{c.adventuresHighlight}</p>
-                <p className="text-[#F5EDD8] font-medium">{c.adventuresEnd}</p>
+                <p className="text-[var(--gold)] italic">{c.adventuresHighlight}</p>
+                <p className="text-[var(--text-1)] font-medium">{c.adventuresEnd}</p>
               </div>
             </div>
           </div>
@@ -261,18 +261,18 @@ export function AboutContent() {
       </section>
 
       {/* Safety */}
-      <section id="safety" className="py-20 bg-[#1C1108]">
+      <section id="safety" className="py-20 bg-[var(--bg-surface)]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Shield className="w-12 h-12 text-[#D4A843] mx-auto mb-6" />
-          <h2 className="text-3xl font-bold text-[#F5EDD8] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
+          <Shield className="w-12 h-12 text-[var(--gold)] mx-auto mb-6" />
+          <h2 className="text-3xl font-bold text-[var(--text-1)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
             {c.safetyTitle}
           </h2>
-          <p className="text-[#A08860] mb-8">{c.safetyDesc}</p>
+          <p className="text-[var(--text-3)] mb-8">{c.safetyDesc}</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {c.safetyItems.map((item) => (
-              <div key={item} className="bg-[#0A0603] border border-[#D4A843]/10 rounded-sm p-4 text-center">
+              <div key={item} className="bg-[var(--bg-base)] border border-[var(--border-sm)] rounded-sm p-4 text-center">
                 <div className="text-green-400 text-xl mb-2">✓</div>
-                <div className="text-[#D6C9AD] text-xs font-medium">{item}</div>
+                <div className="text-[var(--text-2)] text-xs font-medium">{item}</div>
               </div>
             ))}
           </div>
@@ -280,12 +280,12 @@ export function AboutContent() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-[#0A0603] border-t border-[#D4A843]/10">
+      <section className="py-16 bg-[var(--bg-base)] border-t border-[var(--border-sm)]">
         <div className="max-w-xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-[#F5EDD8] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
+          <h2 className="text-3xl font-bold text-[var(--text-1)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
             {c.ctaTitle}
           </h2>
-          <p className="text-[#7A6245] mb-8">{c.ctaDesc}</p>
+          <p className="text-[var(--text-4)] mb-8">{c.ctaDesc}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/tours" className="btn-primary">{c.ctaBtn1}</Link>
             <Link href="/contact" className="btn-secondary">{c.ctaBtn2}</Link>

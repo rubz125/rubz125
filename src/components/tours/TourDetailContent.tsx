@@ -58,34 +58,34 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[380px] flex items-end">
         <Image src={tour.image} alt={title} fill className="object-cover" sizes="100vw" priority />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0603] via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)] via-black/40 to-transparent" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 w-full">
-          <div className="flex items-center gap-2 text-xs text-[#7A6245] mb-3">
-            <Link href="/" className="hover:text-[#D4A843] transition-colors">{L.home}</Link>
+          <div className="flex items-center gap-2 text-xs text-[var(--text-4)] mb-3">
+            <Link href="/" className="hover:text-[var(--gold)] transition-colors">{L.home}</Link>
             <span>/</span>
-            <Link href="/tours" className="hover:text-[#D4A843] transition-colors">{L.tours}</Link>
+            <Link href="/tours" className="hover:text-[var(--gold)] transition-colors">{L.tours}</Link>
             <span>/</span>
-            <span className="text-[#D6C9AD]">{title}</span>
+            <span className="text-[var(--text-2)]">{title}</span>
           </div>
           <div className="flex flex-wrap items-center gap-2 mb-3">
-            <span className="px-3 py-1 bg-[#D4A843]/20 border border-[#D4A843]/40 text-[#D4A843] text-xs font-semibold uppercase tracking-wider rounded-sm">
+            <span className="px-3 py-1 bg-[var(--gold-tint-20)] border border-[var(--border-xl)] text-[var(--gold)] text-xs font-semibold uppercase tracking-wider rounded-sm">
               {category}
             </span>
             {tour.badge && (
-              <span className="px-2.5 py-1 bg-[#D4A843] text-[#0A0603] text-xs font-bold uppercase tracking-wider rounded-sm">{tour.badge}</span>
+              <span className="px-2.5 py-1 bg-[var(--gold)] text-[var(--bg-base)] text-xs font-bold uppercase tracking-wider rounded-sm">{tour.badge}</span>
             )}
             <span className={cn('px-2.5 py-1 text-xs font-semibold uppercase tracking-wider rounded-sm border', getDifficultyColor(tour.difficulty))}>
               {tour.difficulty}
             </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F5EDD8] leading-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text-1)] leading-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
             {title}
           </h1>
-          {subtitle && <p className="text-[#D6C9AD] text-lg mt-2">{subtitle}</p>}
+          {subtitle && <p className="text-[var(--text-2)] text-lg mt-2">{subtitle}</p>}
         </div>
       </section>
 
-      <section className="py-12 bg-[#0A0603]">
+      <section className="py-12 bg-[var(--bg-base)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-10">
 
@@ -93,9 +93,9 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
             <div className="lg:col-span-2 space-y-10">
 
               {/* Quote */}
-              <blockquote className="border-l-2 border-[#D4A843] pl-6 py-2">
-                <p className="text-[#D6C9AD] text-lg italic leading-relaxed">"{tour.quote}"</p>
-                <cite className="text-[#7A6245] text-sm mt-2 block not-italic">— {tour.quoteAuthor}</cite>
+              <blockquote className="border-l-2 border-[var(--gold)] pl-6 py-2">
+                <p className="text-[var(--text-2)] text-lg italic leading-relaxed">"{tour.quote}"</p>
+                <cite className="text-[var(--text-4)] text-sm mt-2 block not-italic">— {tour.quoteAuthor}</cite>
               </blockquote>
 
               {/* Quick meta */}
@@ -106,44 +106,44 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
                   { icon: MapPin, label: L.region,    value: tour.region },
                   { icon: Globe,  label: L.languages, value: tour.languages.slice(0, 2).join(', ') },
                 ].map(({ icon: Icon, label, value }) => (
-                  <div key={label} className="bg-[#1C1108] border border-[#D4A843]/10 rounded-sm p-4">
-                    <Icon className="w-4 h-4 text-[#D4A843] mb-2" />
-                    <div className="text-[#7A6245] text-xs mb-0.5">{label}</div>
-                    <div className="text-[#F5EDD8] text-sm font-medium">{value}</div>
+                  <div key={label} className="bg-[var(--bg-surface)] border border-[var(--border-sm)] rounded-sm p-4">
+                    <Icon className="w-4 h-4 text-[var(--gold)] mb-2" />
+                    <div className="text-[var(--text-4)] text-xs mb-0.5">{label}</div>
+                    <div className="text-[var(--text-1)] text-sm font-medium">{value}</div>
                   </div>
                 ))}
               </div>
 
               {/* Rating */}
-              <div className="flex items-center gap-4 p-4 bg-[#1C1108] border border-[#D4A843]/10 rounded-sm">
+              <div className="flex items-center gap-4 p-4 bg-[var(--bg-surface)] border border-[var(--border-sm)] rounded-sm">
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={cn('w-5 h-5', i < Math.floor(tour.rating) ? 'text-[#D4A843] fill-[#D4A843]' : 'text-[#3D2812]')} />
+                    <Star key={i} className={cn('w-5 h-5', i < Math.floor(tour.rating) ? 'text-[var(--gold)] fill-[var(--gold)]' : 'text-[var(--star-empty)]')} />
                   ))}
                 </div>
-                <span className="text-[#D4A843] font-bold text-xl">{tour.rating}</span>
-                <span className="text-[#7A6245]">{tour.reviewCount} {L.reviews}</span>
+                <span className="text-[var(--gold)] font-bold text-xl">{tour.rating}</span>
+                <span className="text-[var(--text-4)]">{tour.reviewCount} {L.reviews}</span>
               </div>
 
               {/* Description */}
               <div>
-                <h2 className="text-2xl font-bold text-[#F5EDD8] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>{L.about}</h2>
+                <h2 className="text-2xl font-bold text-[var(--text-1)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>{L.about}</h2>
                 {description.split('\n\n').map((para, i) => (
-                  <p key={i} className="text-[#A08860] leading-relaxed mb-4">{para}</p>
+                  <p key={i} className="text-[var(--text-3)] leading-relaxed mb-4">{para}</p>
                 ))}
               </div>
 
               {/* Highlights (Tour 2 only) */}
               {highlights.length > 0 && (
                 <div>
-                  <h2 className="text-2xl font-bold text-[#F5EDD8] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>{L.highlights}</h2>
+                  <h2 className="text-2xl font-bold text-[var(--text-1)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>{L.highlights}</h2>
                   <ul className="space-y-3">
                     {highlights.map((h, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <div className="shrink-0 w-5 h-5 rounded-sm bg-[#D4A843]/10 border border-[#D4A843]/20 flex items-center justify-center mt-0.5">
-                          <Check className="w-3 h-3 text-[#D4A843]" />
+                        <div className="shrink-0 w-5 h-5 rounded-sm bg-[var(--gold-tint-10)] border border-[var(--border-md)] flex items-center justify-center mt-0.5">
+                          <Check className="w-3 h-3 text-[var(--gold)]" />
                         </div>
-                        <span className="text-[#D6C9AD] text-sm">{h}</span>
+                        <span className="text-[var(--text-2)] text-sm">{h}</span>
                       </li>
                     ))}
                   </ul>
@@ -152,12 +152,12 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
 
               {/* Included */}
               <div>
-                <h2 className="text-2xl font-bold text-[#F5EDD8] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>{L.includes}</h2>
+                <h2 className="text-2xl font-bold text-[var(--text-1)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>{L.includes}</h2>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {includes.map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <span className="text-green-400 text-base leading-none mt-0.5">✓</span>
-                      <span className="text-[#A08860] text-sm">{item}</span>
+                      <span className="text-[var(--text-3)] text-sm">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -165,7 +165,7 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
 
               {/* Available Packages */}
               <div>
-                <h2 className="text-2xl font-bold text-[#F5EDD8] mb-5" style={{ fontFamily: 'var(--font-playfair)' }}>{L.packages}</h2>
+                <h2 className="text-2xl font-bold text-[var(--text-1)] mb-5" style={{ fontFamily: 'var(--font-playfair)' }}>{L.packages}</h2>
                 <div className="space-y-4">
                   {tour.packages.map((p, i) => {
                     const pName = lang === 'fr' ? p.nameFr : lang === 'he' ? p.nameHe : p.name
@@ -178,49 +178,49 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
                         className={cn(
                           'w-full text-left p-5 rounded-sm border transition-all duration-200',
                           active
-                            ? 'bg-[#D4A843]/08 border-[#D4A843]/50'
-                            : 'bg-[#1C1108] border-[#D4A843]/10 hover:border-[#D4A843]/30'
+                            ? 'bg-[var(--gold-tint-08)] border-[var(--border-2xl)]'
+                            : 'bg-[var(--bg-surface)] border-[var(--border-sm)] hover:border-[var(--border-lg)]'
                         )}
                       >
                         <div className="flex items-start justify-between gap-4 mb-2">
                           <div className="flex items-center gap-3">
-                            {active && <div className="w-2 h-2 rounded-full bg-[#D4A843] shrink-0 mt-1" />}
-                            <span className={cn('font-bold text-base', active ? 'text-[#D4A843]' : 'text-[#F5EDD8]')} style={{ fontFamily: 'var(--font-playfair)' }}>
+                            {active && <div className="w-2 h-2 rounded-full bg-[var(--gold)] shrink-0 mt-1" />}
+                            <span className={cn('font-bold text-base', active ? 'text-[var(--gold)]' : 'text-[var(--text-1)]')} style={{ fontFamily: 'var(--font-playfair)' }}>
                               {pName}
                             </span>
                           </div>
-                          <span className="text-[#D4A843] font-bold text-xl shrink-0">{p.priceOnRequest ? L.contactUs : `₪${p.price}`}</span>
+                          <span className="text-[var(--gold)] font-bold text-xl shrink-0">{p.priceOnRequest ? L.contactUs : `₪${p.price}`}</span>
                         </div>
-                        <p className="text-[#7A6245] text-sm leading-relaxed mb-3">{pDesc}</p>
+                        <p className="text-[var(--text-4)] text-sm leading-relaxed mb-3">{pDesc}</p>
                         <div className="flex flex-wrap gap-2">
-                          <span className="flex items-center gap-1 text-[#7A6245] text-xs">
-                            <Clock className="w-3 h-3 text-[#D4A843]" /> {p.duration}
+                          <span className="flex items-center gap-1 text-[var(--text-4)] text-xs">
+                            <Clock className="w-3 h-3 text-[var(--gold)]" /> {p.duration}
                           </span>
                           {p.mealIncluded && (
-                            <span className="text-xs bg-[#D4A843]/08 border border-[#D4A843]/20 text-[#D4A843] px-2 py-0.5 rounded-sm">🍽 {L.mealIncl}</span>
+                            <span className="text-xs bg-[var(--gold-tint-08)] border border-[var(--border-md)] text-[var(--gold)] px-2 py-0.5 rounded-sm">🍽 {L.mealIncl}</span>
                           )}
                           {p.entryIncluded && (
-                            <span className="text-xs bg-[#D4A843]/08 border border-[#D4A843]/20 text-[#D4A843] px-2 py-0.5 rounded-sm">🎟 {L.entryIncl}</span>
+                            <span className="text-xs bg-[var(--gold-tint-08)] border border-[var(--border-md)] text-[var(--gold)] px-2 py-0.5 rounded-sm">🎟 {L.entryIncl}</span>
                           )}
                           {p.trekIncluded && (
-                            <span className="text-xs bg-[#D4A843]/08 border border-[#D4A843]/20 text-[#D4A843] px-2 py-0.5 rounded-sm">🚶 {p.trekIncluded} {L.trek}</span>
+                            <span className="text-xs bg-[var(--gold-tint-08)] border border-[var(--border-md)] text-[var(--gold)] px-2 py-0.5 rounded-sm">🚶 {p.trekIncluded} {L.trek}</span>
                           )}
                         </div>
                       </button>
                     )
                   })}
                 </div>
-                <p className="text-[#7A6245] text-xs mt-4">{L.warning}</p>
+                <p className="text-[var(--text-4)] text-xs mt-4">{L.warning}</p>
               </div>
 
               {/* What to bring */}
               {whatToBring.length > 0 && (
                 <div>
-                  <h2 className="text-2xl font-bold text-[#F5EDD8] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>{L.bring}</h2>
+                  <h2 className="text-2xl font-bold text-[var(--text-1)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>{L.bring}</h2>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {whatToBring.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-[#A08860] text-sm">
-                        <span className="text-[#D4A843] mt-0.5">›</span>
+                      <li key={i} className="flex items-start gap-3 text-[var(--text-3)] text-sm">
+                        <span className="text-[var(--gold)] mt-0.5">›</span>
                         {item}
                       </li>
                     ))}
@@ -231,7 +231,7 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
               {/* Gallery */}
               {tour.gallery.length > 1 && (
                 <div>
-                  <h2 className="text-2xl font-bold text-[#F5EDD8] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>{L.photos}</h2>
+                  <h2 className="text-2xl font-bold text-[var(--text-1)] mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>{L.photos}</h2>
                   <div className="grid grid-cols-3 gap-2">
                     {tour.gallery.map((src, i) => (
                       <div key={i} className="relative rounded-sm overflow-hidden" style={{ aspectRatio: '4/3' }}>
@@ -246,20 +246,20 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
             {/* ── Booking widget ───────────────────────────────────────────── */}
             <div className="lg:col-span-1">
               <div className="sticky top-28">
-                <div className="bg-[#1C1108] border border-[#D4A843]/20 rounded-sm p-6 shadow-2xl shadow-black/50">
+                <div className="bg-[var(--bg-surface)] border border-[var(--border-md)] rounded-sm p-6 shadow-2xl shadow-black/50">
                   {/* Selected package summary */}
-                  <div className="mb-5 pb-5 border-b border-[#D4A843]/10">
-                    <div className="text-[#7A6245] text-xs mb-1">{pkgName}</div>
+                  <div className="mb-5 pb-5 border-b border-[var(--border-sm)]">
+                    <div className="text-[var(--text-4)] text-xs mb-1">{pkgName}</div>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-[#D4A843] font-bold text-4xl leading-none" style={{ fontFamily: 'var(--font-playfair)' }}>
+                      <span className="text-[var(--gold)] font-bold text-4xl leading-none" style={{ fontFamily: 'var(--font-playfair)' }}>
                         {pkg.priceOnRequest ? L.contactUs : formatPrice(pkg.price, '₪')}
                       </span>
                       {!pkg.priceOnRequest && (
-                        <span className="text-[#7A6245] text-sm">{pkg.pricePerGroup ? L.upTo8 : L.perPerson}</span>
+                        <span className="text-[var(--text-4)] text-sm">{pkg.pricePerGroup ? L.upTo8 : L.perPerson}</span>
                       )}
                     </div>
-                    <div className="flex items-center gap-1.5 mt-2 text-[#7A6245] text-xs">
-                      <Clock className="w-3.5 h-3.5 text-[#D4A843]" /> {pkg.duration}
+                    <div className="flex items-center gap-1.5 mt-2 text-[var(--text-4)] text-xs">
+                      <Clock className="w-3.5 h-3.5 text-[var(--gold)]" /> {pkg.duration}
                     </div>
                   </div>
 
@@ -274,8 +274,8 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
                           className={cn(
                             'w-full flex items-center justify-between px-3 py-2 rounded-sm text-sm transition-all',
                             selectedPkg === i
-                              ? 'bg-[#D4A843]/15 border border-[#D4A843]/40 text-[#D4A843]'
-                              : 'border border-[#D4A843]/10 text-[#7A6245] hover:border-[#D4A843]/30 hover:text-[#D6C9AD]'
+                              ? 'bg-[var(--gold-tint-15)] border border-[var(--border-xl)] text-[var(--gold)]'
+                              : 'border border-[var(--border-sm)] text-[var(--text-4)] hover:border-[var(--border-lg)] hover:text-[var(--text-2)]'
                           )}
                         >
                           <span>{pName}</span>
@@ -298,9 +298,9 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
                     {L.whatsapp}
                   </a>
 
-                  <div className="mt-5 pt-5 border-t border-[#D4A843]/10 space-y-2">
+                  <div className="mt-5 pt-5 border-t border-[var(--border-sm)] space-y-2">
                     {[L.cancel, L.confirm, L.secure].map((item) => (
-                      <div key={item} className="flex items-center gap-2 text-[#7A6245] text-xs">
+                      <div key={item} className="flex items-center gap-2 text-[var(--text-4)] text-xs">
                         <span className="text-green-400">✓</span>{item}
                       </div>
                     ))}

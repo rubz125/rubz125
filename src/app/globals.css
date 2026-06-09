@@ -19,6 +19,87 @@
 
   --background: var(--midnight);
   --foreground: var(--cream);
+
+  /* ── Theme tokens ─── */
+  /* Dark theme (default) */
+  --bg-base: #0A0603;
+  --bg-surface: #1C1108;
+  --bg-surface-2: #2E1E0F;
+  --bg-surface-3: #150E05;
+  --bg-footer: #0D0906;
+  --bg-bottom: #080503;
+  --bg-dot: #3D2812;
+
+  --text-1: #F5EDD8;
+  --text-2: #D6C9AD;
+  --text-3: #A08860;
+  --text-4: #7A6245;
+  --text-5: #4A3B26;
+
+  --gold: #D4A843;
+  --gold-light: #F2C464;
+  --gold-dark: #A87828;
+  --orange: #C4623A;
+  --orange-light: #E07850;
+  --star-empty: #3D2812;
+
+  /* Pre-computed rgba for borders & tinted bgs */
+  --border-sm: rgba(212,168,67,0.10);
+  --border-md: rgba(212,168,67,0.20);
+  --border-lg: rgba(212,168,67,0.30);
+  --border-xl: rgba(212,168,67,0.40);
+  --border-2xl: rgba(212,168,67,0.50);
+  --gold-tint-05: rgba(212,168,67,0.05);
+  --gold-tint-08: rgba(212,168,67,0.08);
+  --gold-tint-10: rgba(212,168,67,0.10);
+  --gold-tint-15: rgba(212,168,67,0.15);
+  --gold-tint-20: rgba(212,168,67,0.20);
+  --surface-80: rgba(28,17,8,0.80);
+  --surface-95: rgba(28,17,8,0.95);
+  --base-50: rgba(10,6,3,0.50);
+  --base-60: rgba(10,6,3,0.60);
+  --base-80: rgba(10,6,3,0.80);
+  --base-95: rgba(10,6,3,0.95);
+}
+
+[data-theme="light"] {
+  --bg-base: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-surface-2: #F5F0E8;
+  --bg-surface-3: #F8F5F0;
+  --bg-footer: #F0EAE0;
+  --bg-bottom: #EDE7DE;
+  --bg-dot: #D4C8B0;
+
+  --text-1: #1A1209;
+  --text-2: #3D2E14;
+  --text-3: #6B5230;
+  --text-4: #8B7355;
+  --text-5: #A09070;
+
+  --gold: #9A6E15;
+  --gold-light: #7A5510;
+  --gold-dark: #C49030;
+  --orange: #C4623A;
+  --orange-light: #E07850;
+  --star-empty: #D4C4A0;
+
+  --border-sm: rgba(120,90,20,0.12);
+  --border-md: rgba(120,90,20,0.22);
+  --border-lg: rgba(120,90,20,0.35);
+  --border-xl: rgba(120,90,20,0.50);
+  --border-2xl: rgba(120,90,20,0.65);
+  --gold-tint-05: rgba(154,110,21,0.05);
+  --gold-tint-08: rgba(154,110,21,0.08);
+  --gold-tint-10: rgba(154,110,21,0.10);
+  --gold-tint-15: rgba(154,110,21,0.15);
+  --gold-tint-20: rgba(154,110,21,0.20);
+  --surface-80: rgba(255,255,255,0.85);
+  --surface-95: rgba(255,255,255,0.97);
+  --base-50: rgba(250,248,245,0.50);
+  --base-60: rgba(250,248,245,0.70);
+  --base-80: rgba(250,248,245,0.85);
+  --base-95: rgba(250,248,245,0.95);
 }
 
 @theme inline {
@@ -48,12 +129,21 @@ html {
 }
 
 body {
-  background: var(--midnight);
-  color: var(--cream);
+  background: var(--bg-base);
+  color: var(--text-1);
   font-family: 'Inter', -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* Smooth color transitions on theme switch */
+*, *::before, *::after {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+}
+/* But NOT for animations/transforms */
+[class*="motion"], [class*="animate"] {
+  transition: none !important;
 }
 
 @layer utilities {
@@ -81,7 +171,7 @@ body {
 
   /* Gradient text */
   .text-gradient-gold {
-    background: linear-gradient(135deg, #F2C464 0%, #D4A843 50%, #A87828 100%);
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -158,8 +248,8 @@ body {
     justify-content: center;
     gap: 0.5rem;
     padding: 0.875rem 2rem;
-    background: linear-gradient(135deg, #D4A843 0%, #C4913A 100%);
-    color: #0A0603;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: var(--bg-base);
     font-weight: 700;
     font-size: 0.9375rem;
     letter-spacing: 0.02em;
@@ -175,7 +265,7 @@ body {
   .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 32px rgba(212, 168, 67, 0.5);
-    background: linear-gradient(135deg, #F2C464 0%, #D4A843 100%);
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
   }
 
   .btn-primary:active {
@@ -189,12 +279,12 @@ body {
     gap: 0.5rem;
     padding: 0.875rem 2rem;
     background: transparent;
-    color: var(--cream);
+    color: var(--text-1);
     font-weight: 600;
     font-size: 0.9375rem;
     letter-spacing: 0.02em;
     border-radius: 3px;
-    border: 1px solid rgba(245, 237, 216, 0.3);
+    border: 1px solid var(--border-lg);
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
@@ -202,8 +292,8 @@ body {
   }
 
   .btn-secondary:hover {
-    background: rgba(245, 237, 216, 0.06);
-    border-color: rgba(245, 237, 216, 0.5);
+    background: var(--gold-tint-08);
+    border-color: var(--border-2xl);
     transform: translateY(-2px);
   }
 
@@ -221,7 +311,7 @@ body {
   .section-divider {
     width: 60px;
     height: 3px;
-    background: linear-gradient(90deg, #D4A843, #C4623A);
+    background: linear-gradient(90deg, var(--gold), var(--orange));
     border-radius: 2px;
   }
 }

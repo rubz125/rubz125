@@ -18,8 +18,8 @@ export function CTABanner() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0603]/95 via-[#0A0603]/80 to-[#0A0603]/60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0603]/50 via-transparent to-[#0A0603]/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--base-95)] via-[var(--base-80)] to-[var(--base-60)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--base-50)] via-transparent to-[var(--base-50)]" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,7 +32,7 @@ export function CTABanner() {
             className="flex items-center gap-3 mb-6"
           >
             <div className="section-divider" />
-            <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">{t.cta_eyebrow}</span>
+            <span className="text-[var(--gold)] text-sm uppercase tracking-[0.2em] font-medium">{t.cta_eyebrow}</span>
           </motion.div>
 
           <motion.h2
@@ -40,7 +40,7 @@ export function CTABanner() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F5EDD8] leading-tight mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text-1)] leading-tight mb-6"
             style={{ fontFamily: 'var(--font-playfair)' }}
           >
             {t.cta_title1}
@@ -55,7 +55,7 @@ export function CTABanner() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-[#D6C9AD] text-lg leading-relaxed mb-10"
+            className="text-[var(--text-2)] text-lg leading-relaxed mb-10"
           >
             {t.cta_sub}
           </motion.p>
@@ -82,7 +82,7 @@ export function CTABanner() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap gap-4 text-xs text-[#7A6245]"
+            className="flex flex-wrap gap-4 text-xs text-[var(--text-4)]"
           >
             <span className="flex items-center gap-1.5"><span className="text-green-400">✓</span> Free cancellation 48hrs before</span>
             <span className="flex items-center gap-1.5"><span className="text-green-400">✓</span> No payment until confirmed</span>

@@ -12,7 +12,7 @@ export function FeaturedTours() {
   const { t } = useLang()
 
   return (
-    <section className="py-24 bg-[#0A0603]">
+    <section className="py-24 bg-[var(--bg-base)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <div>
@@ -24,14 +24,14 @@ export function FeaturedTours() {
               className="flex items-center gap-3 mb-4"
             >
               <div className="section-divider" />
-              <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">{t.featured_eyebrow}</span>
+              <span className="text-[var(--gold)] text-sm uppercase tracking-[0.2em] font-medium">{t.featured_eyebrow}</span>
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-4xl sm:text-5xl font-bold text-[#F5EDD8] leading-tight"
+              className="text-4xl sm:text-5xl font-bold text-[var(--text-1)] leading-tight"
               style={{ fontFamily: 'var(--font-playfair)' }}
             >
               {t.featured_title}
@@ -44,7 +44,7 @@ export function FeaturedTours() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Link href="/tours" className="flex items-center gap-2 text-[#D4A843] font-semibold hover:gap-3 transition-all duration-200">
+            <Link href="/tours" className="flex items-center gap-2 text-[var(--gold)] font-semibold hover:gap-3 transition-all duration-200">
               {t.featured_view_all}
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -72,9 +72,9 @@ export function FeaturedTours() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-14 text-center"
         >
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 rounded-sm bg-[#1C1108] border border-[#D4A843]/15">
-            <div className="text-[#D6C9AD] text-sm">
-              <span className="text-[#D4A843] font-semibold">{t.featured_undecided}</span>
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 rounded-sm bg-[var(--bg-surface)] border border-[var(--border-sm)]">
+            <div className="text-[var(--text-2)] text-sm">
+              <span className="text-[var(--gold)] font-semibold">{t.featured_undecided}</span>
               {t.featured_undecided_sub}
             </div>
             <a

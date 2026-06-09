@@ -32,17 +32,17 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-[#0D0906] border-t border-[#D4A843]/10">
+    <footer className="bg-[var(--bg-footer)] border-t border-[var(--border-sm)]">
       {/* WhatsApp CTA Bar */}
-      <div className="bg-gradient-to-r from-[#1C1108] via-[#2E1E0F] to-[#1C1108] border-b border-[#D4A843]/10">
+      <div className="bg-gradient-to-r from-[var(--bg-surface)] via-[var(--bg-surface-2)] to-[var(--bg-surface)] border-b border-[var(--border-sm)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-[#D6C9AD] text-sm">
-            {t.footer_questions} {t.footer_hours} <span className="text-[#D4A843] font-semibold">{t.footer_hours_days}</span>
+          <div className="text-[var(--text-2)] text-sm">
+            {t.footer_questions} {t.footer_hours} <span className="text-[var(--gold)] font-semibold">{t.footer_hours_days}</span>
           </div>
           <div className="flex items-center gap-3">
             <a
               href="tel:+972525217029"
-              className="flex items-center gap-2 px-4 py-2 rounded-sm border border-[#D4A843]/30 text-[#D4A843] text-sm hover:bg-[#D4A843]/10 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-sm border border-[var(--border-lg)] text-[var(--gold)] text-sm hover:bg-[var(--gold-tint-10)] transition-colors"
             >
               <Phone className="w-4 h-4" />
               +972-52-521-7029
@@ -68,21 +68,21 @@ export function Footer() {
             <Link href="/" className="inline-block mb-6">
               <EilatActionLogo width={150} />
             </Link>
-            <p className="text-[#7A6245] text-sm leading-relaxed max-w-sm mb-6">
+            <p className="text-[var(--text-4)] text-sm leading-relaxed max-w-sm mb-6">
               {t.footer_desc}
             </p>
             <div className="space-y-2 mb-6">
-              <div className="flex items-start gap-2 text-sm text-[#7A6245]">
-                <MapPin className="w-4 h-4 text-[#D4A843] mt-0.5 shrink-0" />
+              <div className="flex items-start gap-2 text-sm text-[var(--text-4)]">
+                <MapPin className="w-4 h-4 text-[var(--gold)] mt-0.5 shrink-0" />
                 <span>Eilat, Israel</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-[#7A6245]">
-                <Phone className="w-4 h-4 text-[#D4A843] shrink-0" />
-                <a href="tel:+972525217029" className="hover:text-[#D4A843] transition-colors">+972-52-521-7029</a>
+              <div className="flex items-center gap-2 text-sm text-[var(--text-4)]">
+                <Phone className="w-4 h-4 text-[var(--gold)] shrink-0" />
+                <a href="tel:+972525217029" className="hover:text-[var(--gold)] transition-colors">+972-52-521-7029</a>
               </div>
-              <div className="flex items-center gap-2 text-sm text-[#7A6245]">
-                <Mail className="w-4 h-4 text-[#D4A843] shrink-0" />
-                <a href="mailto:Eilataction@gmail.com" className="hover:text-[#D4A843] transition-colors">Eilataction@gmail.com</a>
+              <div className="flex items-center gap-2 text-sm text-[var(--text-4)]">
+                <Mail className="w-4 h-4 text-[var(--gold)] shrink-0" />
+                <a href="mailto:Eilataction@gmail.com" className="hover:text-[var(--gold)] transition-colors">Eilataction@gmail.com</a>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -104,7 +104,7 @@ export function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-sm border border-[#D4A843]/20 flex items-center justify-center text-[#7A6245] hover:text-[#D4A843] hover:border-[#D4A843]/50 hover:bg-[#D4A843]/05 transition-all duration-200"
+                  className="w-9 h-9 rounded-sm border border-[var(--border-md)] flex items-center justify-center text-[var(--text-4)] hover:text-[var(--gold)] hover:border-[var(--border-2xl)] hover:bg-[var(--gold-tint-05)] transition-all duration-200"
                 >
                   {svg}
                 </a>
@@ -123,11 +123,11 @@ export function Footer() {
 
           {/* Tours */}
           <div>
-            <h3 className="text-[#F5EDD8] font-semibold text-sm uppercase tracking-[0.15em] mb-5">{t.footer_tours}</h3>
+            <h3 className="text-[var(--text-1)] font-semibold text-sm uppercase tracking-[0.15em] mb-5">{t.footer_tours}</h3>
             <ul className="space-y-2.5">
               {tourLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-[#7A6245] text-sm hover:text-[#D4A843] transition-colors duration-200">
+                  <Link href={link.href} className="text-[var(--text-4)] text-sm hover:text-[var(--gold)] transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -137,11 +137,11 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-[#F5EDD8] font-semibold text-sm uppercase tracking-[0.15em] mb-5">{t.footer_company}</h3>
+            <h3 className="text-[var(--text-1)] font-semibold text-sm uppercase tracking-[0.15em] mb-5">{t.footer_company}</h3>
             <ul className="space-y-2.5">
               {companyLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-[#7A6245] text-sm hover:text-[#D4A843] transition-colors duration-200">
+                  <Link href={link.href} className="text-[var(--text-4)] text-sm hover:text-[var(--gold)] transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -151,11 +151,11 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="text-[#F5EDD8] font-semibold text-sm uppercase tracking-[0.15em] mb-5">{t.footer_support}</h3>
+            <h3 className="text-[var(--text-1)] font-semibold text-sm uppercase tracking-[0.15em] mb-5">{t.footer_support}</h3>
             <ul className="space-y-2.5">
               {supportLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-[#7A6245] text-sm hover:text-[#D4A843] transition-colors duration-200">
+                  <Link href={link.href} className="text-[var(--text-4)] text-sm hover:text-[var(--gold)] transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -166,19 +166,19 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/5 bg-[#080503]">
+      <div className="border-t border-white/5 bg-[var(--bg-bottom)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[#4A3B26] text-xs">
+          <p className="text-[var(--text-5)] text-xs">
             © {new Date().getFullYear()} Eilat Action. {t.footer_rights}
           </p>
           <div className="flex items-center gap-4">
             {[t.footer_privacy, t.footer_terms].map((label) => (
-              <Link key={label} href="#" className="text-[#4A3B26] text-xs hover:text-[#7A6245] transition-colors">
+              <Link key={label} href="#" className="text-[var(--text-5)] text-xs hover:text-[var(--text-4)] transition-colors">
                 {label}
               </Link>
             ))}
           </div>
-          <div className="flex items-center gap-2 text-[#4A3B26] text-xs">
+          <div className="flex items-center gap-2 text-[var(--text-5)] text-xs">
             <span>🇮🇱</span>
             <span>{t.footer_licensed}</span>
           </div>

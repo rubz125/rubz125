@@ -31,9 +31,9 @@ export function ExperienceSection() {
   const currentPillars = pillars[lang]
 
   return (
-    <section className="py-24 bg-[#1C1108] relative overflow-hidden">
+    <section className="py-24 bg-[var(--bg-surface)] relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'radial-gradient(circle at 1px 1px, #D4A843 1px, transparent 0)',
+        backgroundImage: 'radial-gradient(circle at 1px 1px, var(--gold) 1px, transparent 0)',
         backgroundSize: '40px 40px',
       }} />
 
@@ -54,20 +54,20 @@ export function ExperienceSection() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1C1108]/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface-80)] via-transparent to-transparent" />
             </div>
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="absolute -bottom-6 -right-6 bg-[#0A0603] border border-[#D4A843]/20 rounded-sm p-5 shadow-2xl"
+              className="absolute -bottom-6 -right-6 bg-[var(--bg-base)] border border-[var(--border-md)] rounded-sm p-5 shadow-2xl"
             >
-              <div className="text-[#D4A843] font-bold text-3xl leading-none" style={{ fontFamily: 'var(--font-playfair)' }}>847+</div>
-              <div className="text-[#F5EDD8] text-sm font-medium mt-1">{t.hero_reviews}</div>
+              <div className="text-[var(--gold)] font-bold text-3xl leading-none" style={{ fontFamily: 'var(--font-playfair)' }}>847+</div>
+              <div className="text-[var(--text-1)] text-sm font-medium mt-1">{t.hero_reviews}</div>
               <div className="flex mt-2">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-[#D4A843] text-sm">★</span>
+                  <span key={i} className="text-[var(--gold)] text-sm">★</span>
                 ))}
               </div>
             </motion.div>
@@ -76,10 +76,10 @@ export function ExperienceSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="absolute -top-4 -left-4 bg-gradient-to-br from-[#D4A843] to-[#C4623A] rounded-sm p-4 shadow-xl shadow-[#D4A843]/20"
+              className="absolute -top-4 -left-4 bg-gradient-to-br from-[var(--gold)] to-[var(--orange)] rounded-sm p-4 shadow-xl shadow-[var(--gold)]/20"
             >
-              <div className="text-[#0A0603] font-bold text-lg leading-none">15</div>
-              <div className="text-[#0A0603]/70 text-xs font-medium">{t.hero_experience}</div>
+              <div className="text-[var(--bg-base)] font-bold text-lg leading-none">15</div>
+              <div className="text-[var(--bg-base)]/70 text-xs font-medium">{t.hero_experience}</div>
             </motion.div>
           </motion.div>
 
@@ -92,7 +92,7 @@ export function ExperienceSection() {
               className="flex items-center gap-3 mb-5"
             >
               <div className="section-divider" />
-              <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">{t.experience_eyebrow}</span>
+              <span className="text-[var(--gold)] text-sm uppercase tracking-[0.2em] font-medium">{t.experience_eyebrow}</span>
             </motion.div>
 
             <motion.h2
@@ -100,7 +100,7 @@ export function ExperienceSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-4xl sm:text-5xl font-bold text-[#F5EDD8] leading-tight mb-6"
+              className="text-4xl sm:text-5xl font-bold text-[var(--text-1)] leading-tight mb-6"
               style={{ fontFamily: 'var(--font-playfair)' }}
             >
               {t.experience_title}
@@ -113,7 +113,7 @@ export function ExperienceSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-[#A08860] text-base leading-relaxed mb-10"
+              className="text-[var(--text-3)] text-base leading-relaxed mb-10"
             >
               {t.experience_intro}
             </motion.p>
@@ -130,15 +130,15 @@ export function ExperienceSection() {
                     transition={{ duration: 0.6, delay: 0.1 * i }}
                     className="flex gap-4"
                   >
-                    <div className="shrink-0 w-10 h-10 rounded-sm bg-[#D4A843]/10 border border-[#D4A843]/20 flex items-center justify-center mt-0.5">
-                      <Icon className="w-5 h-5 text-[#D4A843]" />
+                    <div className="shrink-0 w-10 h-10 rounded-sm bg-[var(--gold-tint-10)] border border-[var(--border-md)] flex items-center justify-center mt-0.5">
+                      <Icon className="w-5 h-5 text-[var(--gold)]" />
                     </div>
                     <div>
                       <div className="flex items-baseline gap-3 mb-1">
-                        <h3 className="text-[#F5EDD8] font-semibold text-base">{pillar.title}</h3>
-                        <span className="text-[#D4A843] text-xs font-medium">{pillar.stat}</span>
+                        <h3 className="text-[var(--text-1)] font-semibold text-base">{pillar.title}</h3>
+                        <span className="text-[var(--gold)] text-xs font-medium">{pillar.stat}</span>
                       </div>
-                      <p className="text-[#7A6245] text-sm leading-relaxed">{pillar.description}</p>
+                      <p className="text-[var(--text-4)] text-sm leading-relaxed">{pillar.description}</p>
                     </div>
                   </motion.div>
                 )

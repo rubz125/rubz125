@@ -6,13 +6,13 @@ export default function NotFound() {
   return (
     <>
       <Navbar />
-      <main className="min-h-[70vh] flex items-center justify-center bg-[#0A0603] pt-20">
+      <main className="min-h-[70vh] flex items-center justify-center bg-[var(--bg-base)] pt-20">
         <div className="text-center px-4">
-          <div className="text-[#D4A843] text-8xl font-bold mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>404</div>
-          <h1 className="text-3xl font-bold text-[#F5EDD8] mb-3" style={{ fontFamily: 'var(--font-playfair)' }}>
+          <div className="text-[var(--gold)] text-8xl font-bold mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>404</div>
+          <h1 className="text-3xl font-bold text-[var(--text-1)] mb-3" style={{ fontFamily: 'var(--font-playfair)' }}>
             Lost in the Desert?
           </h1>
-          <p className="text-[#7A6245] mb-8 max-w-sm mx-auto">
+          <p className="text-[var(--text-4)] mb-8 max-w-sm mx-auto">
             This trail doesn't exist. Let's get you back to the main road.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

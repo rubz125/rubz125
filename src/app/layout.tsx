@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { LangProvider } from '@/lib/LangContext'
+import { ThemeProvider } from '@/lib/ThemeContext'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -92,7 +93,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" data-theme="dark" className={`${inter.variable} ${playfair.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
@@ -135,8 +136,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className={`${inter.className} bg-[#0A0603] text-[#F5EDD8] antialiased`}>
-        <LangProvider>{children}</LangProvider>
+      <body className={`${inter.className} antialiased`}>
+        <script dangerouslySetInnerHTML={{ __html: `
+  (function(){
+    try {
+      var t = localStorage.getItem('theme') || 'dark';
+      var resolved = t;
+      if (t === 'system') {
+        resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', resolved);
+    } catch(e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })()
+` }} />
+        <ThemeProvider>
+          <LangProvider>{children}</LangProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -38,18 +38,18 @@ function MarqueeItem({ icon, value, label, sub }: (typeof stats)[0]) {
     <div className="flex items-center gap-4 px-8 shrink-0">
       <span className="text-2xl">{icon}</span>
       <div>
-        <div className="text-[#D4A843] font-bold text-xl leading-none">{value}</div>
-        <div className="text-[#F5EDD8] text-sm font-medium leading-tight mt-0.5">{label}</div>
-        <div className="text-[#7A6245] text-xs">{sub}</div>
+        <div className="text-[var(--gold)] font-bold text-xl leading-none">{value}</div>
+        <div className="text-[var(--text-1)] text-sm font-medium leading-tight mt-0.5">{label}</div>
+        <div className="text-[var(--text-4)] text-xs">{sub}</div>
       </div>
-      <div className="w-px h-8 bg-[#D4A843]/20 ml-4" />
+      <div className="w-px h-8 bg-[var(--border-md)] ml-4" />
     </div>
   )
 }
 
 export function StatsBar() {
   return (
-    <section className="bg-[#1C1108] border-y border-[#D4A843]/15 overflow-hidden py-6">
+    <section className="bg-[var(--bg-surface)] border-y border-[var(--border-sm)] overflow-hidden py-6">
       {/* Marquee */}
       <div
         className="flex"

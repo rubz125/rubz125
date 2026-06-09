@@ -58,10 +58,10 @@ export function HeroSection() {
         >
           <div className="flex">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-4 h-4 text-[#D4A843] fill-[#D4A843]" />
+              <Star key={i} className="w-4 h-4 text-[var(--gold)] fill-[var(--gold)]" />
             ))}
           </div>
-          <span className="text-[#D4A843] text-sm font-medium tracking-[0.2em] uppercase">{t.hero_eyebrow}</span>
+          <span className="text-[var(--gold)] text-sm font-medium tracking-[0.2em] uppercase">{t.hero_eyebrow}</span>
         </motion.div>
 
         <motion.h1
@@ -71,16 +71,16 @@ export function HeroSection() {
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight mb-6"
           style={{ fontFamily: 'var(--font-playfair)' }}
         >
-          <span className="text-[#F5EDD8] block">{t.hero_line1}</span>
+          <span className="text-[var(--text-1)] block">{t.hero_line1}</span>
           <span className="text-gradient-gold block">{t.hero_line2}</span>
-          <span className="text-[#F5EDD8] block">{t.hero_line3}</span>
+          <span className="text-[var(--text-1)] block">{t.hero_line3}</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="text-[#D6C9AD] text-lg sm:text-xl max-w-2xl leading-relaxed mb-10"
+          className="text-[var(--text-2)] text-lg sm:text-xl max-w-2xl leading-relaxed mb-10"
         >
           {t.hero_sub}
         </motion.p>
@@ -93,7 +93,7 @@ export function HeroSection() {
         >
           <Link href="/book" className="btn-primary text-base px-8 py-4">
             {t.hero_cta}
-            <span className="text-[#0A0603]/60 font-normal"> {t.hero_cta_from}</span>
+            <span className="text-[var(--bg-base)]/60 font-normal"> {t.hero_cta_from}</span>
           </Link>
           <Link href="/tours" className="btn-secondary text-base px-8 py-4">
             <Play className="w-4 h-4" />
@@ -114,8 +114,8 @@ export function HeroSection() {
             { number: '3 langs', label: t.hero_languages },
           ].map(({ number, label }) => (
             <div key={label} className="text-center">
-              <div className="text-[#D4A843] font-bold text-xl sm:text-2xl leading-none">{number}</div>
-              <div className="text-[#7A6245] text-xs uppercase tracking-[0.15em] mt-1">{label}</div>
+              <div className="text-[var(--gold)] font-bold text-xl sm:text-2xl leading-none">{number}</div>
+              <div className="text-[var(--text-4)] text-xs uppercase tracking-[0.15em] mt-1">{label}</div>
             </div>
           ))}
         </motion.div>
@@ -126,7 +126,7 @@ export function HeroSection() {
           <button
             key={i}
             onClick={() => setCurrentImg(i)}
-            className={`transition-all duration-300 rounded-full ${i === currentImg ? 'w-8 h-1.5 bg-[#D4A843]' : 'w-1.5 h-1.5 bg-white/30 hover:bg-white/60'}`}
+            className={`transition-all duration-300 rounded-full ${i === currentImg ? 'w-8 h-1.5 bg-[var(--gold)]' : 'w-1.5 h-1.5 bg-white/30 hover:bg-white/60'}`}
             aria-label={`Slide ${i + 1}`}
           />
         ))}
@@ -137,8 +137,8 @@ export function HeroSection() {
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <span className="text-[#7A6245] text-[10px] uppercase tracking-[0.3em]">Scroll</span>
-        <ChevronDown className="w-5 h-5 text-[#D4A843]" />
+        <span className="text-[var(--text-4)] text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+        <ChevronDown className="w-5 h-5 text-[var(--gold)]" />
       </motion.div>
     </section>
   )

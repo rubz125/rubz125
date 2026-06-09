@@ -40,15 +40,15 @@ const faqData: Record<Lang, { q: string; a: string }[]> = {
 
 function FAQItem({ q, a, isOpen, onClick }: { q: string; a: string; isOpen: boolean; onClick: () => void }) {
   return (
-    <div className="border-b border-[#D4A843]/10 last:border-0">
+    <div className="border-b border-[var(--border-sm)] last:border-0">
       <button
         onClick={onClick}
-        className="w-full flex items-start justify-between gap-4 py-5 text-left hover:text-[#D4A843] transition-colors duration-200"
+        className="w-full flex items-start justify-between gap-4 py-5 text-left hover:text-[var(--gold)] transition-colors duration-200"
         aria-expanded={isOpen}
       >
-        <span className={`font-medium text-base transition-colors duration-200 ${isOpen ? 'text-[#D4A843]' : 'text-[#F5EDD8]'}`}>{q}</span>
-        <span className="shrink-0 w-6 h-6 rounded-sm border border-[#D4A843]/30 flex items-center justify-center mt-0.5">
-          {isOpen ? <Minus className="w-3.5 h-3.5 text-[#D4A843]" /> : <Plus className="w-3.5 h-3.5 text-[#D4A843]" />}
+        <span className={`font-medium text-base transition-colors duration-200 ${isOpen ? 'text-[var(--gold)]' : 'text-[var(--text-1)]'}`}>{q}</span>
+        <span className="shrink-0 w-6 h-6 rounded-sm border border-[var(--border-lg)] flex items-center justify-center mt-0.5">
+          {isOpen ? <Minus className="w-3.5 h-3.5 text-[var(--gold)]" /> : <Plus className="w-3.5 h-3.5 text-[var(--gold)]" />}
         </span>
       </button>
       <AnimatePresence initial={false}>
@@ -60,7 +60,7 @@ function FAQItem({ q, a, isOpen, onClick }: { q: string; a: string; isOpen: bool
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <p className="text-[#A08860] text-sm leading-relaxed pb-5 pr-10">{a}</p>
+            <p className="text-[var(--text-3)] text-sm leading-relaxed pb-5 pr-10">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -74,7 +74,7 @@ export function FAQ() {
   const faqs = faqData[lang]
 
   return (
-    <section id="faq" className="py-24 bg-[#0A0603]">
+    <section id="faq" className="py-24 bg-[var(--bg-base)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div className="lg:sticky lg:top-28">
@@ -86,7 +86,7 @@ export function FAQ() {
               className="flex items-center gap-3 mb-5"
             >
               <div className="section-divider" />
-              <span className="text-[#D4A843] text-sm uppercase tracking-[0.2em] font-medium">{t.faq_eyebrow}</span>
+              <span className="text-[var(--gold)] text-sm uppercase tracking-[0.2em] font-medium">{t.faq_eyebrow}</span>
             </motion.div>
 
             <motion.h2
@@ -94,7 +94,7 @@ export function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-4xl sm:text-5xl font-bold text-[#F5EDD8] leading-tight mb-6"
+              className="text-4xl sm:text-5xl font-bold text-[var(--text-1)] leading-tight mb-6"
               style={{ fontFamily: 'var(--font-playfair)' }}
             >
               {t.faq_title}
@@ -107,7 +107,7 @@ export function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-[#7A6245] text-base leading-relaxed mb-8"
+              className="text-[var(--text-4)] text-base leading-relaxed mb-8"
             >
               {t.faq_sub}
             </motion.p>
@@ -130,7 +130,7 @@ export function FAQ() {
               </a>
               <a
                 href="mailto:Eilataction@gmail.com"
-                className="flex items-center gap-2 w-full px-5 py-3.5 bg-[#D4A843]/08 border border-[#D4A843]/20 text-[#D4A843] text-sm font-medium rounded-sm hover:bg-[#D4A843]/15 transition-colors justify-center"
+                className="flex items-center gap-2 w-full px-5 py-3.5 bg-[var(--gold-tint-08)] border border-[var(--border-md)] text-[var(--gold)] text-sm font-medium rounded-sm hover:bg-[var(--gold-tint-15)] transition-colors justify-center"
               >
                 {t.faq_email}
               </a>
@@ -142,7 +142,7 @@ export function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="bg-[#1C1108] border border-[#D4A843]/10 rounded-sm px-6 py-2"
+            className="bg-[var(--bg-surface)] border border-[var(--border-sm)] rounded-sm px-6 py-2"
           >
             {faqs.map((faq, i) => (
               <FAQItem
