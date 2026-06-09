@@ -11,6 +11,7 @@ export function Footer() {
     { label: t.footer_tour1, href: '/tours/decouverte-des-monts-deilat' },
     { label: t.footer_tour2, href: '/tours/a-day-of-adventures' },
     { label: t.footer_tour3, href: '/tours/emotions-et-grands-frissons' },
+    { label: t.footer_tour4, href: '/tours/petra-jordanie' },
   ]
 
   const companyLinks = [

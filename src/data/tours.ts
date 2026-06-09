@@ -228,6 +228,71 @@ export const tours: Tour[] = [
     badge: 'Sunset', featured: true,
     price: 195, currency: '₪', duration: '4h', region: 'Red Canyon · Eilat Mountains',
   },
+
+  // ─── 4. Petra — The Rose City ───────────────────────────────────────────────
+  {
+    slug: 'petra-jordanie',
+    category: 'Full day', categoryFr: 'Journée complète', categoryHe: 'יום שלם',
+    title: 'Petra — The Rose City of Jordan',
+    titleFr: 'Pétra — La Cité Rose de Jordanie',
+    titleHe: 'פטרה — העיר הורודה של ירדן',
+    quote: 'A rose-red city half as old as time.',
+    quoteAuthor: 'John William Burgon',
+
+    description: `Just one hour from Eilat, across the Jordanian border, lies one of the most extraordinary archaeological sites on earth. Petra — the "Rose City" of the Nabataeans — is carved entirely from rose-red sandstone, hidden in a labyrinth of canyons, and designated a UNESCO World Heritage Site.\n\nWe cross the Yitzhak Rabin border together, then drive through the southern Jordanian desert to reach the Petra visitor centre. We enter through the Siq — a spectacular 1.2 km natural gorge with towering 200-metre walls — before the moment that takes every visitor's breath away: the sudden reveal of Al-Khazneh, the Treasury, glowing pink in the morning light. We then explore the ancient Nabataean city at our own pace — the Street of Facades, the Roman amphitheatre, the Royal Tombs — while your guide brings 2,000 years of history to life. A journey across borders, through time.`,
+
+    descriptionFr: `À une heure à peine d'Eilat, de l'autre côté de la frontière jordanienne, se trouve l'un des sites archéologiques les plus extraordinaires de la planète. Pétra — la "Cité Rose" des Nabatéens — est entièrement taillée dans le grès rose-rouge, cachée dans un labyrinthe de canyons, et classée au patrimoine mondial de l'UNESCO.\n\nNous traversons ensemble la frontière Yitzhak Rabin, puis traversons le désert du sud de la Jordanie pour rejoindre le centre des visiteurs de Pétra. Nous entrons par le Siq — un spectaculaire canyon naturel de 1,2 km aux parois de 200 mètres — avant le moment qui coupe le souffle à chaque visiteur : la révélation soudaine d'Al-Khazneh, le Trésor, qui rayonne rose dans la lumière du matin. Nous explorons ensuite l'antique cité nabatéenne à notre rythme — la Rue des Façades, le théâtre romain, les Tombeaux Royaux — tandis que votre guide fait revivre 2 000 ans d'histoire. Un voyage qui franchit les frontières et le temps.`,
+
+    descriptionHe: `רק שעה אחת מאילת, מעבר לגבול הירדני, נמצא אחד מהאתרים הארכיאולוגיים המרהיבים ביותר על פני האדמה. פטרה — "העיר הורודה" של הנבטים — חצובה כולה מאבן חולית ורודה-אדומה, מוסתרת במבוך של קניונים, ומוכרזת כאתר מורשת עולמית של יונסקו.\n\nאנחנו חוצים יחד את גבול יצחק רבין, ואז נוסעים דרך מדבר דרום ירדן להגיע למרכז המבקרים של פטרה. אנחנו נכנסים דרך הסיק — ערוץ טבעי מרהיב באורך 1.2 ק"מ עם קירות של 200 מטר — לפני הרגע שגורם לכל מבקר לעצור נשימה: הגילוי הפתאומי של אל-ח'זנה, האוצר, המנצנץ בוורוד באור הבוקר. אנחנו חוקרים את העיר הנבטית העתיקה בקצב שלנו — רחוב החזיתות, האמפיתיאטרון הרומי, הקברות המלכותיים — בזמן שהמדריך שלך מחיה 2,000 שנות היסטוריה. מסע שחוצה גבולות ועובר בזמן.`,
+
+    shortDescription: 'A day trip from Eilat to Petra — through the Siq gorge to the famous Treasury, guided by an expert in the rose-red Nabataean city.',
+    shortDescriptionFr: "Excursion d'une journée d'Eilat à Pétra — le Siq, le Trésor et les tombeaux royaux de la cité nabatéenne rose guidée par un expert.",
+    shortDescriptionHe: "טיול יום מאילת לפטרה — דרך הסיק לאוצר המפורסם, עם מדריך מומחה בעיר הנבטית הורודה.",
+
+    highlights: ['Yitzhak Rabin border crossing', 'The Siq — 1.2 km natural gorge', 'Al-Khazneh — The Treasury', 'Street of Facades & Roman Theatre', 'Royal Tombs of the Nabataeans'],
+    highlightsFr: ["Passage de la frontière Yitzhak Rabin", "Le Siq — canyon naturel de 1,2 km", "Al-Khazneh — Le Trésor", "Rue des Façades & Théâtre romain", "Tombeaux Royaux des Nabatéens"],
+    highlightsHe: ["מעבר גבול יצחק רבין", "הסיק — ערוץ טבעי 1.2 ק\"מ", "אל-ח'זנה — האוצר", "רחוב החזיתות והתיאטרון הרומי", "הקברות המלכותיים של הנבטים"],
+
+    packages: [
+      {
+        name: 'Petra Classic', nameFr: 'Pétra Classique', nameHe: 'פטרה קלאסי',
+        price: 490, duration: '10–11h',
+        entryIncluded: true,
+        description: 'Border crossing + guided Petra visit: the Siq, Al-Khazneh Treasury, Street of Facades, Roman Theatre. Lunch at a local Jordanian restaurant. Return to Eilat by evening.',
+        descriptionFr: "Passage de frontière + visite guidée de Pétra : le Siq, le Trésor Al-Khazneh, Rue des Façades, Théâtre romain. Déjeuner dans un restaurant jordanien local. Retour à Eilat en soirée.",
+        descriptionHe: "מעבר גבול + ביקור מודרך בפטרה: הסיק, אוצר אל-ח'זנה, רחוב החזיתות, התיאטרון הרומי. ארוחת צהריים במסעדה ירדנית מקומית. חזרה לאילת בערב.",
+      },
+      {
+        name: 'Petra Full Discovery', nameFr: 'Pétra Découverte Complète', nameHe: 'פטרה גילוי מלא',
+        price: 590, duration: '12–13h',
+        entryIncluded: true, mealIncluded: true,
+        description: 'Everything in Classic + the Monastery (Al-Deir) — a 45-minute climb rewarded with Petra\'s most impressive monument. The High Place of Sacrifice. Extended free time to explore. Dinner included.',
+        descriptionFr: "Tout du Classique + le Monastère (Al-Deir) — une montée de 45 minutes récompensée par le monument le plus impressionnant de Pétra. Le Haut Lieu du Sacrifice. Temps libre prolongé pour explorer. Dîner inclus.",
+        descriptionHe: "כל מה שבקלאסי + המנזר (אל-דיר) — עלייה של 45 דקות המתוגמלת במונומנט המרהיב ביותר של פטרה. מקום הקרבן הגבוה. זמן חופשי מורחב לחקירה. ארוחת ערב כלולה.",
+      },
+    ],
+
+    includes: ['Border crossing assistance', 'Licensed Jordanian guide', 'Jordan entry ticket included', 'Pick-up and drop-off at hotel', 'Lunch included', 'Water & snacks'],
+    includesFr: ["Assistance au passage de frontière", "Guide jordanien agréé", "Billet d'entrée Jordanie inclus", "Navette aller-retour depuis l'hôtel", "Déjeuner inclus", "Eau et collations"],
+    includesHe: ["סיוע במעבר גבול", "מדריך ירדני מורשה", "כרטיס כניסה לירדן כלול", "הסעה הלוך ושוב מהמלון", "ארוחת צהריים כלולה", "מים וחטיפים"],
+
+    whatToBring: ['Passport (mandatory)', 'Comfortable walking shoes', 'Hat & sunscreen', 'Camera', 'Light jacket (evenings)'],
+    whatToBringFr: ['Passeport (obligatoire)', 'Chaussures de marche confortables', 'Chapeau et crème solaire', 'Appareil photo', 'Veste légère (soirées)'],
+    whatToBringHe: ['דרכון (חובה)', 'נעלי הליכה נוחות', 'כובע וקרם הגנה', 'מצלמה', 'ז׳קט קל (לערב)'],
+
+    image: 'https://images.unsplash.com/photo-1579606032821-4e6161c81bd3?w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1579606032821-4e6161c81bd3?w=800&q=80',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80',
+      'https://images.unsplash.com/photo-1534685785745-60a2cea0ec34?w=800&q=80',
+    ],
+    difficulty: 'Moderate',
+    rating: 4.9, reviewCount: 156,
+    groupSize: '2–8', languages: ['English', 'French', 'Hebrew'],
+    departure: 'Daily, Year-Round',
+    badge: 'Jordan', featured: true,
+    price: 490, currency: '₪', duration: '10–13h', region: 'Petra, Jordan',
+  },
 ]
 
 export const getFeaturedTours = () => tours.filter((t) => t.featured)
