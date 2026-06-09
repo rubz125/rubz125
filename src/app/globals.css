@@ -177,6 +177,14 @@ body {
     background-clip: text;
   }
 
+  /* Always bright gold — for text rendered over dark image overlays */
+  .text-gradient-gold-bright {
+    background: linear-gradient(135deg, #F2C464 0%, #D4A843 50%, #A87828 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .text-gradient-sunset {
     background: linear-gradient(135deg, #F2C464 0%, #E07850 60%, #C4623A 100%);
     -webkit-background-clip: text;
@@ -295,6 +303,18 @@ body {
     background: var(--gold-tint-08);
     border-color: var(--border-2xl);
     transform: translateY(-2px);
+  }
+
+  /* For btn-secondary placed over dark image backgrounds */
+  .btn-secondary-bright {
+    color: rgba(255,255,255,0.90) !important;
+    border-color: rgba(255,255,255,0.30) !important;
+  }
+
+  .btn-secondary-bright:hover {
+    color: white !important;
+    border-color: rgba(255,255,255,0.60) !important;
+    background: rgba(255,255,255,0.08) !important;
   }
 
   /* Card hover effects */
