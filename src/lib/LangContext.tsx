@@ -23,6 +23,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
     if (saved && (saved === 'en' || saved === 'fr' || saved === 'he')) {
       setLangState(saved)
       document.documentElement.setAttribute('data-lang', saved)
+      document.documentElement.setAttribute('dir', saved === 'he' ? 'rtl' : 'ltr')
     }
   }, [])
 
@@ -30,6 +31,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
     setLangState(l)
     localStorage.setItem('lang', l)
     document.documentElement.setAttribute('data-lang', l)
+    document.documentElement.setAttribute('dir', l === 'he' ? 'rtl' : 'ltr')
   }
 
   return (
