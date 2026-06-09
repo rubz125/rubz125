@@ -77,7 +77,7 @@ export function Navbar() {
               {navLinks.map((link) =>
                 link.children ? (
                   <div key={link.label} className="relative" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
-                    <button className="flex items-center gap-1 text-[var(--text-2)] hover:text-[var(--gold)] transition-colors duration-200 text-sm font-medium tracking-wide">
+                    <button className={`flex items-center gap-1 transition-colors duration-200 text-sm font-medium tracking-wide hover:text-[var(--sand-light)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
                       {link.label}
                       <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
                     </button>
@@ -100,7 +100,7 @@ export function Navbar() {
                     </AnimatePresence>
                   </div>
                 ) : (
-                  <Link key={link.label} href={link.href} className="text-[var(--text-2)] hover:text-[var(--gold)] transition-colors duration-200 text-sm font-medium tracking-wide">
+                  <Link key={link.label} href={link.href} className={`transition-colors duration-200 text-sm font-medium tracking-wide hover:text-[var(--sand-light)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
                     {link.label}
                   </Link>
                 )
@@ -111,7 +111,7 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-4">
               {/* Language switcher */}
               <div className="relative" onMouseEnter={() => setLangOpen(true)} onMouseLeave={() => setLangOpen(false)}>
-                <button className="flex items-center gap-1.5 text-[var(--text-2)] hover:text-[var(--gold)] transition-colors text-sm font-medium px-2 py-1 rounded-sm border border-transparent hover:border-[var(--border-lg)]">
+                <button className={`flex items-center gap-1.5 transition-colors text-sm font-medium px-2 py-1 rounded-sm border border-transparent hover:text-[var(--sand-light)] hover:border-[var(--border-lg)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
                   {LANGS.find(l => l.code === lang)?.flag} {LANGS.find(l => l.code === lang)?.label}
                   <ChevronDown className="w-3 h-3" />
                 </button>
@@ -135,14 +135,14 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
-              <a href="tel:+972525217029" className="flex items-center gap-2 text-[var(--text-2)] hover:text-[var(--gold)] transition-colors duration-200 text-sm">
+              <a href="tel:+972525217029" className={`flex items-center gap-2 transition-colors duration-200 text-sm hover:text-[var(--sand-light)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
                 <Phone className="w-4 h-4" />
                 <span>+972-52-521-7029</span>
               </a>
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
-                className="w-9 h-9 flex items-center justify-center rounded-sm border border-[var(--border-sm)] text-[var(--text-4)] hover:text-[var(--gold)] hover:border-[var(--border-md)] transition-colors duration-200"
+                className={`w-9 h-9 flex items-center justify-center rounded-sm border transition-colors duration-200 hover:text-[var(--sand-light)] ${scrolled ? 'border-[var(--border-sm)] text-[var(--text-4)] hover:border-[var(--border-md)]' : 'border-white/25 text-white/60 hover:border-white/50'}`}
               >
                 {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
@@ -150,7 +150,7 @@ export function Navbar() {
             </div>
 
             {/* Mobile button */}
-            <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden p-2 text-[var(--text-2)] hover:text-[var(--gold)] transition-colors" aria-label="Toggle menu">
+            <button onClick={() => setMobileOpen(!mobileOpen)} className={`lg:hidden p-2 transition-colors hover:text-[var(--sand-light)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`} aria-label="Toggle menu">
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
