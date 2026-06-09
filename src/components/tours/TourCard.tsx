@@ -22,6 +22,7 @@ export function TourCard({ tour, featured = false }: TourCardProps) {
   const perPersonLabel = lang === 'fr' ? 'par personne' : lang === 'he' ? 'לאדם' : 'per person'
   const peopleLabel = lang === 'fr' ? 'personnes' : lang === 'he' ? 'אנשים' : 'people'
   const contactLabel = lang === 'fr' ? 'Nous consulter' : lang === 'he' ? 'צרו קשר' : 'Contact us'
+  const upTo8Label = lang === 'fr' ? "jusqu'à 8 pers." : lang === 'he' ? 'עד 8 אנשים' : 'up to 8 people'
 
   return (
     <Link
@@ -90,6 +91,12 @@ export function TourCard({ tour, featured = false }: TourCardProps) {
           <div>
             {tour.priceOnRequest ? (
               <div className="text-[#D4A843] font-bold text-xl leading-none">{contactLabel}</div>
+            ) : tour.pricePerGroup ? (
+              <>
+                <span className="text-[#7A6245] text-xs">{fromLabel}</span>
+                <div className="text-[#D4A843] font-bold text-xl leading-none">{formatPrice(tour.price, tour.currency)}</div>
+                <span className="text-[#7A6245] text-xs">{upTo8Label}</span>
+              </>
             ) : (
               <>
                 <span className="text-[#7A6245] text-xs">{fromLabel}</span>

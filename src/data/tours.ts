@@ -2,6 +2,7 @@ export interface TourPackage {
   name: string; nameFr: string; nameHe: string
   price: number
   priceOnRequest?: boolean
+  pricePerGroup?: boolean
   duration: string
   description: string; descriptionFr: string; descriptionHe: string
   mealIncluded?: boolean
@@ -33,6 +34,7 @@ export interface Tour {
   badge?: string
   featured: boolean
   priceOnRequest?: boolean
+  pricePerGroup?: boolean
   // computed (lowest package price, for card)
   price: number
   currency: string
@@ -295,6 +297,98 @@ export const tours: Tour[] = [
     badge: 'Jordan', featured: true,
     priceOnRequest: true,
     price: 0, currency: '₪', duration: '10–13h', region: 'Petra, Jordan',
+  },
+
+  // ─── 5. Sailing & Desert Combo ──────────────────────────────────────────────
+  {
+    slug: 'combo-voilier-jeep',
+    category: 'Private combo', categoryFr: 'Combo privé', categoryHe: 'קומבו פרטי',
+    title: 'Sailing & Desert — The Private Combo',
+    titleFr: 'Voilier & Désert — Le Combo Privé',
+    titleHe: 'שייט ומדבר — הקומבו הפרטי',
+    quote: 'The sea, once it casts its spell, holds one in its net of wonder forever.',
+    quoteAuthor: 'Jacques Cousteau',
+
+    description: `Two worlds, one unforgettable day. Eilat sits at a unique crossroads — the desert meets the sea. We've combined our two signature experiences into one private adventure for your group: a sailing trip on the Red Sea followed by a sunset jeep tour through the Eilat Mountains.\n\nOn board your private sailing yacht, glide over the crystal-clear waters of the Gulf of Aqaba — one of the world's richest coral ecosystems. Swim, float, and let the silence of the open sea wash over you, with cold drinks, seasonal fruits and music on deck. Then as the heat of the day softens, we head into the desert — campfire, Bedouin tea, and the stars of Eilat above you.`,
+
+    descriptionFr: `Deux mondes, une journée inoubliable. Eilat se trouve à un carrefour unique — le désert rencontre la mer. Nous avons réuni nos deux expériences signature en une seule aventure privée pour votre groupe : une sortie en voilier sur la mer Rouge suivie d'un safari jeep au coucher du soleil dans les monts d'Eilat.\n\nÀ bord de votre voilier privatif, glissez sur les eaux cristallines du golfe d'Aqaba — l'un des écosystèmes coralliens les plus riches du monde. Nagez, flottez et laissez le silence de la mer ouverte vous envahir, avec boissons fraîches, fruits de saison et musique sur le pont. Puis, quand la chaleur du jour s'adoucit, nous partons dans le désert — feu de camp, thé bédouin, et les étoiles d'Eilat au-dessus de vous.`,
+
+    descriptionHe: `שני עולמות, יום אחד בלתי נשכח. אילת נמצאת בצומת ייחודית — המדבר פוגש את הים. שילבנו את שתי החוויות הייחודיות שלנו להרפתקה פרטית אחת לקבוצה שלך: שייט ביאכטה על ים סוף ואחריו סיור ג'יפ בשקיעה בהרי אילת.\n\nעל סיפון היאכטה הפרטית שלך, שוט על המים הצלולים של מפרץ עקבה — אחד מאקוסיסטמות האלמוגים העשירות ביותר בעולם. שחה, צוף, ותן לשקט הים הפתוח לשטוף אותך, עם משקאות קרים, פירות עונתיים ומוזיקה על הסיפון. ואז, כשחום היום מתמתן, אנחנו יוצאים למדבר — מדורה, תה בדואי, וכוכבי אילת מעל ראשך.`,
+
+    shortDescription: 'Private yacht on the Red Sea + sunset jeep safari — the ultimate Eilat combo for groups up to 8.',
+    shortDescriptionFr: "Voilier privatif sur la mer Rouge + safari jeep au coucher du soleil — le combo Eilat ultime pour groupes jusqu'à 8 personnes.",
+    shortDescriptionHe: "יאכטה פרטית על ים סוף + ספארי ג'יפ בשקיעה — הקומבו האולטימטיבי של אילת לקבוצות עד 8 אנשים.",
+
+    highlights: ['Private sailing yacht — Red Sea / Gulf of Aqaba', 'Swimming in crystal-clear coral waters', 'Soft drinks, seasonal fruits & music on deck', 'Sunset jeep safari — Eilat Mountains', 'Bedouin campfire & desert tea', 'Private group — up to 8 people'],
+    highlightsFr: ["Voilier privatif — mer Rouge / golfe d'Aqaba", "Baignade dans les eaux coraliennes cristallines", "Boissons soft, fruits de saison & musique sur le pont", "Safari jeep au coucher du soleil — monts d'Eilat", "Feu de camp bédouin & thé du désert", "Groupe privé — jusqu'à 8 personnes"],
+    highlightsHe: ["יאכטה פרטית — ים סוף / מפרץ עקבה", "שחייה במים קורליניים צלולים", "משקאות קלים, פירות עונתיים ומוזיקה על הסיפון", "ספארי ג'יפ בשקיעה — הרי אילת", "מדורה בדואית ותה מדברי", "קבוצה פרטית — עד 8 אנשים"],
+
+    packages: [
+      {
+        name: 'Sea Breeze', nameFr: 'Brise Marine', nameHe: 'רוח ים',
+        price: 1390, pricePerGroup: true, duration: '~5h total',
+        description: '⛵ Sailing 1h30: soft drinks, seasonal fruits, music, swimming · 🔥 Jeep 3h: campfire, Bedouin tea, soft drinks, grilled marshmallows, petits gâteaux',
+        descriptionFr: '⛵ Voilier 1h30 : boissons soft, fruits de saison, musique, baignade · 🔥 Jeep 3h : feu de camp, thé bédouin, boissons soft, marshmallows grillés, petits gâteaux',
+        descriptionHe: '⛵ שייט 1.5 שעות: משקאות קלים, פירות עונתיים, מוזיקה, שחייה · 🔥 ג\'יפ 3 שעות: מדורה, תה בדואי, משקאות קלים, מרשמלו על האש, עוגיות',
+      },
+      {
+        name: 'Sailor\'s Desert', nameFr: 'Marin du Désert', nameHe: 'מלח המדבר',
+        price: 1590, pricePerGroup: true, duration: '~6h total',
+        description: '⛵ Sailing 1h30: soft drinks, seasonal fruits, music, swimming · 🔥 Jeep 4h: campfire, Bedouin tea, soft drinks, marshmallows, petits gâteaux + lafot on wood fire with olive oil hummus & zaatar',
+        descriptionFr: '⛵ Voilier 1h30 : boissons soft, fruits de saison, musique, baignade · 🔥 Jeep 4h : feu de camp, thé bédouin, boissons soft, marshmallows + lafotes cuites au feu de bois avec houmous à l\'huile d\'olive et zaatar',
+        descriptionHe: '⛵ שייט 1.5 שעות: משקאות קלים, פירות עונתיים, מוזיקה, שחייה · 🔥 ג\'יפ 4 שעות: מדורה, תה בדואי, משקאות קלים, מרשמלו + לאפות על אש עם חומוס שמן זית וזעתר',
+      },
+      {
+        name: 'Blue Horizon', nameFr: 'Horizon Bleu', nameHe: 'אופק כחול',
+        price: 1890, pricePerGroup: true, duration: '~6h30 total',
+        description: '⛵ Sailing 2h30: soft drinks, seasonal fruits, music, swimming · 🔥 Jeep 3h: campfire, Bedouin tea, soft drinks, grilled marshmallows, petits gâteaux',
+        descriptionFr: '⛵ Voilier 2h30 : boissons soft, fruits de saison, musique, baignade · 🔥 Jeep 3h : feu de camp, thé bédouin, boissons soft, marshmallows grillés, petits gâteaux',
+        descriptionHe: '⛵ שייט 2.5 שעות: משקאות קלים, פירות עונתיים, מוזיקה, שחייה · 🔥 ג\'יפ 3 שעות: מדורה, תה בדואי, משקאות קלים, מרשמלו על האש, עוגיות',
+      },
+      {
+        name: 'Full Explorer', nameFr: 'Explorateur Complet', nameHe: 'חוקר מלא',
+        price: 2190, pricePerGroup: true, duration: '~7h30 total',
+        description: '⛵ Sailing 2h30: soft drinks, seasonal fruits, music, swimming · 🔥 Jeep 4h: campfire, Bedouin tea, soft drinks, marshmallows, petits gâteaux + lafot on wood fire with olive oil hummus & zaatar',
+        descriptionFr: '⛵ Voilier 2h30 : boissons soft, fruits de saison, musique, baignade · 🔥 Jeep 4h : feu de camp, thé bédouin, boissons soft, marshmallows + lafotes cuites au feu de bois avec houmous à l\'huile d\'olive et zaatar',
+        descriptionHe: '⛵ שייט 2.5 שעות: משקאות קלים, פירות עונתיים, מוזיקה, שחייה · 🔥 ג\'יפ 4 שעות: מדורה, תה בדואי, משקאות קלים, מרשמלו + לאפות על אש עם חומוס שמן זית וזעתר',
+      },
+      {
+        name: 'Deep Blue', nameFr: 'Grand Large', nameHe: 'ים עמוק',
+        price: 2590, pricePerGroup: true, duration: '~8h total',
+        description: '⛵ Sailing 4h: soft drinks, seasonal fruits, music, swimming · 🔥 Jeep 3h: campfire, Bedouin tea, soft drinks, grilled marshmallows, petits gâteaux',
+        descriptionFr: '⛵ Voilier 4h : boissons soft, fruits de saison, musique, baignade · 🔥 Jeep 3h : feu de camp, thé bédouin, boissons soft, marshmallows grillés, petits gâteaux',
+        descriptionHe: '⛵ שייט 4 שעות: משקאות קלים, פירות עונתיים, מוזיקה, שחייה · 🔥 ג\'יפ 3 שעות: מדורה, תה בדואי, משקאות קלים, מרשמלו על האש, עוגיות',
+      },
+      {
+        name: 'The Ultimate', nameFr: "L'Ultime", nameHe: 'האולטימטיבי',
+        price: 2790, pricePerGroup: true, duration: '~9h total',
+        description: '⛵ Sailing 4h: soft drinks, seasonal fruits, music, swimming · 🔥 Jeep 4h: campfire, Bedouin tea, soft drinks, marshmallows, petits gâteaux + lafot on wood fire with olive oil hummus & zaatar',
+        descriptionFr: '⛵ Voilier 4h : boissons soft, fruits de saison, musique, baignade · 🔥 Jeep 4h : feu de camp, thé bédouin, boissons soft, marshmallows + lafotes cuites au feu de bois avec houmous à l\'huile d\'olive et zaatar',
+        descriptionHe: '⛵ שייט 4 שעות: משקאות קלים, פירות עונתיים, מוזיקה, שחייה · 🔥 ג\'יפ 4 שעות: מדורה, תה בדואי, משקאות קלים, מרשמלו + לאפות על אש עם חומוס שמן זית וזעתר',
+      },
+    ],
+
+    includes: ['Private yacht — up to 8 people', 'Pick-up and drop-off at hotel', 'Soft drinks & seasonal fruits on board', 'Swimming & snorkelling stop', 'Campfire & Bedouin tea', 'Grilled marshmallows & petits gâteaux'],
+    includesFr: ["Voilier privatif — jusqu'à 8 personnes", "Navette aller-retour depuis l'hôtel", "Boissons soft & fruits de saison à bord", "Arrêt baignade & snorkeling", "Feu de camp & thé bédouin", "Marshmallows grillés & petits gâteaux"],
+    includesHe: ["יאכטה פרטית — עד 8 אנשים", "הסעה הלוך ושוב מהמלון", "משקאות קלים ופירות עונתיים על הסיפון", "עצירת שחייה ושנורקלינג", "מדורה ותה בדואי", "מרשמלו על האש ועוגיות"],
+
+    whatToBring: ['Swimsuit & towel', 'Sunscreen & hat', 'Camera / underwater camera', 'Walking shoes (for jeep)', 'Warm layer (evening)'],
+    whatToBringFr: ['Maillot de bain & serviette', 'Crème solaire & chapeau', 'Appareil photo / caméra sous-marine', 'Chaussures de marche (pour le jeep)', 'Couche chaude (soirée)'],
+    whatToBringHe: ['בגד ים ומגבת', 'קרם הגנה וכובע', 'מצלמה / מצלמת מים', 'נעלי הליכה (לג\'יפ)', 'שכבה חמה (לערב)'],
+
+    image: 'https://images.unsplash.com/photo-1500514966906-fe245eea9344?w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1500514966906-fe245eea9344?w=800&q=80',
+      'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=800&q=80',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80',
+    ],
+    difficulty: 'Easy',
+    rating: 4.9, reviewCount: 98,
+    groupSize: 'Up to 8', languages: ['English', 'French', 'Hebrew'],
+    departure: 'Daily, Year-Round',
+    badge: 'Private', featured: true,
+    pricePerGroup: true,
+    price: 1390, currency: '₪', duration: '5h → 9h', region: 'Red Sea · Eilat Mountains',
   },
 ]
 

@@ -50,6 +50,7 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
     trek:       lang === 'fr' ? 'Trek inclus'         : lang === 'he' ? 'טרקינג כלול'       : 'Trek included',
     warning:    lang === 'fr' ? "⚠️ Tarifs enfants non applicables pendant les fêtes." : lang === 'he' ? '⚠️ מחירי ילדים אינם חלים בחגים.' : '⚠️ Children\'s rates do not apply during holidays.',
     contactUs:  lang === 'fr' ? 'Nous consulter'      : lang === 'he' ? 'צרו קשר'           : 'Contact us',
+    upTo8:      lang === 'fr' ? "jusqu'à 8 personnes" : lang === 'he' ? 'עד 8 אנשים'        : 'up to 8 people',
   }
 
   return (
@@ -253,7 +254,9 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
                       <span className="text-[#D4A843] font-bold text-4xl leading-none" style={{ fontFamily: 'var(--font-playfair)' }}>
                         {pkg.priceOnRequest ? L.contactUs : formatPrice(pkg.price, '₪')}
                       </span>
-                      {!pkg.priceOnRequest && <span className="text-[#7A6245] text-sm">{L.perPerson}</span>}
+                      {!pkg.priceOnRequest && (
+                        <span className="text-[#7A6245] text-sm">{pkg.pricePerGroup ? L.upTo8 : L.perPerson}</span>
+                      )}
                     </div>
                     <div className="flex items-center gap-1.5 mt-2 text-[#7A6245] text-xs">
                       <Clock className="w-3.5 h-3.5 text-[#D4A843]" /> {pkg.duration}
@@ -276,7 +279,7 @@ export function TourDetailContent({ tour }: { tour: Tour }) {
                           )}
                         >
                           <span>{pName}</span>
-                          <span className="font-semibold">{p.priceOnRequest ? L.contactUs : `₪${p.price}`}</span>
+                          <span className="font-semibold">{p.priceOnRequest ? L.contactUs : `₪${p.price}`}{p.pricePerGroup && !p.priceOnRequest ? ` · ${L.upTo8}` : ''}</span>
                         </button>
                       )
                     })}
