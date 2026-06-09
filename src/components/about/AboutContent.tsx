@@ -31,6 +31,10 @@ const content: Record<Lang, {
   ctaDesc: string
   ctaBtn1: string
   ctaBtn2: string
+  hannaEyebrow: string
+  hannaTitle: string
+  hannaSubtitle: string
+  hannaDesc: string
   stats: { icon: typeof Compass; title: string; desc: string }[]
 }> = {
   en: {
@@ -59,6 +63,10 @@ const content: Record<Lang, {
     ctaDesc: 'Browse our tours and find the perfect adventure for your group.',
     ctaBtn1: 'View All Tours',
     ctaBtn2: 'Contact Didier',
+    hannaEyebrow: 'Co-Founder',
+    hannaTitle: 'Hanna Uzan',
+    hannaSubtitle: 'Co-Founder & Heart of the Operation',
+    hannaDesc: 'Behind every seamless adventure is Hanna — managing bookings, welcoming clients in three languages, and ensuring that every detail is perfect from the first message to the last campfire. Her warmth and dedication are woven into every Eilat Action experience.',
     stats: [
       { icon: Compass, title: 'Expert Guide', desc: 'Trained alongside the best Negev guides. Specialist in geology, archaeology, flora & fauna.' },
       { icon: Shield, title: 'Total Safety', desc: 'Expedition-grade Jeep, satellite comms, first aid. Perfect safety record.' },
@@ -92,6 +100,10 @@ const content: Record<Lang, {
     ctaDesc: 'Parcourez nos circuits et trouvez l\'aventure parfaite pour votre groupe.',
     ctaBtn1: 'Voir tous les circuits',
     ctaBtn2: 'Contacter Didier',
+    hannaEyebrow: 'Co-Fondatrice',
+    hannaTitle: 'Hanna Uzan',
+    hannaSubtitle: 'Co-Fondatrice & Âme de l\'Aventure',
+    hannaDesc: "Derrière chaque aventure sans accroc, il y a Hanna — gérant les réservations, accueillant les clients dans trois langues, et s'assurant que chaque détail est parfait du premier message au dernier feu de camp. Sa chaleur et son dévouement sont au cœur de chaque expérience Eilat Action.",
     stats: [
       { icon: Compass, title: 'Guide Expert', desc: 'Formé aux côtés des meilleurs guides du Néguev. Spécialiste en géologie, archéologie, faune & flore.' },
       { icon: Shield, title: 'Sécurité Totale', desc: 'Jeep de niveau expédition, communication satellite, premiers secours. Bilan parfait.' },
@@ -125,6 +137,10 @@ const content: Record<Lang, {
     ctaDesc: 'עיין בסיורים שלנו ומצא את ההרפתקה המושלמת עבור הקבוצה שלך.',
     ctaBtn1: 'כל הסיורים',
     ctaBtn2: 'צור קשר עם דידייה',
+    hannaEyebrow: 'שותפה מייסדת',
+    hannaTitle: 'חנה אוזן',
+    hannaSubtitle: 'שותפה מייסדת ולב הפעילות',
+    hannaDesc: 'מאחורי כל הרפתקה חלקה עומדת חנה — מנהלת הזמנות, מקבלת לקוחות בשלוש שפות, ומבטיחה שכל פרט מושלם מההודעה הראשונה ועד המדורה האחרונה. החמימות והמסירות שלה שזורות בכל חוויה של Eilat Action.',
     stats: [
       { icon: Compass, title: 'מדריך מומחה', desc: 'מאומן לצד המדריכים הטובים ביותר של הנגב. מומחה בגיאולוגיה, ארכיאולוגיה, חי וצומח.' },
       { icon: Shield, title: 'בטיחות מוחלטת', desc: 'ג׳יפ ברמת משלחת, תקשורת לוויינית, עזרה ראשונה. שיא בטיחות מושלם.' },
@@ -229,6 +245,41 @@ export function AboutContent() {
         </div>
       </section>
 
+      {/* Hanna Uzan — Co-Founder */}
+      <section className="py-20 bg-[var(--bg-base)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Text */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="section-divider" />
+                <span className="text-[var(--gold)] text-sm uppercase tracking-[0.2em] font-medium">{c.hannaEyebrow}</span>
+              </div>
+              <h2 className="text-4xl font-bold text-[var(--text-1)] mb-3 leading-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
+                {c.hannaTitle}
+              </h2>
+              <p className="text-gradient-gold text-lg font-medium mb-6">{c.hannaSubtitle}</p>
+              <p className="text-[var(--text-3)] leading-relaxed">{c.hannaDesc}</p>
+            </div>
+            {/* Photo */}
+            <div className="relative rounded-sm overflow-hidden shadow-2xl shadow-black/50" style={{ aspectRatio: '4/5' }}>
+              <Image
+                src="/gallery/Hanna-Uzan.jpg"
+                alt="Hanna Uzan — Eilat Action Co-Founder"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)]/70 to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="text-[var(--text-1)] font-bold text-xl" style={{ fontFamily: 'var(--font-playfair)' }}>{c.hannaTitle}</div>
+                <div className="text-[var(--gold)] text-sm">{c.hannaEyebrow} — Eilat Action</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Eilat between desert and sea + Adventures */}
       <section className="py-20 bg-[var(--bg-base)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -292,6 +343,16 @@ export function AboutContent() {
           </div>
         </div>
       </section>
+
+      {/* Website credit */}
+      <div className="py-6 text-center border-t border-[var(--border-sm)]">
+        <p className="text-[var(--text-5)] text-xs">
+          Website designed & developed by{' '}
+          <a href="https://github.com/rubz125" target="_blank" rel="noopener noreferrer" className="text-[var(--gold)] hover:underline font-medium">
+            @RubenUzan
+          </a>
+        </p>
+      </div>
 
     </main>
   )
