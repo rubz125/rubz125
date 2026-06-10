@@ -179,9 +179,12 @@ export function Footer() {
               </Link>
             ))}
           </div>
-          <div className="flex items-center gap-2 text-[var(--text-5)] text-xs">
-            <span>🇮🇱</span>
-            <span>{t.footer_licensed}</span>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 text-[var(--text-5)] text-xs">
+              <span>🇮🇱</span>
+              <span>{t.footer_licensed}</span>
+            </div>
+            <span className="text-[var(--text-5)] text-xs">@RubenUzan</span>
           </div>
         </div>
       </div>
