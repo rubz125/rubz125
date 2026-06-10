@@ -223,17 +223,28 @@ export const translations = {
     hero_languages: 'Langues parlées',
 
     // Stats bar
+<<<<<<< HEAD
     stats_reviews_label: 'Avis 5 Étoiles',
     stats_reviews_sub: 'TripAdvisor & Google',
     stats_routes_label: 'Circuits Uniques',
     stats_routes_sub: 'Dans les monts d\'Eilat',
+=======
+    stats_reviews_label: 'Avis Cinq Étoiles',
+    stats_reviews_sub: 'TripAdvisor & Google',
+    stats_routes_label: 'Circuits Uniques',
+    stats_routes_sub: 'Dans les Monts d\'Eilat',
+>>>>>>> 9513261 (Make stats bar draggable with touch/mouse + add i18n translations)
     stats_adventurers_label: 'Aventuriers Heureux',
     stats_adventurers_sub: 'Depuis 2009',
     stats_safety_label: 'Bilan Sécurité',
     stats_safety_sub: 'Zéro Incident',
     stats_languages_label: 'Langues Parlées',
     stats_languages_sub: 'Par Nos Guides',
+<<<<<<< HEAD
     stats_years_label: "Ans d'Activité",
+=======
+    stats_years_label: 'Années d\'Expérience',
+>>>>>>> 9513261 (Make stats bar draggable with touch/mouse + add i18n translations)
     stats_years_sub: 'Agréé & Certifié',
 
     featured_eyebrow: 'Expériences Signature',
@@ -412,13 +423,22 @@ export const translations = {
     hero_languages: 'שפות המדריכים',
 
     // Stats bar
+<<<<<<< HEAD
     stats_reviews_label: 'ביקורות 5 כוכבים',
     stats_reviews_sub: 'TripAdvisor ו-Google',
+=======
+    stats_reviews_label: 'ביקורות חמש כוכבים',
+    stats_reviews_sub: 'TripAdvisor וגוגל',
+>>>>>>> 9513261 (Make stats bar draggable with touch/mouse + add i18n translations)
     stats_routes_label: 'מסלולים ייחודיים',
     stats_routes_sub: 'בהרי אילת',
     stats_adventurers_label: 'מטיילים מרוצים',
     stats_adventurers_sub: 'מאז 2009',
+<<<<<<< HEAD
     stats_safety_label: 'רשומת בטיחות',
+=======
+    stats_safety_label: 'רישום בטיחות',
+>>>>>>> 9513261 (Make stats bar draggable with touch/mouse + add i18n translations)
     stats_safety_sub: 'אפס תקריות',
     stats_languages_label: 'שפות מדוברות',
     stats_languages_sub: 'על ידי המדריכים',
