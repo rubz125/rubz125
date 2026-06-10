@@ -32,22 +32,24 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://eilat-action.com'),
   title: {
-    default: 'Eilat Action – Premium Jeep Safari Tours | Israel',
+    default: 'Eilat Action – Jeep Safari dans les Monts d\'Eilat | Israël',
     template: '%s | Eilat Action',
   },
   description:
-    "Experience Israel's most breathtaking landscapes on a private Jeep Safari. Negev Desert, Galilee, Golan Heights, Dead Sea. Book online — guides speak 6 languages.",
+    "Safari Jeep privé dans les monts d'Eilat. Canyon Rouge, vues panoramiques sur 4 pays, faune du désert, coucher de soleil et feu de camp. Guides experts — réservation en ligne.",
   keywords: [
-    'Jeep Safari Israel',
-    'Negev desert tour',
-    'Golan Heights jeep',
-    'Galilee adventure',
-    'Israel off-road tour',
-    'Dead Sea excursion',
-    'luxury safari Israel',
-    'private jeep tour Israel',
-    'ג׳יפ סיור מדבר הנגב',
-    'ספארי גולן',
+    'jeep safari Eilat',
+    'safari désert Eilat',
+    'canyon rouge Eilat',
+    'monts Eilat',
+    'excursion jeep Eilat',
+    'tour privé Eilat',
+    'ספארי ג\'יפ אילת',
+    'הרי אילת',
+    'קניון אדום אילת',
+    'Eilat jeep tour',
+    'Eilat Mountains safari',
+    'Red Canyon Eilat',
   ],
   authors: [{ name: 'Eilat Action', url: 'https://eilat-action.com' }],
   creator: 'Eilat Action',
@@ -68,9 +70,9 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://eilat-action.com',
     siteName: 'Eilat Action',
-    title: 'Eilat Action – Premium Jeep Safari Tours | Israel',
+    title: 'Eilat Action – Jeep Safari dans les Monts d\'Eilat | Israël',
     description:
-      "Private Jeep Safaris across Israel's most epic landscapes. Negev, Galilee, Golan, Dead Sea. 15 years of unforgettable adventures.",
+      "Safari Jeep privé dans les monts d'Eilat. Canyon Rouge, vues sur 4 pays, faune du désert, feu de camp au coucher du soleil. Guides experts.",
     images: [
       {
         url: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200&q=80',
@@ -82,9 +84,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Eilat Action – Premium Jeep Safari Tours | Israel',
+    title: 'Eilat Action – Jeep Safari dans les Monts d\'Eilat | Israël',
     description:
-      "Private Jeep Safaris across Israel's most epic landscapes.",
+      "Safari Jeep privé dans les monts d'Eilat — Canyon Rouge, 4 pays, désert.",
     images: ['https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200&q=80'],
     creator: '@desertkings',
   },
