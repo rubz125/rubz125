@@ -1,39 +1,7 @@
 'use client'
-import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useLang } from '@/lib/LangContext'
 
-const stats = [
-  { icon: '🏆', value: '847+', label: 'Five-Star Reviews', sub: 'TripAdvisor & Google' },
-  { icon: '🗺️', value: '6', label: 'Unique Routes', sub: 'Across Israel' },
-  { icon: '👥', value: '12,000+', label: 'Happy Adventurers', sub: 'Since 2009' },
-  { icon: '🛡️', value: '100%', label: 'Safety Record', sub: 'Zero Incidents' },
-  { icon: '🌍', value: '3', label: 'Languages Spoken', sub: 'By Our Guides' },
-  { icon: '⏱️', value: '15', label: 'Years Operating', sub: 'Licensed & Certified' },
-]
-
-function useCountUp(target: number, duration = 1500) {
-  const [count, setCount] = useState(0)
-  const ref = useRef(false)
-
-  useEffect(() => {
-    if (ref.current) return
-    ref.current = true
-    const start = performance.now()
-    const animate = (now: number) => {
-      const elapsed = now - start
-      const progress = Math.min(elapsed / duration, 1)
-      const eased = 1 - Math.pow(1 - progress, 3)
-      setCount(Math.floor(eased * target))
-      if (progress < 1) requestAnimationFrame(animate)
-      else setCount(target)
-    }
-    requestAnimationFrame(animate)
-  }, [target, duration])
-
-  return count
-}
-
-function MarqueeItem({ icon, value, label, sub }: (typeof stats)[0]) {
+function MarqueeItem({ icon, value, label, sub }: { icon: string; value: string; label: string; sub: string }) {
   return (
     <div className="flex items-center gap-4 px-8 shrink-0">
       <span className="text-2xl">{icon}</span>
@@ -48,15 +16,22 @@ function MarqueeItem({ icon, value, label, sub }: (typeof stats)[0]) {
 }
 
 export function StatsBar() {
+  const { t } = useLang()
+
+  const stats = [
+    { icon: '🏆', value: '847+',    label: t.stats_reviews_label,     sub: t.stats_reviews_sub },
+    { icon: '🗺️', value: '6',       label: t.stats_routes_label,      sub: t.stats_routes_sub },
+    { icon: '👥', value: '12,000+', label: t.stats_adventurers_label, sub: t.stats_adventurers_sub },
+    { icon: '🛡️', value: '100%',    label: t.stats_safety_label,      sub: t.stats_safety_sub },
+    { icon: '🌍', value: '3',       label: t.stats_languages_label,   sub: t.stats_languages_sub },
+    { icon: '⏱️', value: '15',      label: t.stats_years_label,       sub: t.stats_years_sub },
+  ]
+
   return (
     <section className="bg-[var(--bg-surface)] border-y border-[var(--border-sm)] overflow-hidden py-6">
-      {/* Marquee */}
       <div
         className="flex"
-        style={{
-          animation: 'marquee 30s linear infinite',
-          width: 'max-content',
-        }}
+        style={{ animation: 'marquee 30s linear infinite', width: 'max-content' }}
       >
         {[...stats, ...stats].map((stat, i) => (
           <MarqueeItem key={i} {...stat} />

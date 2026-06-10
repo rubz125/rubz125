@@ -25,6 +25,20 @@ export const translations = {
     hero_experience: 'Experience',
     hero_languages: 'Guides Speak',
 
+    // Stats bar
+    stats_reviews_label: 'Five-Star Reviews',
+    stats_reviews_sub: 'TripAdvisor & Google',
+    stats_routes_label: 'Unique Routes',
+    stats_routes_sub: 'Across Eilat',
+    stats_adventurers_label: 'Happy Adventurers',
+    stats_adventurers_sub: 'Since 2009',
+    stats_safety_label: 'Safety Record',
+    stats_safety_sub: 'Zero Incidents',
+    stats_languages_label: 'Languages Spoken',
+    stats_languages_sub: 'By Our Guides',
+    stats_years_label: 'Years Operating',
+    stats_years_sub: 'Licensed & Certified',
+
     // Sections
     featured_eyebrow: 'Signature Experiences',
     featured_title: 'Our Most Epic',
@@ -182,6 +196,20 @@ export const translations = {
     hero_experience: "Années d'expérience",
     hero_languages: 'Langues parlées',
 
+    // Stats bar
+    stats_reviews_label: 'Avis 5 Étoiles',
+    stats_reviews_sub: 'TripAdvisor & Google',
+    stats_routes_label: 'Circuits Uniques',
+    stats_routes_sub: 'Dans les monts d\'Eilat',
+    stats_adventurers_label: 'Aventuriers Heureux',
+    stats_adventurers_sub: 'Depuis 2009',
+    stats_safety_label: 'Bilan Sécurité',
+    stats_safety_sub: 'Zéro Incident',
+    stats_languages_label: 'Langues Parlées',
+    stats_languages_sub: 'Par Nos Guides',
+    stats_years_label: "Ans d'Activité",
+    stats_years_sub: 'Agréé & Certifié',
+
     featured_eyebrow: 'Expériences Signature',
     featured_title: 'Nos Safaris',
     featured_title2: ' les Plus Épiques',
@@ -329,6 +357,20 @@ export const translations = {
     hero_rating: 'דירוג ממוצע',
     hero_experience: 'שנות ניסיון',
     hero_languages: 'שפות המדריכים',
+
+    // Stats bar
+    stats_reviews_label: 'ביקורות 5 כוכבים',
+    stats_reviews_sub: 'TripAdvisor ו-Google',
+    stats_routes_label: 'מסלולים ייחודיים',
+    stats_routes_sub: 'בהרי אילת',
+    stats_adventurers_label: 'מטיילים מרוצים',
+    stats_adventurers_sub: 'מאז 2009',
+    stats_safety_label: 'רשומת בטיחות',
+    stats_safety_sub: 'אפס תקריות',
+    stats_languages_label: 'שפות מדוברות',
+    stats_languages_sub: 'על ידי המדריכים',
+    stats_years_label: 'שנות פעילות',
+    stats_years_sub: 'מורשה ומוסמך',
 
     featured_eyebrow: 'חוויות יחודיות',
     featured_title: 'הספארי',
