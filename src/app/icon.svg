@@ -1,34 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Orange sun -->
-  <circle cx="50" cy="38" r="32" fill="#E8550A"/>
+  <!-- Dark background -->
+  <rect width="100" height="100" rx="14" fill="#160E09"/>
 
-  <!-- Ground / base -->
-  <rect x="0" y="72" width="100" height="28" fill="#1a0f00"/>
+  <!-- Sun / orange circle -->
+  <circle cx="50" cy="44" r="30" fill="#E8550A"/>
+
+  <!-- Ground strip -->
+  <rect x="0" y="72" width="100" height="28" fill="#160E09"/>
 
   <!-- Jeep body -->
-  <rect x="10" y="60" width="80" height="20" rx="3" fill="#1a0f00"/>
+  <rect x="11" y="56" width="78" height="18" rx="3" fill="#160E09"/>
 
   <!-- Cabin -->
-  <rect x="20" y="46" width="50" height="18" rx="3" fill="#1a0f00"/>
+  <rect x="20" y="41" width="50" height="19" rx="3" fill="#160E09"/>
 
-  <!-- Windshield / windows -->
-  <rect x="23" y="49" width="19" height="12" rx="2" fill="#E8550A" opacity="0.85"/>
-  <rect x="45" y="49" width="19" height="12" rx="2" fill="#E8550A" opacity="0.85"/>
+  <!-- Windows -->
+  <rect x="23" y="44" width="19" height="13" rx="2" fill="#E8550A" opacity="0.65"/>
+  <rect x="44" y="44" width="19" height="13" rx="2" fill="#E8550A" opacity="0.65"/>
 
-  <!-- Front bumper -->
-  <rect x="6" y="64" width="10" height="12" rx="2" fill="#1a0f00"/>
-  <!-- Rear bumper -->
-  <rect x="84" y="64" width="10" height="12" rx="2" fill="#1a0f00"/>
+  <!-- Roof rack bar -->
+  <rect x="20" y="39" width="50" height="4" rx="1" fill="#160E09"/>
 
-  <!-- Wheels -->
-  <circle cx="26" cy="80" r="11" fill="#111"/>
-  <circle cx="26" cy="80" r="6" fill="#2a1a00"/>
-  <circle cx="26" cy="80" r="2.5" fill="#111"/>
+  <!-- Wheel left -->
+  <circle cx="27" cy="74" r="11" fill="#160E09"/>
+  <circle cx="27" cy="74" r="7.5" fill="#2D1A0A"/>
+  <circle cx="27" cy="74" r="3" fill="#160E09"/>
 
-  <circle cx="74" cy="80" r="11" fill="#111"/>
-  <circle cx="74" cy="80" r="6" fill="#2a1a00"/>
-  <circle cx="74" cy="80" r="2.5" fill="#111"/>
-
-  <!-- Roof rack -->
-  <rect x="20" y="44" width="50" height="4" rx="1" fill="#1a0f00"/>
+  <!-- Wheel right -->
+  <circle cx="73" cy="74" r="11" fill="#160E09"/>
+  <circle cx="73" cy="74" r="7.5" fill="#2D1A0A"/>
+  <circle cx="73" cy="74" r="3" fill="#160E09"/>
 </svg>
