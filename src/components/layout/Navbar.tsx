@@ -19,6 +19,7 @@ export function Navbar() {
   const { theme, setTheme } = useTheme()
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark')
   const [scrolled, setScrolled] = useState(false)
+  const opaque = scrolled || theme === 'light'
   const [mobileOpen, setMobileOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [langOpen, setLangOpen] = useState(false)
@@ -60,7 +61,7 @@ export function Navbar() {
       <nav
         dir={lang === 'he' ? 'rtl' : 'ltr'}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+          opaque
             ? 'bg-[var(--base-95)] backdrop-blur-xl border-b border-[var(--border-sm)] shadow-2xl shadow-black/50'
             : 'bg-transparent'
         }`}
@@ -77,7 +78,7 @@ export function Navbar() {
               {navLinks.map((link) =>
                 link.children ? (
                   <div key={link.label} className="relative" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
-                    <button className={`flex items-center gap-1 transition-colors duration-200 text-sm font-medium tracking-wide hover:text-[var(--sand-light)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
+                    <button className={`flex items-center gap-1 transition-colors duration-200 text-sm font-medium tracking-wide hover:text-[var(--sand-light)] ${opaque ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
                       {link.label}
                       <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
                     </button>
@@ -100,7 +101,7 @@ export function Navbar() {
                     </AnimatePresence>
                   </div>
                 ) : (
-                  <Link key={link.label} href={link.href} className={`transition-colors duration-200 text-sm font-medium tracking-wide hover:text-[var(--sand-light)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
+                  <Link key={link.label} href={link.href} className={`transition-colors duration-200 text-sm font-medium tracking-wide hover:text-[var(--sand-light)] ${opaque ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
                     {link.label}
                   </Link>
                 )
@@ -111,7 +112,7 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-4">
               {/* Language switcher */}
               <div className="relative" onMouseEnter={() => setLangOpen(true)} onMouseLeave={() => setLangOpen(false)}>
-                <button className={`flex items-center gap-1.5 transition-colors text-sm font-medium px-2 py-1 rounded-sm border border-transparent hover:text-[var(--sand-light)] hover:border-[var(--border-lg)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
+                <button className={`flex items-center gap-1.5 transition-colors text-sm font-medium px-2 py-1 rounded-sm border border-transparent hover:text-[var(--sand-light)] hover:border-[var(--border-lg)] ${opaque ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
                   {LANGS.find(l => l.code === lang)?.label}
                   <ChevronDown className="w-3 h-3" />
                 </button>
@@ -135,13 +136,13 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
-              <a href="tel:+972525217029" aria-label="+972-52-521-7029" className={`flex items-center transition-colors duration-200 hover:text-[var(--sand-light)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
+              <a href="tel:+972525217029" aria-label="+972-52-521-7029" className={`flex items-center transition-colors duration-200 hover:text-[var(--sand-light)] ${opaque ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
                 <Phone className="w-4 h-4" />
               </a>
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
-                className={`w-9 h-9 flex items-center justify-center rounded-sm border transition-colors duration-200 hover:text-[var(--sand-light)] ${scrolled ? 'border-[var(--border-sm)] text-[var(--text-4)] hover:border-[var(--border-md)]' : 'border-white/25 text-white/60 hover:border-white/50'}`}
+                className={`w-9 h-9 flex items-center justify-center rounded-sm border transition-colors duration-200 hover:text-[var(--sand-light)] ${opaque ? 'border-[var(--border-sm)] text-[var(--text-4)] hover:border-[var(--border-md)]' : 'border-white/25 text-white/60 hover:border-white/50'}`}
               >
                 {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
@@ -149,7 +150,7 @@ export function Navbar() {
             </div>
 
             {/* Mobile button */}
-            <button onClick={() => setMobileOpen(!mobileOpen)} className={`lg:hidden p-2 transition-colors hover:text-[var(--sand-light)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`} aria-label="Toggle menu">
+            <button onClick={() => setMobileOpen(!mobileOpen)} className={`lg:hidden p-2 transition-colors hover:text-[var(--sand-light)] ${opaque ? 'text-[var(--text-2)]' : 'text-white/80'}`} aria-label="Toggle menu">
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
