@@ -193,84 +193,104 @@ function makeMoonTex(): THREE.CanvasTexture {
 
 // ─── Earth texture (equirectangular 2:1) ─────────────────────────────
 function makeEarthTex(): THREE.CanvasTexture {
-  const W = 512, H = 256
+  const W = 1024, H = 512
   const cv = document.createElement('canvas')
   cv.width = W; cv.height = H
   const cx = cv.getContext('2d')!
 
-  // Ocean base
-  cx.fillStyle = '#1640A2'
+  // Deep ocean base
+  cx.fillStyle = '#0B2D74'
   cx.fillRect(0, 0, W, H)
-  const oceanDepth = cx.createLinearGradient(0,0,0,H)
-  oceanDepth.addColorStop(0,   'rgba(8,25,75,.45)')
-  oceanDepth.addColorStop(.45, 'rgba(18,55,140,.18)')
-  oceanDepth.addColorStop(1,   'rgba(8,25,75,.45)')
-  cx.fillStyle = oceanDepth; cx.fillRect(0, 0, W, H)
+  // Ocean depth shading: polar darker, tropical slightly brighter
+  const od = cx.createLinearGradient(0,0,0,H)
+  od.addColorStop(0,   'rgba(4,12,45,.55)')
+  od.addColorStop(.18, 'rgba(0,0,0,0)')
+  od.addColorStop(.50, 'rgba(18,60,160,.12)')
+  od.addColorStop(.82, 'rgba(0,0,0,0)')
+  od.addColorStop(1,   'rgba(4,12,45,.55)')
+  cx.fillStyle = od; cx.fillRect(0,0,W,H)
 
-  const land = (x: number, y: number, rx: number, ry: number, rot: number, col: string) => {
-    cx.fillStyle = col
-    cx.save(); cx.translate(x*W, y*H); cx.rotate(rot)
-    cx.beginPath(); cx.ellipse(0, 0, rx*W, ry*H, 0, 0, Math.PI*2)
+  const L = (x: number, y: number, rx: number, ry: number, rot: number, col: string, a=1.0) => {
+    cx.save(); cx.globalAlpha = a; cx.fillStyle = col
+    cx.translate(x*W, y*H); cx.rotate(rot)
+    cx.beginPath(); cx.ellipse(0,0,rx*W,ry*H,0,0,Math.PI*2)
     cx.fill(); cx.restore()
   }
 
-  // Africa (main body + horn)
-  land(.555,.52,.048,.20,-.12,'#5A8C38')
-  land(.57,.38,.034,.08,.15,'#6A9C42')
-  land(.59,.32,.018,.035,.2,'#628A3C')
-  // Arabian Peninsula
-  land(.606,.395,.018,.032,.15,'#A89430')
-  // Europe
-  land(.535,.27,.032,.058,.18,'#6BAA40')
-  // Scandinavia
-  land(.528,.20,.015,.042,-.15,'#5E9A38')
-  // Asia (main)
-  land(.722,.30,.130,.105,-.07,'#5C9035')
-  land(.760,.43,.055,.072,.22,'#668A3A')
-  // Indian Subcontinent
-  land(.650,.40,.025,.065,.05,'#6A9038')
-  // Southeast Asia
-  land(.790,.46,.032,.038,.1,'#5E8C35')
-  land(.830,.48,.018,.020,.0,'#5E8C35')
-  // Japan/Korea area
-  land(.832,.28,.012,.022,-.1,'#5A8830')
-  // Australia
-  land(.875,.645,.042,.048,.08,'#A87828')
-  // North America (main)
-  land(.205,.28,.075,.125,-.18,'#578638')
-  land(.230,.19,.038,.048,-.28,'#4C7833')
-  // Mexico/Central America
-  land(.215,.38,.020,.028,.1,'#5A8435')
-  // Greenland
-  land(.158,.12,.022,.058,-.10,'#C8D8EC')
-  // South America
-  land(.280,.595,.040,.155,.12,'#428C2C')
-  land(.262,.45,.022,.048,.08,'#4A8030')
-  // Madagascar
-  land(.592,.60,.010,.022,.05,'#628C38')
+  // ── Africa ──
+  L(.555,.54,.050,.195,-.10,'#3E7020')       // rain-forest core
+  L(.555,.42,.042,.095, .12,'#6A8C2A')       // N Africa savanna
+  L(.565,.30,.035,.050,  .0,'#C8963C')       // Sahara
+  L(.540,.31,.028,.042,-.08,'#BD8C34')       // Sahara west
+  L(.580,.31,.018,.030, .20,'#D09840')       // Libya/Egypt
+  L(.608,.46,.016,.028, .30,'#8A8C30')       // Horn of Africa
+  L(.555,.66,.022,.030,  .0,'#3A6818')       // S Africa forest
+  // ── Arabian Peninsula ──
+  L(.618,.390,.022,.038, .12,'#C49240')
+  // ── Europe ──
+  L(.528,.268,.034,.058, .18,'#527A2A')
+  L(.525,.215,.015,.040,-.15,'#4A7225')      // Scandinavia
+  L(.510,.285,.012,.020,  .0,'#5E8C30')      // Iberia
+  // ── Asia ──
+  L(.715,.280,.128,.108,-.07,'#4E8025')      // main mass
+  L(.740,.195,.100,.075,-.05,'#3C6C20')      // Siberia
+  L(.672,.278,.058,.048,  .0,'#A88A38')      // Central Asia arid
+  L(.628,.318,.032,.038,  .0,'#BC9240')      // Middle East
+  L(.646,.418,.028,.068, .04,'#578828')      // Indian subcontinent
+  L(.792,.458,.036,.040, .10,'#407A20')      // SE Asia
+  L(.844,.462,.020,.022,  .0,'#407A20')
+  L(.834,.278,.010,.022,-.10,'#457825')      // Japan
+  // ── North America ──
+  L(.208,.285,.078,.122,-.18,'#487A26')
+  L(.232,.190,.042,.052,-.28,'#406820')
+  L(.205,.380,.022,.030, .08,'#509025')      // Mexico
+  L(.158,.118,.025,.060,-.10,'#C5D8EC')      // Greenland
+  // ── South America ──
+  L(.282,.615,.042,.148, .12,'#2E7015')      // Amazon rain forest
+  L(.280,.440,.026,.052, .06,'#3E7820')
+  L(.310,.690,.022,.030, .15,'#5A8028')      // Patagonia
+  // ── Australia ──
+  L(.876,.652,.046,.052, .08,'#B07A2A')      // arid interior
+  L(.858,.610,.018,.018,  .0,'#A07025')
+  L(.900,.630,.014,.018,  .0,'#9A6C22')
+  L(.868,.680,.014,.020, .10,'#5A7C28')      // E coast greener
+  // ── Madagascar ──
+  L(.596,.606,.010,.023, .05,'#528025')
+  // ── New Zealand ──
+  L(.938,.720,.007,.016,-.10,'#4A7825')
 
   // Antarctica
-  const ant = cx.createLinearGradient(0,H*.82,0,H)
-  ant.addColorStop(0,  'rgba(225,235,248,0)')
-  ant.addColorStop(.35,'rgba(228,238,250,.85)')
-  ant.addColorStop(1,  'rgba(238,245,255,1.0)')
-  cx.fillStyle = ant; cx.fillRect(0,H*.80,W,H*.20)
+  const ant = cx.createLinearGradient(0,H*.76,0,H)
+  ant.addColorStop(0,  'rgba(195,215,238,0)')
+  ant.addColorStop(.28,'rgba(208,225,245,.90)')
+  ant.addColorStop(1,  'rgba(228,242,255,1.0)')
+  cx.fillStyle = ant; cx.fillRect(0,H*.74,W,H*.26)
 
   // Arctic
-  const arc = cx.createLinearGradient(0,0,0,H*.12)
-  arc.addColorStop(0,  'rgba(238,245,255,.96)')
-  arc.addColorStop(.55,'rgba(228,238,250,.62)')
-  arc.addColorStop(1,  'rgba(225,235,248,0)')
-  cx.fillStyle = arc; cx.fillRect(0,0,W,H*.12)
+  const arc = cx.createLinearGradient(0,0,0,H*.15)
+  arc.addColorStop(0,  'rgba(228,242,255,.96)')
+  arc.addColorStop(.55,'rgba(208,225,245,.58)')
+  arc.addColorStop(1,  'rgba(195,215,238,0)')
+  cx.fillStyle = arc; cx.fillRect(0,0,W,H*.15)
 
-  // Cloud layer
-  for (let i = 0; i < 35; i++) {
-    const cx_ = Math.random()*W, cy_ = Math.random()*H*.88+H*.06
-    const r = 18+Math.random()*60
-    const g = cx.createRadialGradient(cx_,cy_,0,cx_,cy_,r)
-    g.addColorStop(0,'rgba(255,255,255,.20)'); g.addColorStop(.5,'rgba(255,255,255,.09)'); g.addColorStop(1,'rgba(255,255,255,0)')
+  // Polar atmospheric blue haze
+  const ph = cx.createLinearGradient(0,0,0,H)
+  ph.addColorStop(0,   'rgba(70,120,210,.14)'); ph.addColorStop(.14,'rgba(70,120,210,0)')
+  ph.addColorStop(.86, 'rgba(70,120,210,0)');   ph.addColorStop(1,  'rgba(70,120,210,.14)')
+  cx.fillStyle = ph; cx.fillRect(0,0,W,H)
+
+  // Cloud wisps — elongated, semi-transparent
+  for (let i = 0; i < 65; i++) {
+    const cx_ = Math.random()*W, cy_ = H*.07+Math.random()*H*.86
+    const rx = 24+Math.random()*90, ry = rx*(0.10+Math.random()*.20)
+    const rot = (Math.random()-.5)*.7
+    const op = 0.13+Math.random()*.22
+    const g = cx.createRadialGradient(cx_,cy_,0,cx_,cy_,rx)
+    g.addColorStop(0,  `rgba(255,255,255,${op})`)
+    g.addColorStop(.45,`rgba(250,252,255,${op*.55})`)
+    g.addColorStop(1,  'rgba(255,255,255,0)')
     cx.fillStyle = g
-    cx.beginPath(); cx.ellipse(cx_,cy_,r,r*.28,Math.random()*.55,0,Math.PI*2); cx.fill()
+    cx.beginPath(); cx.ellipse(cx_,cy_,rx,ry,rot,0,Math.PI*2); cx.fill()
   }
 
   return new THREE.CanvasTexture(cv)
@@ -457,7 +477,7 @@ function buildNebulae(scene: THREE.Scene) {
 function buildMoon(scene: THREE.Scene): THREE.Mesh {
   const mesh = new THREE.Mesh(
     new THREE.SphereGeometry(17, 128, 128),
-    new THREE.MeshBasicMaterial({ map: makeMoonTex() })
+    new THREE.MeshPhongMaterial({ map: makeMoonTex(), shininess: 3, specular: new THREE.Color(0x0a0a0a) })
   )
   const MAZ = 1.25, MEL = 0.44
   mesh.position.set(
@@ -476,7 +496,7 @@ function buildMoon(scene: THREE.Scene): THREE.Mesh {
 function buildEarth(scene: THREE.Scene): THREE.Mesh {
   const mesh = new THREE.Mesh(
     new THREE.SphereGeometry(26, 128, 128),
-    new THREE.MeshBasicMaterial({ map: makeEarthTex() })
+    new THREE.MeshPhongMaterial({ map: makeEarthTex(), shininess: 28, specular: new THREE.Color(0x1a3a6a) })
   )
   const EAZ = 0.80, EEL = 0.52
   mesh.position.set(
@@ -600,6 +620,14 @@ export default function NightSkyExperience() {
     const scene = new THREE.Scene()
     s.scene = scene
     scene.add(new THREE.AmbientLight(0x0d1220, .6))
+    // Directional sun light — gives 3D shading to moon & earth
+    const _sunDL = new THREE.DirectionalLight(0xFFF5E0, 3.5)
+    _sunDL.position.set(
+      Math.cos(0.35)*Math.sin(5.80)*400,
+      Math.sin(0.35)*400,
+      Math.cos(0.35)*Math.cos(5.80)*400
+    )
+    scene.add(_sunDL)
 
     const cam = new THREE.PerspectiveCamera(DFLT_FOV, el.clientWidth/el.clientHeight, .1, SKY_R*2)
     cam.position.set(0,0,0); s.camera = cam
@@ -880,7 +908,8 @@ export default function NightSkyExperience() {
           </button>
         </div>
 
-        <div className="absolute bottom-5 inset-x-0 flex items-center justify-center gap-5 z-20 px-4">
+        <div className="absolute inset-x-0 flex flex-col items-center gap-3 z-20 px-4"
+          style={{bottom:'max(5.5rem, calc(env(safe-area-inset-bottom, 0px) + 4.5rem))'}}>
           <button onClick={toggleExplore}
             className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-sm border text-[11px] tracking-[.16em] uppercase transition-all duration-300 backdrop-blur-md ${
               explore
@@ -890,8 +919,8 @@ export default function NightSkyExperience() {
             <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${explore?'bg-[#D4A843] animate-pulse':'bg-white/25'}`}/>
             {explore?'Exploring…':'Explore Mode'}
           </button>
-          <p className="text-white/18 text-[9px] tracking-[.14em] uppercase hidden sm:block">
-            Arrow keys · +/- to zoom
+          <p className="text-white/22 text-[9px] tracking-[.18em] uppercase">
+            Created by Ruben Uzan
           </p>
         </div>
       </>)}
