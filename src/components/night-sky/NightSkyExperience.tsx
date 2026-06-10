@@ -58,135 +58,113 @@ const ALL_LABELS = [
 ]
 
 // ─── Moon texture ─────────────────────────────────────────────────────
-// Fill entire canvas (no clip) — sphere geometry itself provides circular silhouette.
-// Canvas clip causes black areas when sphere rotates.
 function makeMoonTex(): THREE.CanvasTexture {
-  const S = 512
+  const S = 1024
   const cv = document.createElement('canvas')
   cv.width = cv.height = S
   const cx = cv.getContext('2d')!
 
-  // Base surface (warm gray, slight off-center gradient for depth)
-  const bg = cx.createRadialGradient(S*.42, S*.38, 0, S/2, S/2, S*.72)
-  bg.addColorStop(0,   '#E0DBCB')
-  bg.addColorStop(.6,  '#CECBB8')
-  bg.addColorStop(1,   '#BFBCAA')
-  cx.fillStyle = '#CFCBB8'
-  cx.fillRect(0, 0, S, S)
-  cx.fillStyle = bg
+  // Dark charcoal base — matches real lunar photography
+  cx.fillStyle = '#3A3838'
   cx.fillRect(0, 0, S, S)
 
-  // Surface albedo variation (soft blotches)
-  for (let i = 0; i < 200; i++) {
+  // Coarse albedo variation across the surface
+  for (let i = 0; i < 600; i++) {
     const px = Math.random()*S, py = Math.random()*S
-    const r = 10 + Math.random()*55
-    const dark = Math.random() > .55
-    const a = .025 + Math.random()*.04
+    const r = 8 + Math.random()*80
+    const bright = Math.random() > .48
+    const a = .018 + Math.random()*.038
+    const v = bright ? 90 : 20
     const g = cx.createRadialGradient(px,py,0,px,py,r)
-    g.addColorStop(0, `rgba(${dark?50:205},${dark?48:200},${dark?42:182},${a})`)
-    g.addColorStop(1, `rgba(${dark?50:205},${dark?48:200},${dark?42:182},0)`)
-    cx.fillStyle = g; cx.fillRect(0, 0, S, S)
+    g.addColorStop(0, `rgba(${v},${v},${v},${a})`)
+    g.addColorStop(1, `rgba(${v},${v},${v},0)`)
+    cx.fillStyle = g; cx.fillRect(0,0,S,S)
   }
 
-  // ── Maria (real positions, fills entire canvas so no black areas on sphere) ──
+  // ── Maria — very dark volcanic plains ──
   const maria: [number,number,number,number,number][] = [
-    [.22,.45,.22,1.65,.78],  // Oceanus Procellarum (largest)
-    [.43,.30,.13,1.00,.78],  // Mare Imbrium
-    [.58,.33,.10,1.00,.72],  // Mare Serenitatis
-    [.61,.44,.10,1.00,.72],  // Mare Tranquillitatis
-    [.73,.37,.07,1.38,.75],  // Mare Crisium (oval)
-    [.66,.55,.09,1.00,.65],  // Mare Fecunditatis
-    [.63,.63,.055,1.00,.68], // Mare Nectaris
-    [.50,.41,.055,1.00,.55], // Mare Vaporum
-    [.38,.42,.055,1.00,.55], // Mare Insularum
-    [.28,.38,.04,1.00,.48],  // Sinus Iridum / Mare edge
+    [.22,.45,.24,1.60,.92],  // Oceanus Procellarum
+    [.43,.30,.14,1.00,.88],  // Mare Imbrium
+    [.58,.33,.11,1.00,.85],  // Mare Serenitatis
+    [.61,.44,.11,1.00,.85],  // Mare Tranquillitatis
+    [.73,.37,.08,1.38,.88],  // Mare Crisium
+    [.66,.55,.10,1.00,.80],  // Mare Fecunditatis
+    [.63,.63,.060,1.00,.82], // Mare Nectaris
+    [.50,.41,.060,1.00,.68], // Mare Vaporum
+    [.38,.42,.060,1.00,.68], // Mare Insularum
+    [.28,.38,.045,1.00,.60], // Sinus Iridum
+    [.68,.25,.060,1.00,.72], // Mare Frigoris
+    [.18,.50,.080,1.00,.55], // Mare Orientale edge
   ]
   maria.forEach(([mx,my,mr,sy,op]) => {
     const g = cx.createRadialGradient(mx*S,my*S,0,mx*S,my*S,mr*S)
-    g.addColorStop(0, `rgba(52,50,42,${op})`)
-    g.addColorStop(.6, `rgba(65,62,54,${op*.52})`)
-    g.addColorStop(1, `rgba(80,77,68,0)`)
+    g.addColorStop(0, `rgba(18,17,16,${op})`)
+    g.addColorStop(.55,`rgba(28,27,25,${op*.60})`)
+    g.addColorStop(1, `rgba(40,38,36,0)`)
     cx.fillStyle = g
     cx.save(); cx.scale(1, sy)
     cx.beginPath(); cx.arc(mx*S, my*S/sy, mr*S, 0, Math.PI*2)
     cx.fill(); cx.restore()
   })
 
-  // ── Large craters (named) ──
-  const bigCr: [number,number,number,boolean][] = [
-    [.78,.72,18,true],  // Tycho
-    [.42,.68,16,true],  // Clavius
-    [.28,.72,13,false], // Longomontanus
-    [.55,.65,12,false], // Maginus
-    [.25,.28,11,false], // Plato
-    [.65,.22, 9,false], // Aristoteles
-    [.44,.22,10,true],  // Pythagoras area
-    [.35,.52, 8,false], // Grimaldi
-    [.80,.48, 7,false], // Langrenus
-    [.70,.60, 8,false], // Petavius
-  ]
-  bigCr.forEach(([cx_,cy_,r_,hasPeak]) => {
-    const px = cx_*S, py = cy_*S, r = r_
-    // Rim bright ring
-    const g1 = cx.createRadialGradient(px,py,r*.55,px,py,r*1.3)
-    g1.addColorStop(0,  'rgba(200,196,182,0)')
-    g1.addColorStop(.45,'rgba(218,214,198,.45)')
-    g1.addColorStop(.8, 'rgba(218,214,198,.28)')
-    g1.addColorStop(1,  'rgba(165,160,148,0)')
-    cx.fillStyle = g1; cx.beginPath(); cx.arc(px,py,r*1.35,0,Math.PI*2); cx.fill()
-    // Floor
-    const g2 = cx.createRadialGradient(px,py,0,px,py,r*.78)
-    g2.addColorStop(0, 'rgba(70,67,58,.72)')
-    g2.addColorStop(.65,'rgba(88,85,76,.35)')
-    g2.addColorStop(1, 'rgba(108,105,96,0)')
-    cx.fillStyle = g2; cx.beginPath(); cx.arc(px,py,r*.82,0,Math.PI*2); cx.fill()
+  // Helper: draw a single crater
+  const crater = (px: number, py: number, r: number, hasPeak = false) => {
+    // Bright ejecta blanket
+    const g0 = cx.createRadialGradient(px,py,r*.6,px,py,r*2.0)
+    g0.addColorStop(0,'rgba(110,108,104,0)')
+    g0.addColorStop(.35,'rgba(95,93,88,.28)')
+    g0.addColorStop(.7, 'rgba(75,73,68,.12)')
+    g0.addColorStop(1,  'rgba(55,53,50,0)')
+    cx.fillStyle = g0; cx.beginPath(); cx.arc(px,py,r*2.0,0,Math.PI*2); cx.fill()
+    // Bright rim
+    const g1 = cx.createRadialGradient(px,py,r*.72,px,py,r*1.25)
+    g1.addColorStop(0,  'rgba(120,118,114,0)')
+    g1.addColorStop(.42,'rgba(128,126,120,.55)')
+    g1.addColorStop(.75,'rgba(118,115,110,.30)')
+    g1.addColorStop(1,  'rgba(80,78,74,0)')
+    cx.fillStyle = g1; cx.beginPath(); cx.arc(px,py,r*1.28,0,Math.PI*2); cx.fill()
+    // Dark floor
+    const g2 = cx.createRadialGradient(px,py,0,px,py,r*.82)
+    g2.addColorStop(0, 'rgba(14,13,12,.82)')
+    g2.addColorStop(.6,'rgba(22,21,20,.45)')
+    g2.addColorStop(1, 'rgba(35,33,31,0)')
+    cx.fillStyle = g2; cx.beginPath(); cx.arc(px,py,r*.85,0,Math.PI*2); cx.fill()
     // Central peak
     if (hasPeak) {
-      const g3 = cx.createRadialGradient(px,py,0,px,py,r*.17)
-      g3.addColorStop(0,'rgba(218,214,198,.58)'); g3.addColorStop(1,'rgba(218,214,198,0)')
-      cx.fillStyle = g3; cx.beginPath(); cx.arc(px,py,r*.20,0,Math.PI*2); cx.fill()
+      const g3 = cx.createRadialGradient(px,py,0,px,py,r*.18)
+      g3.addColorStop(0,'rgba(130,128,124,.65)'); g3.addColorStop(1,'rgba(130,128,124,0)')
+      cx.fillStyle = g3; cx.beginPath(); cx.arc(px,py,r*.22,0,Math.PI*2); cx.fill()
     }
-  })
+  }
 
-  // Tycho ejecta rays
-  const tyX = .78*S, tyY = .72*S
-  for (let i = 0; i < 16; i++) {
-    const ang = (i/16)*Math.PI*2, len = 65 + Math.random()*120
+  // Large named craters
+  [[.78,.72,22,true],[.42,.68,20,true],[.28,.72,16,false],[.55,.65,15,false],
+   [.25,.28,14,false],[.65,.22,12,false],[.44,.22,13,true],[.35,.52,11,false],
+   [.80,.48,10,false],[.70,.60,11,false],[.48,.55,9,false],[.62,.28,8,false]
+  ].forEach(([x,y,r,p])=>crater(x as number*S,y as number*S,r as number,p as boolean))
+
+  // Tycho rays
+  const tyX=.78*S, tyY=.72*S
+  for (let i=0;i<20;i++) {
+    const ang=(i/20)*Math.PI*2, len=80+Math.random()*180
     cx.save(); cx.translate(tyX,tyY); cx.rotate(ang)
-    const g = cx.createLinearGradient(0,0,len,0)
-    g.addColorStop(0,  'rgba(225,220,205,.34)')
-    g.addColorStop(.5, 'rgba(225,220,205,.15)')
-    g.addColorStop(1,  'rgba(225,220,205,0)')
-    cx.strokeStyle = g; cx.lineWidth = 1.5 + Math.random()*2.2
-    cx.beginPath(); cx.moveTo(14,0); cx.lineTo(len,0); cx.stroke(); cx.restore()
+    const g=cx.createLinearGradient(0,0,len,0)
+    g.addColorStop(0,'rgba(140,138,132,.38)'); g.addColorStop(.5,'rgba(130,128,122,.16)'); g.addColorStop(1,'rgba(110,108,104,0)')
+    cx.strokeStyle=g; cx.lineWidth=1.8+Math.random()*2.8
+    cx.beginPath(); cx.moveTo(18,0); cx.lineTo(len,0); cx.stroke(); cx.restore()
   }
 
   // Medium craters
-  for (let i = 0; i < 60; i++) {
-    const px = Math.random()*S, py = Math.random()*S, r = 4+Math.random()*11
-    const g1 = cx.createRadialGradient(px,py,r*.55,px,py,r*1.25)
-    g1.addColorStop(0,'rgba(200,196,182,0)'); g1.addColorStop(.45,'rgba(215,210,196,.40)'); g1.addColorStop(1,'rgba(162,158,146,0)')
-    cx.fillStyle = g1; cx.beginPath(); cx.arc(px,py,r*1.3,0,Math.PI*2); cx.fill()
-    const g2 = cx.createRadialGradient(px,py,0,px,py,r*.75)
-    g2.addColorStop(0,'rgba(76,73,64,.62)'); g2.addColorStop(.65,'rgba(92,89,80,.30)'); g2.addColorStop(1,'rgba(112,109,100,0)')
-    cx.fillStyle = g2; cx.beginPath(); cx.arc(px,py,r*.80,0,Math.PI*2); cx.fill()
-  }
-
+  for (let i=0;i<180;i++) crater(Math.random()*S, Math.random()*S, 5+Math.random()*15)
   // Small craters
-  for (let i = 0; i < 240; i++) {
-    const px = Math.random()*S, py = Math.random()*S, r = 1.4+Math.random()*4
-    const g1 = cx.createRadialGradient(px,py,r*.58,px,py,r*1.22)
-    g1.addColorStop(0,'rgba(200,196,182,0)'); g1.addColorStop(.5,'rgba(215,210,196,.34)'); g1.addColorStop(1,'rgba(132,128,118,0)')
-    cx.fillStyle = g1; cx.beginPath(); cx.arc(px,py,r*1.25,0,Math.PI*2); cx.fill()
-    const g2 = cx.createRadialGradient(px,py,0,px,py,r*.8)
-    g2.addColorStop(0,'rgba(78,75,66,.52)'); g2.addColorStop(.65,'rgba(94,91,82,.24)'); g2.addColorStop(1,'rgba(116,113,104,0)')
-    cx.fillStyle = g2; cx.beginPath(); cx.arc(px,py,r,0,Math.PI*2); cx.fill()
+  for (let i=0;i<700;i++) crater(Math.random()*S, Math.random()*S, 1.5+Math.random()*5)
+  // Micro craters — gives the grainy texture seen in photos
+  for (let i=0;i<1800;i++) {
+    const px=Math.random()*S, py=Math.random()*S, r=0.6+Math.random()*2
+    const g=cx.createRadialGradient(px,py,0,px,py,r*1.4)
+    g.addColorStop(0,'rgba(8,8,8,.55)'); g.addColorStop(.6,'rgba(100,98,95,.22)'); g.addColorStop(1,'rgba(60,58,55,0)')
+    cx.fillStyle=g; cx.beginPath(); cx.arc(px,py,r*1.4,0,Math.PI*2); cx.fill()
   }
-
-  // Limb darkening
-  const limb = cx.createRadialGradient(S/2,S/2,S/2*.68,S/2,S/2,S/2*.98)
-  limb.addColorStop(0,'rgba(0,0,0,0)'); limb.addColorStop(1,'rgba(0,0,0,.32)')
-  cx.fillStyle = limb; cx.fillRect(0, 0, S, S)
 
   return new THREE.CanvasTexture(cv)
 }
@@ -198,99 +176,130 @@ function makeEarthTex(): THREE.CanvasTexture {
   cv.width = W; cv.height = H
   const cx = cv.getContext('2d')!
 
-  // Deep ocean base
-  cx.fillStyle = '#0B2D74'
+  // Vivid deep-ocean base
+  cx.fillStyle = '#1165C8'
   cx.fillRect(0, 0, W, H)
-  // Ocean depth shading: polar darker, tropical slightly brighter
+
+  // Ocean tone variation: tropical brighter, polar deeper
   const od = cx.createLinearGradient(0,0,0,H)
-  od.addColorStop(0,   'rgba(4,12,45,.55)')
+  od.addColorStop(0,   'rgba(5,18,68,.55)')
   od.addColorStop(.18, 'rgba(0,0,0,0)')
-  od.addColorStop(.50, 'rgba(18,60,160,.12)')
-  od.addColorStop(.82, 'rgba(0,0,0,0)')
-  od.addColorStop(1,   'rgba(4,12,45,.55)')
+  od.addColorStop(.40, 'rgba(30,120,210,.14)')  // equatorial sunlit
+  od.addColorStop(.65, 'rgba(0,0,0,0)')
+  od.addColorStop(1,   'rgba(5,18,68,.55)')
   cx.fillStyle = od; cx.fillRect(0,0,W,H)
 
+  // Shallow-water / sunlit-surface highlights (Caribbean, Pacific atolls)
+  const shallow = [
+    [.220,.430,.065,.028],[.230,.390,.045,.020],[.205,.460,.038,.018],
+    [.840,.520,.040,.015],[.890,.480,.030,.012],
+  ]
+  shallow.forEach(([x,y,rx,ry]) => {
+    const g = cx.createRadialGradient(x*W,y*H,0,x*W,y*H,rx*W)
+    g.addColorStop(0,'rgba(55,185,240,.30)'); g.addColorStop(.5,'rgba(30,150,210,.14)'); g.addColorStop(1,'rgba(0,0,0,0)')
+    cx.fillStyle=g; cx.beginPath(); cx.ellipse(x*W,y*H,rx*W,ry*H,0,0,Math.PI*2); cx.fill()
+  })
+
   const L = (x: number, y: number, rx: number, ry: number, rot: number, col: string, a=1.0) => {
-    cx.save(); cx.globalAlpha = a; cx.fillStyle = col
-    cx.translate(x*W, y*H); cx.rotate(rot)
+    cx.save(); cx.globalAlpha=a; cx.fillStyle=col
+    cx.translate(x*W,y*H); cx.rotate(rot)
     cx.beginPath(); cx.ellipse(0,0,rx*W,ry*H,0,0,Math.PI*2)
     cx.fill(); cx.restore()
   }
 
   // ── Africa ──
-  L(.555,.54,.050,.195,-.10,'#3E7020')       // rain-forest core
-  L(.555,.42,.042,.095, .12,'#6A8C2A')       // N Africa savanna
-  L(.565,.30,.035,.050,  .0,'#C8963C')       // Sahara
-  L(.540,.31,.028,.042,-.08,'#BD8C34')       // Sahara west
-  L(.580,.31,.018,.030, .20,'#D09840')       // Libya/Egypt
-  L(.608,.46,.016,.028, .30,'#8A8C30')       // Horn of Africa
-  L(.555,.66,.022,.030,  .0,'#3A6818')       // S Africa forest
-  // ── Arabian Peninsula ──
-  L(.618,.390,.022,.038, .12,'#C49240')
+  L(.555,.54,.050,.200,-.10,'#2E6015')   // equatorial rain forest
+  L(.555,.43,.043,.095, .12,'#6A8820')   // N savanna
+  L(.562,.30,.038,.052,  .0,'#C89030')   // Sahara
+  L(.538,.31,.030,.045,-.08,'#BB8828')   // W Sahara
+  L(.578,.30,.020,.032, .22,'#CC9838')   // Libya/Egypt
+  L(.610,.47,.015,.026, .32,'#888828')   // Horn
+  L(.553,.68,.024,.032,  .0,'#306010')   // S Africa
+  // ── Arabia ──
+  L(.620,.390,.022,.040, .12,'#C08C30')
   // ── Europe ──
-  L(.528,.268,.034,.058, .18,'#527A2A')
-  L(.525,.215,.015,.040,-.15,'#4A7225')      // Scandinavia
-  L(.510,.285,.012,.020,  .0,'#5E8C30')      // Iberia
+  L(.528,.268,.035,.060, .18,'#4A7820')
+  L(.524,.212,.016,.042,-.15,'#406A1A')  // Scandinavia
+  L(.508,.288,.013,.022,  .0,'#528022')  // Iberia
   // ── Asia ──
-  L(.715,.280,.128,.108,-.07,'#4E8025')      // main mass
-  L(.740,.195,.100,.075,-.05,'#3C6C20')      // Siberia
-  L(.672,.278,.058,.048,  .0,'#A88A38')      // Central Asia arid
-  L(.628,.318,.032,.038,  .0,'#BC9240')      // Middle East
-  L(.646,.418,.028,.068, .04,'#578828')      // Indian subcontinent
-  L(.792,.458,.036,.040, .10,'#407A20')      // SE Asia
-  L(.844,.462,.020,.022,  .0,'#407A20')
-  L(.834,.278,.010,.022,-.10,'#457825')      // Japan
+  L(.718,.278,.130,.110,-.07,'#468018')  // main landmass
+  L(.742,.192,.102,.078,-.05,'#345E14')  // Siberia
+  L(.675,.275,.060,.050,  .0,'#A08228')  // C Asia arid
+  L(.628,.316,.034,.040,  .0,'#B88828')  // Middle East
+  L(.648,.420,.028,.072, .04,'#508020')  // Indian sub
+  L(.793,.458,.037,.042, .10,'#387818')  // SE Asia
+  L(.845,.463,.020,.022,  .0,'#387818')
+  L(.834,.278,.011,.023,-.10,'#407020')  // Japan
   // ── North America ──
-  L(.208,.285,.078,.122,-.18,'#487A26')
-  L(.232,.190,.042,.052,-.28,'#406820')
-  L(.205,.380,.022,.030, .08,'#509025')      // Mexico
-  L(.158,.118,.025,.060,-.10,'#C5D8EC')      // Greenland
+  L(.208,.285,.080,.125,-.18,'#427820')  // E forests + center
+  L(.175,.255,.048,.065,-.22,'#886825')  // W deserts/Rockies
+  L(.232,.192,.042,.055,-.28,'#3A6518')  // Canada forests
+  L(.206,.382,.023,.032, .08,'#4A8018')  // Mexico
+  L(.158,.118,.026,.060,-.10,'#C2D5EA')  // Greenland ice
   // ── South America ──
-  L(.282,.615,.042,.148, .12,'#2E7015')      // Amazon rain forest
-  L(.280,.440,.026,.052, .06,'#3E7820')
-  L(.310,.690,.022,.030, .15,'#5A8028')      // Patagonia
+  L(.282,.618,.043,.150, .12,'#246010')  // Amazon — very dark green
+  L(.280,.442,.027,.053, .06,'#347018')
+  L(.312,.692,.022,.032, .15,'#487820')  // Patagonia
+  L(.295,.565,.018,.025, .05,'#8A7830')  // Atacama
   // ── Australia ──
-  L(.876,.652,.046,.052, .08,'#B07A2A')      // arid interior
-  L(.858,.610,.018,.018,  .0,'#A07025')
-  L(.900,.630,.014,.018,  .0,'#9A6C22')
-  L(.868,.680,.014,.020, .10,'#5A7C28')      // E coast greener
+  L(.877,.652,.048,.054, .08,'#A87020')  // red interior
+  L(.858,.612,.020,.020,  .0,'#986818')
+  L(.902,.632,.015,.020,  .0,'#906015')
+  L(.870,.682,.016,.022, .10,'#507820')  // E green coast
   // ── Madagascar ──
-  L(.596,.606,.010,.023, .05,'#528025')
+  L(.597,.607,.011,.024, .05,'#4A7818')
   // ── New Zealand ──
-  L(.938,.720,.007,.016,-.10,'#4A7825')
+  L(.938,.722,.007,.017,-.10,'#457020')
 
-  // Antarctica
-  const ant = cx.createLinearGradient(0,H*.76,0,H)
-  ant.addColorStop(0,  'rgba(195,215,238,0)')
-  ant.addColorStop(.28,'rgba(208,225,245,.90)')
-  ant.addColorStop(1,  'rgba(228,242,255,1.0)')
-  cx.fillStyle = ant; cx.fillRect(0,H*.74,W,H*.26)
-
+  // Antarctica — bright ice
+  const ant = cx.createLinearGradient(0,H*.74,0,H)
+  ant.addColorStop(0,  'rgba(190,212,240,0)')
+  ant.addColorStop(.22,'rgba(210,228,248,.92)')
+  ant.addColorStop(1,  'rgba(232,245,255,1.0)')
+  cx.fillStyle=ant; cx.fillRect(0,H*.72,W,H*.28)
   // Arctic
-  const arc = cx.createLinearGradient(0,0,0,H*.15)
-  arc.addColorStop(0,  'rgba(228,242,255,.96)')
-  arc.addColorStop(.55,'rgba(208,225,245,.58)')
-  arc.addColorStop(1,  'rgba(195,215,238,0)')
-  cx.fillStyle = arc; cx.fillRect(0,0,W,H*.15)
+  const arc = cx.createLinearGradient(0,0,0,H*.16)
+  arc.addColorStop(0,  'rgba(232,245,255,.96)')
+  arc.addColorStop(.5, 'rgba(210,228,248,.55)')
+  arc.addColorStop(1,  'rgba(190,212,240,0)')
+  cx.fillStyle=arc; cx.fillRect(0,0,W,H*.16)
 
-  // Polar atmospheric blue haze
+  // Atmospheric polar haze (blue)
   const ph = cx.createLinearGradient(0,0,0,H)
-  ph.addColorStop(0,   'rgba(70,120,210,.14)'); ph.addColorStop(.14,'rgba(70,120,210,0)')
-  ph.addColorStop(.86, 'rgba(70,120,210,0)');   ph.addColorStop(1,  'rgba(70,120,210,.14)')
-  cx.fillStyle = ph; cx.fillRect(0,0,W,H)
+  ph.addColorStop(0,   'rgba(60,110,200,.18)'); ph.addColorStop(.13,'rgba(60,110,200,0)')
+  ph.addColorStop(.87, 'rgba(60,110,200,0)');   ph.addColorStop(1,  'rgba(60,110,200,.18)')
+  cx.fillStyle=ph; cx.fillRect(0,0,W,H)
 
-  // Cloud wisps — elongated, semi-transparent
-  for (let i = 0; i < 65; i++) {
-    const cx_ = Math.random()*W, cy_ = H*.07+Math.random()*H*.86
-    const rx = 24+Math.random()*90, ry = rx*(0.10+Math.random()*.20)
-    const rot = (Math.random()-.5)*.7
-    const op = 0.13+Math.random()*.22
-    const g = cx.createRadialGradient(cx_,cy_,0,cx_,cy_,rx)
-    g.addColorStop(0,  `rgba(255,255,255,${op})`)
-    g.addColorStop(.45,`rgba(250,252,255,${op*.55})`)
-    g.addColorStop(1,  'rgba(255,255,255,0)')
-    cx.fillStyle = g
-    cx.beginPath(); cx.ellipse(cx_,cy_,rx,ry,rot,0,Math.PI*2); cx.fill()
+  // ── Clouds — large swirling systems, ~45% coverage ──
+  // Big cloud masses
+  for (let i=0;i<18;i++) {
+    const cx_=Math.random()*W, cy_=H*.08+Math.random()*H*.84
+    const rx=80+Math.random()*140, ry=rx*(0.25+Math.random()*.35)
+    const rot=(Math.random()-.5)*.9
+    const op=0.55+Math.random()*.30
+    const g=cx.createRadialGradient(cx_,cy_,0,cx_,cy_,rx)
+    g.addColorStop(0,`rgba(255,255,255,${op})`); g.addColorStop(.4,`rgba(252,252,255,${op*.6})`); g.addColorStop(1,'rgba(255,255,255,0)')
+    cx.fillStyle=g; cx.beginPath(); cx.ellipse(cx_,cy_,rx,ry,rot,0,Math.PI*2); cx.fill()
+  }
+  // Medium cloud patches
+  for (let i=0;i<45;i++) {
+    const cx_=Math.random()*W, cy_=H*.06+Math.random()*H*.88
+    const rx=30+Math.random()*80, ry=rx*(0.15+Math.random()*.25)
+    const rot=(Math.random()-.5)*.7
+    const op=0.35+Math.random()*.40
+    const g=cx.createRadialGradient(cx_,cy_,0,cx_,cy_,rx)
+    g.addColorStop(0,`rgba(255,255,255,${op})`); g.addColorStop(.5,`rgba(250,252,255,${op*.5})`); g.addColorStop(1,'rgba(255,255,255,0)')
+    cx.fillStyle=g; cx.beginPath(); cx.ellipse(cx_,cy_,rx,ry,rot,0,Math.PI*2); cx.fill()
+  }
+  // Wispy cloud streaks
+  for (let i=0;i<60;i++) {
+    const cx_=Math.random()*W, cy_=H*.05+Math.random()*H*.90
+    const rx=18+Math.random()*55, ry=rx*(0.08+Math.random()*.14)
+    const rot=(Math.random()-.5)*.55
+    const op=0.20+Math.random()*.28
+    const g=cx.createRadialGradient(cx_,cy_,0,cx_,cy_,rx)
+    g.addColorStop(0,`rgba(255,255,255,${op})`); g.addColorStop(1,'rgba(255,255,255,0)')
+    cx.fillStyle=g; cx.beginPath(); cx.ellipse(cx_,cy_,rx,ry,rot,0,Math.PI*2); cx.fill()
   }
 
   return new THREE.CanvasTexture(cv)
@@ -476,7 +485,7 @@ function buildNebulae(scene: THREE.Scene) {
 // ─── Moon ─────────────────────────────────────────────────────────────
 function buildMoon(scene: THREE.Scene): THREE.Mesh {
   const mesh = new THREE.Mesh(
-    new THREE.SphereGeometry(17, 128, 128),
+    new THREE.SphereGeometry(22, 128, 128),
     new THREE.MeshPhongMaterial({ map: makeMoonTex(), shininess: 3, specular: new THREE.Color(0x0a0a0a) })
   )
   const MAZ = 1.25, MEL = 0.44
@@ -495,8 +504,8 @@ function buildMoon(scene: THREE.Scene): THREE.Mesh {
 // ─── Earth ────────────────────────────────────────────────────────────
 function buildEarth(scene: THREE.Scene): THREE.Mesh {
   const mesh = new THREE.Mesh(
-    new THREE.SphereGeometry(26, 128, 128),
-    new THREE.MeshPhongMaterial({ map: makeEarthTex(), shininess: 28, specular: new THREE.Color(0x1a3a6a) })
+    new THREE.SphereGeometry(32, 128, 128),
+    new THREE.MeshPhongMaterial({ map: makeEarthTex(), shininess: 35, specular: new THREE.Color(0x1a4080) })
   )
   const EAZ = 0.80, EEL = 0.52
   mesh.position.set(
@@ -508,7 +517,7 @@ function buildEarth(scene: THREE.Scene): THREE.Mesh {
   const atmo = new THREE.Sprite(new THREE.SpriteMaterial({
     map: makeGlowTex(90,155,255), transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, opacity:.65,
   }))
-  atmo.position.copy(mesh.position); atmo.scale.setScalar(180); scene.add(atmo)
+  atmo.position.copy(mesh.position); atmo.scale.setScalar(220); scene.add(atmo)
   return mesh
 }
 
