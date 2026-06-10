@@ -77,6 +77,24 @@ export function FAQ() {
     <section id="faq" className="py-24 bg-[var(--bg-base)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="bg-[var(--bg-surface)] border border-[var(--border-sm)] rounded-sm px-6 py-2"
+          >
+            {faqs.map((faq, i) => (
+              <FAQItem
+                key={i}
+                q={faq.q}
+                a={faq.a}
+                isOpen={openIndex === i}
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              />
+            ))}
+          </motion.div>
+
           <div className="lg:sticky lg:top-28">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -136,24 +154,6 @@ export function FAQ() {
               </a>
             </motion.div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="bg-[var(--bg-surface)] border border-[var(--border-sm)] rounded-sm px-6 py-2"
-          >
-            {faqs.map((faq, i) => (
-              <FAQItem
-                key={i}
-                q={faq.q}
-                a={faq.a}
-                isOpen={openIndex === i}
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              />
-            ))}
-          </motion.div>
         </div>
       </div>
     </section>
