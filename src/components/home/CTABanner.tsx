@@ -12,7 +12,7 @@ export function CTABanner() {
     <section className="relative py-24 overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=1920&q=80"
+          src="/gallery/desert1.jpg"
           alt="Desert adventure"
           fill
           className="object-cover"
