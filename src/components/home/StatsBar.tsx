@@ -27,15 +27,25 @@ export function StatsBar() {
     { icon: '⏱️', value: '15',      label: t.stats_years_label,       sub: t.stats_years_sub },
   ]
 
+  // 4 copies so the loop is seamless even if the viewport is very wide
+  const repeated = [...stats, ...stats, ...stats, ...stats]
+
   return (
     <section className="bg-[var(--bg-surface)] border-y border-[var(--border-sm)] overflow-hidden py-6">
-      <div
-        className="flex"
-        style={{ animation: 'marquee 30s linear infinite', width: 'max-content' }}
-      >
-        {[...stats, ...stats].map((stat, i) => (
-          <MarqueeItem key={i} {...stat} />
-        ))}
+      {/* dir="ltr" forces left-to-right scroll even in RTL/Hebrew mode */}
+      <div dir="ltr" className="relative w-full overflow-hidden">
+        <div
+          className="flex"
+          style={{
+            animation: 'marquee 40s linear infinite',
+            width: 'max-content',
+            willChange: 'transform',
+          }}
+        >
+          {repeated.map((stat, i) => (
+            <MarqueeItem key={i} {...stat} />
+          ))}
+        </div>
       </div>
     </section>
   )
