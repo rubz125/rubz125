@@ -116,7 +116,6 @@ export const translations = {
     footer_privacy: 'Privacy Policy',
     footer_terms: 'Terms of Service',
 
-    // Contact page
     contact_eyebrow: 'Get in Touch',
     contact_title: 'Contact Us',
     contact_subtitle: "Questions, custom tours, or just want to say hello — we'd love to hear from you.",
@@ -140,7 +139,7 @@ export const translations = {
     contact_subject: 'Subject',
     contact_subject_ph: 'Select a subject',
     contact_message: 'Message',
-    contact_message_ph: 'Tell us about your group, preferred dates, and what you\'re looking for...',
+    contact_message_ph: "Tell us about your group, preferred dates, and what you're looking for...",
     contact_submit: 'Send Message',
     contact_sent_title: 'Message Sent!',
     contact_sent_desc: "We'll be in touch within 2 hours. Check your inbox at",
@@ -150,6 +149,15 @@ export const translations = {
     contact_opt4: 'Wedding / special occasion',
     contact_opt5: 'Press / media',
     contact_opt6: 'Other',
+
+    tours_eyebrow: 'Eilat Mountains',
+    tours_title1: 'Our',
+    tours_title2: ' Safaris',
+    tours_subtitle: 'An unforgettable Jeep adventure through the mountains of Eilat — panoramic views of Israel, Jordan and Egypt, desert wildlife, and a sunset campfire.',
+    tours_custom_title: 'Need Something Custom?',
+    tours_custom_desc: 'Large groups, corporate events, special occasions — we build bespoke safaris for any request.',
+    tours_custom_btn1: 'Chat With Us',
+    tours_custom_btn2: 'Send a Request',
   },
 
   fr: {
@@ -256,7 +264,6 @@ export const translations = {
     footer_privacy: 'Confidentialité',
     footer_terms: "Conditions d'utilisation",
 
-    // Contact page
     contact_eyebrow: 'Nous contacter',
     contact_title: 'Contactez-nous',
     contact_subtitle: "Questions, circuits sur mesure, ou juste envie de dire bonjour — nous serions ravis de vous entendre.",
@@ -290,6 +297,15 @@ export const translations = {
     contact_opt4: 'Mariage / occasion spéciale',
     contact_opt5: 'Presse / médias',
     contact_opt6: 'Autre',
+
+    tours_eyebrow: 'Monts Eilat',
+    tours_title1: 'Nos',
+    tours_title2: ' Safaris',
+    tours_subtitle: "Une aventure en Jeep inoubliable dans les montagnes d'Eilat — vues panoramiques sur Israël, la Jordanie et l'Égypte, faune du désert et feu de camp au coucher du soleil.",
+    tours_custom_title: 'Un circuit sur mesure ?',
+    tours_custom_desc: 'Grands groupes, événements d\'entreprise, occasions spéciales — nous créons des safaris personnalisés pour toute demande.',
+    tours_custom_btn1: 'Discuter sur WhatsApp',
+    tours_custom_btn2: 'Envoyer une demande',
   },
 
   he: {
@@ -396,7 +412,6 @@ export const translations = {
     footer_privacy: 'פרטיות',
     footer_terms: 'תנאי שירות',
 
-    // Contact page
     contact_eyebrow: 'צור קשר',
     contact_title: 'צרו קשר',
     contact_subtitle: 'שאלות, סיורים מותאמים אישית, או סתם רוצים להגיד שלום — נשמח לשמוע מכם.',
@@ -412,7 +427,7 @@ export const translations = {
     contact_hours_line2: "ו': 8:00-15:00 | שבת: סגור",
     contact_whatsapp_title: 'תגובה מהירה: וואטסאפ',
     contact_whatsapp_desc: 'אנחנו בדרך כלל עונים תוך דקות בשעות העבודה.',
-    contact_whatsapp_btn: 'פתח צ׳אט וואטסאפ',
+    contact_whatsapp_btn: "פתח צ'אט וואטסאפ",
     contact_form_title: 'שלח הודעה',
     contact_name: 'שם',
     contact_name_ph: 'שמך',
@@ -430,6 +445,15 @@ export const translations = {
     contact_opt4: 'חתונה / אירוע מיוחד',
     contact_opt5: 'עיתונות / מדיה',
     contact_opt6: 'אחר',
+
+    tours_eyebrow: 'הרי אילת',
+    tours_title1: 'הספארי',
+    tours_title2: ' שלנו',
+    tours_subtitle: 'הרפתקת ג׳יפ בלתי נשכחת בהרי אילת — נופים פנורמיים על ישראל, ירדן ומצרים, חיות המדבר ומדורה בשקיעה.',
+    tours_custom_title: 'רוצים משהו מותאם אישית?',
+    tours_custom_desc: 'קבוצות גדולות, אירועי חברה, אירועים מיוחדים — אנחנו בונים ספארי לכל בקשה.',
+    tours_custom_btn1: 'שוחח איתנו',
+    tours_custom_btn2: 'שלח בקשה',
   },
 }
 
