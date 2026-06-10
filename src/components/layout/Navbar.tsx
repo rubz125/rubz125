@@ -44,6 +44,7 @@ export function Navbar() {
         { label: t.nav_view_all, href: '/tours' },
       ],
     },
+    { label: t.nav_night_sky, href: '/night-sky' },
     { label: t.nav_about, href: '/about' },
     { label: t.nav_gallery, href: '/gallery' },
     { label: t.nav_reviews, href: '/#reviews' },

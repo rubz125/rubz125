@@ -4,6 +4,7 @@ export const translations = {
   en: {
     // Navbar
     nav_tours: 'Tours',
+    nav_night_sky: 'Night Sky',
     nav_about: 'About',
     nav_gallery: 'Gallery',
     nav_reviews: 'Reviews',
@@ -202,6 +203,7 @@ export const translations = {
 
   fr: {
     nav_tours: 'Circuits',
+    nav_night_sky: 'Ciel Étoilé',
     nav_about: 'À propos',
     nav_gallery: 'Galerie',
     nav_reviews: 'Avis',
@@ -391,6 +393,7 @@ export const translations = {
 
   he: {
     nav_tours: 'סיורים',
+    nav_night_sky: 'שמיים כוכבים',
     nav_about: 'אודות',
     nav_gallery: 'גלריה',
     nav_reviews: 'ביקורות',
