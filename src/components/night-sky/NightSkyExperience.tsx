@@ -12,17 +12,41 @@ const MIN_FOV  = 22
 const MAX_FOV  = 95
 const TRAIL_N  = 10
 
+// ─── Named stars (phi=azimuth rad, theta=elevation rad) ──────────────
+const NAMED_STARS = [
+  { name: 'Sirius',     phi: 1.20, theta:  0.18 },
+  { name: 'Canopus',    phi: 1.85, theta: -0.32 },
+  { name: 'Vega',       phi: 4.22, theta:  0.62 },
+  { name: 'Arcturus',   phi: 3.45, theta:  0.50 },
+  { name: 'Rigel',      phi: 0.98, theta:  0.10 },
+  { name: 'Betelgeuse', phi: 0.88, theta:  0.26 },
+  { name: 'Procyon',    phi: 1.58, theta:  0.23 },
+  { name: 'Aldebaran',  phi: 0.72, theta:  0.31 },
+  { name: 'Antares',    phi: 2.62, theta:  0.07 },
+  { name: 'Fomalhaut',  phi: 2.05, theta: -0.13 },
+  { name: 'Deneb',      phi: 4.52, theta:  0.59 },
+  { name: 'Altair',     phi: 3.82, theta:  0.37 },
+  { name: 'Spica',      phi: 2.95, theta:  0.20 },
+  { name: 'Regulus',    phi: 2.40, theta:  0.34 },
+  { name: 'Pollux',     phi: 1.42, theta:  0.44 },
+]
+
 // ─── Procedural textures ─────────────────────────────────────────────
 function makeMoonTex(): THREE.CanvasTexture {
   const S = 512
   const cv = document.createElement('canvas')
   cv.width = cv.height = S
   const cx = cv.getContext('2d')!
-  // Base gradient
+  // Clip to perfect circle so edges are crisp
+  cx.save()
+  cx.beginPath()
+  cx.arc(S / 2, S / 2, S / 2 - 1, 0, Math.PI * 2)
+  cx.clip()
+  // Base gradient (brighter than before for MeshBasicMaterial)
   const bg = cx.createRadialGradient(S * .42, S * .38, 0, S / 2, S / 2, S / 2)
-  bg.addColorStop(0,   '#CFCBBE')
-  bg.addColorStop(.55, '#BFBCB0')
-  bg.addColorStop(1,   '#AEACA0')
+  bg.addColorStop(0,   '#E2DDD0')
+  bg.addColorStop(.55, '#D2CEC0')
+  bg.addColorStop(1,   '#C2BEB0')
   cx.fillStyle = bg
   cx.fillRect(0, 0, S, S)
   // Maria (dark seas)
@@ -54,6 +78,13 @@ function makeMoonTex(): THREE.CanvasTexture {
     cx.fillStyle = g2
     cx.beginPath(); cx.arc(px,py,r,0,Math.PI*2); cx.fill()
   }
+  // Subtle limb darkening
+  const limb = cx.createRadialGradient(S/2,S/2,S/2*.78,S/2,S/2,S/2)
+  limb.addColorStop(0, 'rgba(0,0,0,0)')
+  limb.addColorStop(1, 'rgba(0,0,0,.30)')
+  cx.fillStyle = limb
+  cx.fillRect(0, 0, S, S)
+  cx.restore()
   return new THREE.CanvasTexture(cv)
 }
 
@@ -237,25 +268,23 @@ function buildNebulae(scene: THREE.Scene) {
   })
 }
 
-// ─── Moon ─────────────────────────────────────────────────────────────
+// ─── Moon — MeshBasicMaterial so it's always bright, 128 segments for smoothness ──
 function buildMoon(scene: THREE.Scene): THREE.Mesh {
-  const tex=makeMoonTex()
-  const mesh=new THREE.Mesh(
-    new THREE.SphereGeometry(17,56,56),
-    new THREE.MeshStandardMaterial({map:tex,roughness:1,metalness:0,color:new THREE.Color(1,.985,.88)})
+  const tex = makeMoonTex()
+  const mesh = new THREE.Mesh(
+    new THREE.SphereGeometry(17, 128, 128),
+    new THREE.MeshBasicMaterial({ map: tex })
   )
-  const MAZ=1.25, MEL=0.44
+  const MAZ = 1.25, MEL = 0.44
   mesh.position.set(
-    SKY_R*.71*Math.cos(MEL)*Math.sin(MAZ),
-    SKY_R*.71*Math.sin(MEL),
-    SKY_R*.71*Math.cos(MEL)*Math.cos(MAZ),
+    SKY_R * .71 * Math.cos(MEL) * Math.sin(MAZ),
+    SKY_R * .71 * Math.sin(MEL),
+    SKY_R * .71 * Math.cos(MEL) * Math.cos(MAZ),
   )
-  // Directional sunlight on moon
-  const sun=new THREE.DirectionalLight(0xfff8e0,2.8)
-  sun.position.set(mesh.position.x+120,mesh.position.y+65,mesh.position.z-80)
-  scene.add(sun)
-  // Halo (Sprite always faces camera)
-  const halo=new THREE.Sprite(new THREE.SpriteMaterial({map:makeGlowTex(225,215,168),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}))
+  const halo = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: makeGlowTex(225,215,168),
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  }))
   halo.position.copy(mesh.position)
   halo.scale.setScalar(115)
   scene.add(halo)
@@ -327,233 +356,281 @@ function tickShooter(s: Shooter, dt: number) {
 
 // ─── Component ────────────────────────────────────────────────────────
 export default function NightSkyExperience() {
-  const mountRef=useRef<HTMLDivElement>(null)
-  const [ready,setReady]=useState(false)
-  const [explore,setExplore]=useState(false)
-  const exploreRef=useRef(false)
+  const mountRef  = useRef<HTMLDivElement>(null)
+  const labelsRef = useRef<HTMLDivElement>(null)
+  const [ready, setReady] = useState(false)
+  const [explore, setExplore] = useState(false)
+  const exploreRef = useRef(false)
 
-  const S=useRef({
-    // three
-    renderer:null as THREE.WebGLRenderer|null,
-    scene:null as THREE.Scene|null,
-    camera:null as THREE.PerspectiveCamera|null,
-    clock:null as THREE.Clock|null,
-    starMats:[] as THREE.ShaderMaterial[],
-    shooters:[] as Shooter[],
-    raf:0,
-    // camera state
-    phi:DFLT_PHI,   theta:DFLT_EL,   fov:DFLT_FOV,
-    tPhi:DFLT_PHI, tTheta:DFLT_EL, tFov:DFLT_FOV,
-    vPhi:0, vTheta:0,
-    // input
-    down:false, lastX:0, lastY:0, lastTD:0,
-    nextShoot:3,
+  const S = useRef({
+    renderer: null as THREE.WebGLRenderer|null,
+    scene:    null as THREE.Scene|null,
+    camera:   null as THREE.PerspectiveCamera|null,
+    clock:    null as THREE.Clock|null,
+    starMats: [] as THREE.ShaderMaterial[],
+    shooters: [] as Shooter[],
+    raf: 0,
+    phi:   DFLT_PHI, theta:  DFLT_EL,  fov:   DFLT_FOV,
+    tPhi:  DFLT_PHI, tTheta: DFLT_EL,  tFov:  DFLT_FOV,
+    vPhi: 0, vTheta: 0,
+    down: false, lastX: 0, lastY: 0, lastTD: 0,
+    nextShoot: 3,
   })
 
-  useEffect(()=>{
-    if(!mountRef.current) return
-    const s=S.current
-    const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-    const el=mountRef.current
-    s.clock=new THREE.Clock()
+  useEffect(() => {
+    if (!mountRef.current) return
+    const s   = S.current
+    const mob = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    const el  = mountRef.current
+    s.clock   = new THREE.Clock()
 
-    // Renderer
-    const renderer=new THREE.WebGLRenderer({antialias:!mob,alpha:false,powerPreference:'high-performance'})
-    renderer.setSize(el.clientWidth,el.clientHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio,mob?1.5:2))
-    renderer.toneMapping=THREE.ACESFilmicToneMapping
-    renderer.toneMappingExposure=1.15
+    const renderer = new THREE.WebGLRenderer({antialias:!mob,alpha:false,powerPreference:'high-performance'})
+    renderer.setSize(el.clientWidth, el.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mob ? 1.5 : 2))
+    renderer.toneMapping = THREE.ACESFilmicToneMapping
+    renderer.toneMappingExposure = 1.15
     el.appendChild(renderer.domElement)
-    s.renderer=renderer
+    s.renderer = renderer
 
-    // Scene
-    const scene=new THREE.Scene()
-    s.scene=scene
-    scene.add(new THREE.AmbientLight(0x0d1220,.6))
+    const scene = new THREE.Scene()
+    s.scene = scene
+    scene.add(new THREE.AmbientLight(0x0d1220, .6))
 
-    // Camera
-    const cam=new THREE.PerspectiveCamera(DFLT_FOV,el.clientWidth/el.clientHeight,.1,SKY_R*2)
-    cam.position.set(0,0,0)
-    s.camera=cam
+    const cam = new THREE.PerspectiveCamera(DFLT_FOV, el.clientWidth / el.clientHeight, .1, SKY_R * 2)
+    cam.position.set(0, 0, 0)
+    s.camera = cam
 
-    // Build scene
     scene.add(buildSkyDome())
     buildNebulae(scene)
 
-    const bright=buildStars(mob?4800:9000,1.2,4.8,true)
+    const bright = buildStars(mob ? 4800 : 9000, 1.2, 4.8, true)
     scene.add(bright); s.starMats.push(bright.material as THREE.ShaderMaterial)
 
-    const faint=buildStars(mob?55000:155000,.25,1.15,false)
+    const faint = buildStars(mob ? 55000 : 155000, .25, 1.15, false)
     scene.add(faint); s.starMats.push(faint.material as THREE.ShaderMaterial)
 
-    const mw=buildMilkyWay(mob?110000:260000)
+    const mw = buildMilkyWay(mob ? 110000 : 260000)
     scene.add(mw); s.starMats.push(mw.material as THREE.ShaderMaterial)
 
-    const moon=buildMoon(scene)
+    const moon = buildMoon(scene)
     scene.add(moon)
 
-    for (let i=0;i<5;i++) s.shooters.push(makeShooter(scene))
+    for (let i = 0; i < 5; i++) s.shooters.push(makeShooter(scene))
 
-    // Animation loop
+    // Pre-compute 3D star positions for labels
+    const starVecs = NAMED_STARS.map(st => new THREE.Vector3(
+      SKY_R * Math.cos(st.theta) * Math.sin(st.phi),
+      SKY_R * Math.sin(st.theta),
+      SKY_R * Math.cos(st.theta) * Math.cos(st.phi),
+    ))
+    const projVec = new THREE.Vector3()
+
     function tick() {
-      s.raf=requestAnimationFrame(tick)
-      const dt=Math.min(s.clock!.getDelta(),.05)
-      const t=s.clock!.elapsedTime
-      s.starMats.forEach(m=>{if(m.uniforms.uTime)m.uniforms.uTime.value=t})
-      moon.rotation.y=t*.018
+      s.raf = requestAnimationFrame(tick)
+      const dt = Math.min(s.clock!.getDelta(), .05)
+      const t  = s.clock!.elapsedTime
+      s.starMats.forEach(m => { if (m.uniforms.uTime) m.uniforms.uTime.value = t })
+      moon.rotation.y = t * .018
 
-      if(!s.down){
-        if(Math.abs(s.vPhi)>.00005||Math.abs(s.vTheta)>.00005){
-          s.tPhi+=s.vPhi; s.tTheta+=s.vTheta
-          s.vPhi*=.90; s.vTheta*=.90
-          s.tTheta=Math.max(-1.47,Math.min(1.47,s.tTheta))
+      if (!s.down) {
+        if (Math.abs(s.vPhi) > .00005 || Math.abs(s.vTheta) > .00005) {
+          s.tPhi   += s.vPhi;   s.tTheta += s.vTheta
+          s.vPhi   *= .90;      s.vTheta *= .90
+          s.tTheta = Math.max(-1.47, Math.min(1.47, s.tTheta))
         }
       }
-      if(exploreRef.current){
-        s.tPhi+=.00016
-        s.tTheta+=Math.sin(t*.07)*.00005
+      if (exploreRef.current) {
+        s.tPhi  += .00016
+        s.tTheta += Math.sin(t * .07) * .00005
       }
 
-      const k=.072
-      s.phi  +=(s.tPhi  -s.phi  )*k
-      s.theta+=(s.tTheta-s.theta)*k
-      s.fov  +=(s.tFov  -s.fov  )*.1
-      s.theta=Math.max(-1.47,Math.min(1.47,s.theta))
-      cam.fov=s.fov; cam.updateProjectionMatrix()
+      const k = .072
+      s.phi   += (s.tPhi   - s.phi)   * k
+      s.theta += (s.tTheta - s.theta) * k
+      s.fov   += (s.tFov   - s.fov)   * .1
+      s.theta = Math.max(-1.47, Math.min(1.47, s.theta))
+      cam.fov = s.fov; cam.updateProjectionMatrix()
       cam.lookAt(
-        Math.cos(s.theta)*Math.sin(s.phi)*200,
-        Math.sin(s.theta)*200,
-        Math.cos(s.theta)*Math.cos(s.phi)*200,
+        Math.cos(s.theta) * Math.sin(s.phi) * 200,
+        Math.sin(s.theta) * 200,
+        Math.cos(s.theta) * Math.cos(s.phi) * 200,
       )
 
-      s.nextShoot-=dt
-      if(s.nextShoot<=0){
-        const free=s.shooters.find(sh=>!sh.active)
-        if(free) spawnShooter(free)
-        s.nextShoot=4+Math.random()*11
+      s.nextShoot -= dt
+      if (s.nextShoot <= 0) {
+        const free = s.shooters.find(sh => !sh.active)
+        if (free) spawnShooter(free)
+        s.nextShoot = 4 + Math.random() * 11
       }
-      s.shooters.forEach(sh=>tickShooter(sh,dt))
-      renderer.render(scene,cam)
+      s.shooters.forEach(sh => tickShooter(sh, dt))
+
+      // ── Star label projection ──────────────────────────────────
+      const lc = labelsRef.current
+      if (lc) {
+        const W = el.clientWidth, H = el.clientHeight
+        starVecs.forEach((vec, i) => {
+          const div = lc.children[i] as HTMLElement
+          if (!div) return
+          projVec.copy(vec).project(cam)
+          const inFront = projVec.z < 1
+          const inBounds = projVec.x > -.9 && projVec.x < .9 && projVec.y > -.88 && projVec.y < .88
+          if (inFront && inBounds) {
+            const sx = (projVec.x * .5 + .5) * W
+            const sy = (-projVec.y * .5 + .5) * H
+            const edge = Math.min(1, (0.88 - Math.max(Math.abs(projVec.x), Math.abs(projVec.y))) * 5)
+            div.style.left    = sx + 'px'
+            div.style.top     = sy + 'px'
+            div.style.opacity = String(Math.max(0, edge) * .70)
+            div.style.display = 'block'
+          } else {
+            div.style.display = 'none'
+          }
+        })
+      }
+
+      renderer.render(scene, cam)
     }
     tick()
     setReady(true)
 
-    // Resize
-    const ro=new ResizeObserver(()=>{
-      renderer.setSize(el.clientWidth,el.clientHeight)
-      cam.aspect=el.clientWidth/el.clientHeight
+    const ro = new ResizeObserver(() => {
+      renderer.setSize(el.clientWidth, el.clientHeight)
+      cam.aspect = el.clientWidth / el.clientHeight
       cam.updateProjectionMatrix()
     })
     ro.observe(el)
 
-    // ── Mouse ─────────────────────────────────────────────────────
-    const onDown=(e:MouseEvent)=>{
-      s.down=true; s.lastX=e.clientX; s.lastY=e.clientY
-      s.vPhi=0; s.vTheta=0
-      el.style.cursor='grabbing'
+    // ── Mouse (inverted: drag left → sky right, drag up → sky down) ──
+    const onDown = (e: MouseEvent) => {
+      s.down = true; s.lastX = e.clientX; s.lastY = e.clientY
+      s.vPhi = 0; s.vTheta = 0
+      el.style.cursor = 'grabbing'
     }
-    const onMove=(e:MouseEvent)=>{
-      if(!s.down) return
-      const sens=(s.fov/70)*.0022
-      const dx=e.clientX-s.lastX, dy=e.clientY-s.lastY
-      s.tPhi-=dx*sens; s.tTheta+=dy*sens
-      s.tTheta=Math.max(-1.47,Math.min(1.47,s.tTheta))
-      s.vPhi=-dx*sens*.28; s.vTheta=dy*sens*.28
-      s.lastX=e.clientX; s.lastY=e.clientY
+    const onMove = (e: MouseEvent) => {
+      if (!s.down) return
+      const sens = (s.fov / 70) * .0022
+      const dx = e.clientX - s.lastX, dy = e.clientY - s.lastY
+      s.tPhi   += dx * sens          // drag right → phi increases → sky moves right
+      s.tTheta -= dy * sens          // drag up    → theta decreases → sky moves down
+      s.tTheta  = Math.max(-1.47, Math.min(1.47, s.tTheta))
+      s.vPhi    =  dx * sens * .28
+      s.vTheta  = -dy * sens * .28
+      s.lastX   = e.clientX; s.lastY = e.clientY
     }
-    const onUp=()=>{ s.down=false; el.style.cursor='grab' }
-    const onWheel=(e:WheelEvent)=>{
+    const onUp = () => { s.down = false; el.style.cursor = 'grab' }
+    const onWheel = (e: WheelEvent) => {
       e.preventDefault()
-      s.tFov=Math.max(MIN_FOV,Math.min(MAX_FOV,s.tFov+e.deltaY*.038))
+      s.tFov = Math.max(MIN_FOV, Math.min(MAX_FOV, s.tFov + e.deltaY * .038))
     }
-    const onDbl=(e:MouseEvent)=>{
-      const W=el.clientWidth,H=el.clientHeight
-      const nx=(e.clientX/W-.5)*2, ny=-(e.clientY/H-.5)*2
-      const hfv=(s.fov*Math.PI/180)/2
-      s.tPhi  +=nx*hfv*(W/H)*.55
-      s.tTheta-=ny*hfv*.55
-      s.tFov=Math.max(MIN_FOV,s.tFov-18)
+    const onDbl = (e: MouseEvent) => {
+      const W = el.clientWidth, H = el.clientHeight
+      const nx = (e.clientX / W - .5) * 2, ny = -(e.clientY / H - .5) * 2
+      const hfv = (s.fov * Math.PI / 180) / 2
+      s.tPhi   += nx * hfv * (W / H) * .55
+      s.tTheta -= ny * hfv * .55
+      s.tFov    = Math.max(MIN_FOV, s.tFov - 18)
     }
 
     // ── Touch ─────────────────────────────────────────────────────
-    const onTS=(e:TouchEvent)=>{
+    const onTS = (e: TouchEvent) => {
       e.preventDefault()
-      if(e.touches.length===1){
-        s.down=true; s.lastX=e.touches[0].clientX; s.lastY=e.touches[0].clientY
-        s.vPhi=0; s.vTheta=0
-      } else if(e.touches.length===2){
-        s.down=false
-        s.lastTD=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY)
+      if (e.touches.length === 1) {
+        s.down = true; s.lastX = e.touches[0].clientX; s.lastY = e.touches[0].clientY
+        s.vPhi = 0; s.vTheta = 0
+      } else if (e.touches.length === 2) {
+        s.down = false
+        s.lastTD = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY)
       }
     }
-    const onTM=(e:TouchEvent)=>{
+    const onTM = (e: TouchEvent) => {
       e.preventDefault()
-      if(e.touches.length===1&&s.down){
-        const sens=(s.fov/70)*.0028
-        const dx=e.touches[0].clientX-s.lastX, dy=e.touches[0].clientY-s.lastY
-        s.tPhi-=dx*sens; s.tTheta+=dy*sens
-        s.tTheta=Math.max(-1.47,Math.min(1.47,s.tTheta))
-        s.vPhi=-dx*sens*.22; s.vTheta=dy*sens*.22
-        s.lastX=e.touches[0].clientX; s.lastY=e.touches[0].clientY
-      } else if(e.touches.length===2){
-        const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY)
-        s.tFov=Math.max(MIN_FOV,Math.min(MAX_FOV,s.tFov*(s.lastTD/d)))
-        s.lastTD=d
+      if (e.touches.length === 1 && s.down) {
+        const sens = (s.fov / 70) * .0028
+        const dx = e.touches[0].clientX - s.lastX, dy = e.touches[0].clientY - s.lastY
+        s.tPhi   -= dx * sens; s.tTheta += dy * sens
+        s.tTheta  = Math.max(-1.47, Math.min(1.47, s.tTheta))
+        s.vPhi = -dx * sens * .22; s.vTheta = dy * sens * .22
+        s.lastX = e.touches[0].clientX; s.lastY = e.touches[0].clientY
+      } else if (e.touches.length === 2) {
+        const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY)
+        s.tFov = Math.max(MIN_FOV, Math.min(MAX_FOV, s.tFov * (s.lastTD / d)))
+        s.lastTD = d
       }
     }
-    const onTE=(e:TouchEvent)=>{ if(e.touches.length===0)s.down=false }
+    const onTE = (e: TouchEvent) => { if (e.touches.length === 0) s.down = false }
 
     // ── Keyboard ──────────────────────────────────────────────────
-    const onKey=(e:KeyboardEvent)=>{
-      const sp=.04
-      if(e.key==='ArrowLeft')  s.tPhi-=sp
-      if(e.key==='ArrowRight') s.tPhi+=sp
-      if(e.key==='ArrowUp')    s.tTheta+=sp
-      if(e.key==='ArrowDown')  s.tTheta-=sp
-      if(e.key==='+'||e.key==='=') s.tFov=Math.max(MIN_FOV,s.tFov-5)
-      if(e.key==='-')              s.tFov=Math.min(MAX_FOV,s.tFov+5)
+    const onKey = (e: KeyboardEvent) => {
+      const sp = .04
+      if (e.key === 'ArrowLeft')  s.tPhi -= sp
+      if (e.key === 'ArrowRight') s.tPhi += sp
+      if (e.key === 'ArrowUp')    s.tTheta += sp
+      if (e.key === 'ArrowDown')  s.tTheta -= sp
+      if (e.key === '+' || e.key === '=') s.tFov = Math.max(MIN_FOV, s.tFov - 5)
+      if (e.key === '-')                  s.tFov = Math.min(MAX_FOV, s.tFov + 5)
     }
 
-    el.addEventListener('mousedown',onDown)
-    window.addEventListener('mousemove',onMove)
-    window.addEventListener('mouseup',onUp)
-    el.addEventListener('wheel',onWheel,{passive:false})
-    el.addEventListener('dblclick',onDbl)
-    el.addEventListener('touchstart',onTS,{passive:false})
-    el.addEventListener('touchmove',onTM,{passive:false})
-    el.addEventListener('touchend',onTE)
-    window.addEventListener('keydown',onKey)
-    el.style.cursor='grab'
+    el.addEventListener('mousedown', onDown)
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('mouseup', onUp)
+    el.addEventListener('wheel', onWheel, {passive: false})
+    el.addEventListener('dblclick', onDbl)
+    el.addEventListener('touchstart', onTS, {passive: false})
+    el.addEventListener('touchmove', onTM, {passive: false})
+    el.addEventListener('touchend', onTE)
+    window.addEventListener('keydown', onKey)
+    el.style.cursor = 'grab'
 
-    return ()=>{
+    return () => {
       cancelAnimationFrame(s.raf)
       ro.disconnect()
-      el.removeEventListener('mousedown',onDown)
-      window.removeEventListener('mousemove',onMove)
-      window.removeEventListener('mouseup',onUp)
-      el.removeEventListener('wheel',onWheel)
-      el.removeEventListener('dblclick',onDbl)
-      el.removeEventListener('touchstart',onTS)
-      el.removeEventListener('touchmove',onTM)
-      el.removeEventListener('touchend',onTE)
-      window.removeEventListener('keydown',onKey)
+      el.removeEventListener('mousedown', onDown)
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseup', onUp)
+      el.removeEventListener('wheel', onWheel)
+      el.removeEventListener('dblclick', onDbl)
+      el.removeEventListener('touchstart', onTS)
+      el.removeEventListener('touchmove', onTM)
+      el.removeEventListener('touchend', onTE)
+      window.removeEventListener('keydown', onKey)
       renderer.dispose()
-      if(el.contains(renderer.domElement)) el.removeChild(renderer.domElement)
+      if (el.contains(renderer.domElement)) el.removeChild(renderer.domElement)
     }
-  },[])
+  }, [])
 
-  const toggleExplore=()=>{ const n=!explore; setExplore(n); exploreRef.current=n }
-  const resetView=()=>{ const s=S.current; s.tPhi=DFLT_PHI; s.tTheta=DFLT_EL; s.tFov=DFLT_FOV; s.vPhi=0; s.vTheta=0 }
-  const zoom=(d:number)=>{ const s=S.current; s.tFov=Math.max(MIN_FOV,Math.min(MAX_FOV,s.tFov+d)) }
+  const toggleExplore = () => { const n = !explore; setExplore(n); exploreRef.current = n }
+  const resetView = () => {
+    const s = S.current
+    s.tPhi = DFLT_PHI; s.tTheta = DFLT_EL; s.tFov = DFLT_FOV; s.vPhi = 0; s.vTheta = 0
+  }
+  const zoom = (d: number) => { const s = S.current; s.tFov = Math.max(MIN_FOV, Math.min(MAX_FOV, s.tFov + d)) }
 
   return (
     <div className="relative w-full h-screen bg-black overflow-hidden select-none">
       {/* Three.js canvas */}
       <div ref={mountRef} className="absolute inset-0" tabIndex={0} aria-label="Interactive night sky. Drag to look around, scroll to zoom." />
 
+      {/* Star name labels — always mounted so labelsRef is ready for RAF loop */}
+      <div ref={labelsRef} className="absolute inset-0 pointer-events-none z-10" style={{overflow:'hidden'}}>
+        {NAMED_STARS.map((star, i) => (
+          <div key={i} className="absolute" style={{display:'none', left:0, top:0}}>
+            <div className="flex flex-col items-center gap-[3px]" style={{transform:'translate(-50%, calc(-100% - 6px))'}}>
+              <span
+                className="text-white/60 font-light whitespace-nowrap"
+                style={{fontSize:'9px', letterSpacing:'0.18em', textTransform:'uppercase', textShadow:'0 0 6px rgba(0,0,0,1),0 0 12px rgba(0,0,0,.8)'}}
+              >
+                {star.name}
+              </span>
+              <div className="w-[1px] h-[5px] bg-white/20" />
+              <div className="w-[3px] h-[3px] rounded-full bg-white/35" />
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Loading */}
-      {!ready&&(
-        <div className="absolute inset-0 bg-black flex items-center justify-center z-10">
+      {!ready && (
+        <div className="absolute inset-0 bg-black flex items-center justify-center z-20">
           <div className="text-center space-y-3">
             <div className="w-8 h-8 border-2 border-[#D4A843] border-t-transparent rounded-full animate-spin mx-auto"/>
             <p className="text-[#D4A843]/80 text-xs tracking-[.25em] uppercase">Rendering the sky…</p>
@@ -561,7 +638,7 @@ export default function NightSkyExperience() {
         </div>
       )}
 
-      {ready&&(<>
+      {ready && (<>
         {/* Top bar */}
         <div className="absolute top-0 inset-x-0 flex items-start justify-between px-5 pt-5 pointer-events-none z-20">
           <Link href="/" className="pointer-events-auto inline-flex items-center gap-1.5 text-white/40 hover:text-white/80 transition-colors duration-300 text-xs tracking-[.18em] uppercase">
@@ -580,8 +657,8 @@ export default function NightSkyExperience() {
         {/* Right controls */}
         <div className="absolute right-4 sm:right-6 bottom-[5.5rem] sm:bottom-24 flex flex-col gap-2 z-20">
           {([
-            {label:'+',fn:()=>zoom(-10),aria:'Zoom in'},
-            {label:'−',fn:()=>zoom(+10),aria:'Zoom out'},
+            {label:'+', fn:()=>zoom(-10), aria:'Zoom in'},
+            {label:'−', fn:()=>zoom(+10), aria:'Zoom out'},
           ] as {label:string;fn:()=>void;aria:string}[]).map(({label,fn,aria})=>(
             <button key={label} onClick={fn} aria-label={aria}
               className="w-10 h-10 rounded-sm bg-black/50 border border-white/12 text-white/55 hover:text-white hover:border-white/35 hover:bg-black/70 transition-all flex items-center justify-center text-xl font-light backdrop-blur-md">
@@ -602,8 +679,8 @@ export default function NightSkyExperience() {
                 ? 'bg-[#D4A843]/18 border-[#D4A843]/45 text-[#D4A843]'
                 : 'bg-black/45 border-white/12 text-white/45 hover:text-white/75 hover:border-white/28'
             }`}>
-            <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${explore?'bg-[#D4A843] animate-pulse':'bg-white/25'}`}/>
-            {explore?'Exploring…':'Explore Mode'}
+            <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${explore ? 'bg-[#D4A843] animate-pulse' : 'bg-white/25'}`}/>
+            {explore ? 'Exploring…' : 'Explore Mode'}
           </button>
           <p className="text-white/18 text-[9px] tracking-[.14em] uppercase hidden sm:block">
             Arrow keys · +/- to zoom
