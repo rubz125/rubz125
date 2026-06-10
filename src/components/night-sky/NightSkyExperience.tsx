@@ -68,8 +68,8 @@ function makeMoonTex(): THREE.CanvasTexture {
 
   // Base surface (warm gray, slight off-center gradient for depth)
   const bg = cx.createRadialGradient(S*.42, S*.38, 0, S/2, S/2, S*.72)
-  bg.addColorStop(0,   '#E0DBcB')
-  bg.addColorStop(.6,  '#CECBA')
+  bg.addColorStop(0,   '#E0DBCB')
+  bg.addColorStop(.6,  '#CECBB8')
   bg.addColorStop(1,   '#BFBCAA')
   cx.fillStyle = '#CFCBB8'
   cx.fillRect(0, 0, S, S)
