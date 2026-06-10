@@ -135,9 +135,8 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
-              <a href="tel:+972525217029" className={`flex items-center gap-2 transition-colors duration-200 text-sm hover:text-[var(--sand-light)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
+              <a href="tel:+972525217029" aria-label="+972-52-521-7029" className={`flex items-center transition-colors duration-200 hover:text-[var(--sand-light)] ${scrolled ? 'text-[var(--text-2)]' : 'text-white/80'}`}>
                 <Phone className="w-4 h-4" />
-                <span>+972-52-521-7029</span>
               </a>
               <button
                 onClick={toggleTheme}
