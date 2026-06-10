@@ -51,7 +51,7 @@ export function TourCard({ tour, featured = false }: TourCardProps) {
             {tour.difficulty}
           </span>
         </div>
-        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white/80 text-xs">
+        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white text-xs bg-black/50 backdrop-blur-sm px-2 py-1 rounded-sm">
           <MapPin className="w-3 h-3 text-[var(--gold)]" />
           <span>{tour.region}</span>
         </div>

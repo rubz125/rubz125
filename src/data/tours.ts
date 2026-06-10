@@ -219,11 +219,11 @@ export const tours: Tour[] = [
     whatToBringFr: ['Chapeau ou casquette', 'Lunettes de soleil', "Bouteille d'eau personnelle", 'Chaussures de marche', 'Couche chaude (soirée)'],
     whatToBringHe: ['כובע או מצחייה', 'משקפי שמש', 'בקבוק מים אישי', 'נעלי הליכה', 'שכבה חמה (לערב)'],
 
-    image: 'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=800&q=80',
+    image: '/gallery/BALLADE-EN-JEEP-2.jpg.jpeg',
     gallery: [
-      'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=800&q=80',
-      'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80',
-      'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&q=80',
+      '/gallery/BALLADE-EN-JEEP-2.jpg.jpeg',
+      '/gallery/sinai-hardon1.jpg.jpeg',
+      '/gallery/IMG_5772.jpg.jpeg',
     ],
     difficulty: 'Moderate',
     rating: 4.9, reviewCount: 241,
