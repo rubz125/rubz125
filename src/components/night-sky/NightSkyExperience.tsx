@@ -49,7 +49,7 @@ const STAR_LABELS = [
 ]
 const PLANET_LABELS = [
   { name: 'Moon',  phi: 1.25, theta:  0.44 },
-  { name: 'Earth', phi: 4.20, theta:  0.60 },
+  { name: 'Earth', phi: 0.80, theta:  0.52 },
   { name: 'Sun',   phi: 5.80, theta:  0.35 },
 ]
 const ALL_LABELS = [
@@ -475,10 +475,10 @@ function buildMoon(scene: THREE.Scene): THREE.Mesh {
 // ─── Earth ────────────────────────────────────────────────────────────
 function buildEarth(scene: THREE.Scene): THREE.Mesh {
   const mesh = new THREE.Mesh(
-    new THREE.SphereGeometry(20, 128, 128),
+    new THREE.SphereGeometry(26, 128, 128),
     new THREE.MeshBasicMaterial({ map: makeEarthTex() })
   )
-  const EAZ = 4.20, EEL = 0.60
+  const EAZ = 0.80, EEL = 0.52
   mesh.position.set(
     SKY_R*.78*Math.cos(EEL)*Math.sin(EAZ),
     SKY_R*.78*Math.sin(EEL),
@@ -486,9 +486,9 @@ function buildEarth(scene: THREE.Scene): THREE.Mesh {
   )
   // Atmosphere glow
   const atmo = new THREE.Sprite(new THREE.SpriteMaterial({
-    map: makeGlowTex(90,155,255), transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, opacity:.55,
+    map: makeGlowTex(90,155,255), transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, opacity:.65,
   }))
-  atmo.position.copy(mesh.position); atmo.scale.setScalar(140); scene.add(atmo)
+  atmo.position.copy(mesh.position); atmo.scale.setScalar(180); scene.add(atmo)
   return mesh
 }
 
@@ -648,10 +648,10 @@ export default function NightSkyExperience() {
         s.tTheta += Math.sin(t*.07)*.00005
       }
 
-      const k = .072
+      const k = s.down ? 1.0 : 0.088
       s.phi   += (s.tPhi   - s.phi)   * k
       s.theta += (s.tTheta - s.theta) * k
-      s.fov   += (s.tFov   - s.fov)   * .1
+      s.fov   += (s.tFov   - s.fov)   * (s.down ? 1.0 : 0.1)
       s.theta = Math.max(-1.47, Math.min(1.47, s.theta))
       cam.fov = s.fov; cam.updateProjectionMatrix()
       cam.lookAt(
@@ -746,11 +746,14 @@ export default function NightSkyExperience() {
     const onTM = (e: TouchEvent) => {
       e.preventDefault()
       if (e.touches.length===1&&s.down) {
-        const sens=(s.fov/70)*.0028
+        const fovRad = s.fov * Math.PI / 180
+        const hFovRad = 2 * Math.atan(Math.tan(fovRad/2) * (el.clientWidth/el.clientHeight))
+        const sensH = hFovRad / el.clientWidth
+        const sensV = fovRad / el.clientHeight
         const dx=e.touches[0].clientX-s.lastX, dy=e.touches[0].clientY-s.lastY
-        s.tPhi-=dx*sens; s.tTheta+=dy*sens
+        s.tPhi+=dx*sensH; s.tTheta+=dy*sensV
         s.tTheta=Math.max(-1.47,Math.min(1.47,s.tTheta))
-        s.vPhi=-dx*sens*.22; s.vTheta=dy*sens*.22
+        s.vPhi=dx*sensH*.25; s.vTheta=dy*sensV*.25
         s.lastX=e.touches[0].clientX; s.lastY=e.touches[0].clientY
       } else if (e.touches.length===2) {
         const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY)
