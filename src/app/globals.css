@@ -51,26 +51,26 @@
 
   /* ── Theme tokens ─── */
   /* Dark theme (default) */
-  --bg-base: #0A0603;
-  --bg-surface: #1C1108;
-  --bg-surface-2: #2E1E0F;
-  --bg-surface-3: #150E05;
-  --bg-footer: #0D0906;
-  --bg-bottom: #080503;
-  --bg-dot: #3D2812;
+  --bg-base: #160E09;
+  --bg-surface: #28190E;
+  --bg-surface-2: #3A2615;
+  --bg-surface-3: #21160B;
+  --bg-footer: #19110C;
+  --bg-bottom: #140D09;
+  --bg-dot: #493018;
 
   --text-1: #F5EDD8;
   --text-2: #D6C9AD;
   --text-3: #A08860;
-  --text-4: #7A6245;
-  --text-5: #4A3B26;
+  --text-4: #8A7255;
+  --text-5: #54432C;
 
   --gold: #D4A843;
   --gold-light: #F2C464;
   --gold-dark: #A87828;
   --orange: #C4623A;
   --orange-light: #E07850;
-  --star-empty: #3D2812;
+  --star-empty: #493018;
 
   /* Pre-computed rgba for borders & tinted bgs */
   --border-sm: rgba(212,168,67,0.10);
@@ -83,12 +83,12 @@
   --gold-tint-10: rgba(212,168,67,0.10);
   --gold-tint-15: rgba(212,168,67,0.15);
   --gold-tint-20: rgba(212,168,67,0.20);
-  --surface-80: rgba(28,17,8,0.80);
-  --surface-95: rgba(28,17,8,0.95);
-  --base-50: rgba(10,6,3,0.50);
-  --base-60: rgba(10,6,3,0.60);
-  --base-80: rgba(10,6,3,0.80);
-  --base-95: rgba(10,6,3,0.95);
+  --surface-80: rgba(40,25,14,0.80);
+  --surface-95: rgba(40,25,14,0.95);
+  --base-50: rgba(22,14,9,0.50);
+  --base-60: rgba(22,14,9,0.60);
+  --base-80: rgba(22,14,9,0.80);
+  --base-95: rgba(22,14,9,0.95);
 }
 
 [data-theme="light"] {
